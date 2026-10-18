@@ -124,7 +124,6 @@ a:hover {
 :focus-visible {
   outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
-  border-radius: var(--radius);
 }
 
 /* ---- Layout helpers ---------------------------------------------------- */
@@ -201,8 +200,18 @@ a:hover {
 }
 
 .chip.is-active {
-  background-color: var(--accent-wash);
+  background-color: var(--accent);
+  color: var(--accent-ink);
   font-weight: 700;
+}
+
+/* In forced-colors mode the browser overrides background-color, so the fill
+   above disappears and the active chip looks like every other one. A border
+   survives, and Highlight is the system's own "this is chosen" colour. */
+@media (forced-colors: active) {
+  .chip.is-active {
+    border: 2px solid Highlight;
+  }
 }
 
 /* Every interactive control clears 44 by 44px, for wet hands on a phone. */
@@ -248,9 +257,14 @@ a:hover {
 }
 
 .icon-button[data-tooltip]::after {
-  content: attr(data-tooltip);
+  content: attr(data-tooltip) / "";
   position: absolute;
-  top: calc(100% + var(--space-2));
+  /* Sits against the button with a transparent border bridging the visual
+     gap, so moving the pointer onto the tooltip does not cross dead space and
+     dismiss it. */
+  top: 100%;
+  border-top: var(--space-2) solid transparent;
+  background-clip: padding-box;
   left: 50%;
   translate: -50% 0;
   z-index: 10;
@@ -284,6 +298,7 @@ a:hover {
 .icon-button[data-tooltip]:focus-visible::after {
   visibility: visible;
   opacity: 1;
+  pointer-events: auto;
 }
 
 /* ---- Motion ------------------------------------------------------------

@@ -70,6 +70,3 @@ export function searchToFilters(
   };
 }
 
-export function sameFilters(a: Filters, b: Filters): boolean {
-  return filtersToSearch(a) === filtersToSearch(b);
-}

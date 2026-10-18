@@ -21,6 +21,7 @@
 import { parseRecipe, type Recipe } from "./parse-recipe";
 import { slugFromFilename } from "./slug";
 import { photoFilenames } from "./photos";
+import { warnIfPlaceholderUrl } from "../config/site";
 
 /** Every .txt in the recipes folder, as raw text, resolved at build time. */
 const recipeFiles = import.meta.glob<string>("../../recipes/*.txt", {
@@ -35,7 +36,17 @@ const recipeFiles = import.meta.glob<string>("../../recipes/*.txt", {
  * never called, so nothing is actually imported. The pattern does not descend
  * into recipes/photos, which is what we want.
  */
-const anyFileInRecipesDir = import.meta.glob("../../recipes/*");
+const anyFileInRecipesDir = import.meta.glob("../../recipes/*", {
+  // Only the keys are ever read and the loader functions are never called, so
+  // nothing here is actually imported. The query still matters: a dynamic
+  // import with a literal path is a real module to Rollup, so without it an
+  // unusual extension is resolved as source and the build dies inside Vite
+  // with a parse error before our own "only .txt files belong here" message
+  // ever prints. Verified by dropping a .docx in the folder: as plain source
+  // Vite failed first, with ?raw our error wins.
+  query: "?raw",
+  import: "default",
+});
 
 /** Photo formats we accept. */
 const PHOTO_EXTENSIONS = [".jpg", ".jpeg", ".png", ".webp", ".avif"];
@@ -64,6 +75,8 @@ export function loadRecipes(): Recipe[] {
   // Already reported once. Rethrow the same error without printing it again.
   if (failure !== null) throw failure;
   if (cache !== null) return cache;
+
+  warnIfPlaceholderUrl();
 
   const problems: string[] = [];
   const recipes: Recipe[] = [];
@@ -204,8 +217,3 @@ Nothing was built. Fix these and run the build again.
   }
 }
 
-/** Clears the cache. Only used by tests. */
-export function resetRecipeCache(): void {
-  cache = null;
-  failure = null;
-}

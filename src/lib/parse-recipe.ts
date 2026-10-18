@@ -29,6 +29,9 @@ export const OPTIONAL_HEADERS = ["Photo"] as const;
 
 export const ALL_HEADERS = [...REQUIRED_HEADERS, ...OPTIONAL_HEADERS];
 
+/** The body sections, in the order they are expected to appear. */
+export const KNOWN_SECTIONS = ["Ingredients", "Instructions", "Notes"];
+
 /** The only accepted meal times. */
 export const MEALS = ["breakfast", "lunch", "dinner", "snack", "dessert"] as const;
 export type Meal = (typeof MEALS)[number];
@@ -127,7 +130,13 @@ export function parseRecipe(
 
   // Normalise line endings. Files written on Windows arrive with \r\n and the
   // stray \r would otherwise end up inside values.
-  const normalised = text.replace(/\r\n?/g, "\n");
+  const normalised = text
+    .replace(/\r\n?/g, "\n")
+    // A separator line that picked up a space or a tab is still a blank line.
+    // Several editors add that whitespace on save, and without this the file
+    // failed with "cannot find the blank line that separates the header from
+    // the body" while the line was sitting right there in front of you.
+    .replace(/^[ \t]+$/gm, "");
 
   if (normalised.trim().length === 0) {
     return { recipe: null, problems: ["file is empty"] };
@@ -254,7 +263,7 @@ export function parseRecipe(
       }
     }
 
-    if (meals.length === 0 && written.length === 0) {
+    if (written.length === 0) {
       add(`header "Meal" has no values`);
     }
   }
@@ -290,10 +299,10 @@ export function parseRecipe(
 
   /* ---- Body ------------------------------------------------------------- */
 
-  const sections = splitSections(bodyText);
+  const sections = splitSections(bodyText, add);
 
   for (const name of Object.keys(sections)) {
-    if (!["Ingredients", "Instructions", "Notes"].includes(name)) {
+    if (!KNOWN_SECTIONS.includes(name)) {
       add(
         `unknown section "${name}:". Allowed sections are Ingredients:, Instructions: and Notes:`,
       );
@@ -326,7 +335,20 @@ export function parseRecipe(
     }
   });
 
-  const instructions = (instructionLines ?? []).map(stripStepNumber);
+  // "1/0" parses as Infinity. formatAmount guards itself, but the metric
+  // conversions would print the literal text "Infinity ml", so catch it here
+  // where the error can name the file and the line.
+  for (const line of ingredients) {
+    if (line.amount !== null && !Number.isFinite(line.amount)) {
+      add(`ingredient "${line.raw}" has a zero denominator, so its amount is not a number`);
+    }
+  }
+
+  const instructions = (instructionLines ?? [])
+    .map(stripStepNumber)
+    // A line that was only its own number strips to nothing and would render
+    // an empty step.
+    .filter((step) => step.length > 0);
 
   const notesLines = sections["Notes"];
   const notes =
@@ -391,7 +413,10 @@ function wholeNumber(
  * Split the body into its named sections. A section starts at a line that is
  * exactly one of the known section names followed by a colon.
  */
-function splitSections(body: string): Record<string, string[]> {
+function splitSections(
+  body: string,
+  add: (problem: string) => void,
+): Record<string, string[]> {
   const sections: Record<string, string[]> = {};
   let current: string | null = null;
 
@@ -401,17 +426,28 @@ function splitSections(body: string): Record<string, string[]> {
     // Only a line that is a known section name on its own starts a section.
     // This matters because "For the sauce:" is a group heading inside
     // Ingredients, not a new section.
-    if (match && ["Ingredients", "Instructions", "Notes"].includes(match[1])) {
+    if (match && KNOWN_SECTIONS.includes(match[1])) {
+      // A second "Ingredients:" used to reset the list and throw the first
+      // one away in silence, which is exactly the shape of a copy and paste
+      // mistake. Keep the first and report it instead.
+      if (sections[match[1]] !== undefined) {
+        add(`section "${match[1]}:" appears more than once`);
+      }
       current = match[1];
-      sections[current] = [];
+      sections[current] ??= [];
       continue;
     }
 
-    // A line like "Toppings:" at the top level, outside any section, is a
-    // section we do not know about. Flag it by recording it.
-    if (match && current === null) {
+    // A line like "Toppings:" on its own is a section we do not know about.
+    //
+    // Outside any section it is unambiguous. Inside Instructions it is too,
+    // because a bare "Name:" line is never a legitimate instruction step. It
+    // is deliberately NOT treated as a section inside Ingredients, where
+    // "For the sauce:" is a group heading, or inside Notes, which is free
+    // text and may reasonably contain a line like "Variations:".
+    if (match && (current === null || current === "Instructions")) {
       current = match[1];
-      sections[current] = [];
+      sections[current] ??= [];
       continue;
     }
 

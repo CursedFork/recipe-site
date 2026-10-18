@@ -24,7 +24,7 @@ const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
         edge, rather than the toggle breaking away on its own. */}
     <div class="site-header__end">
       <nav class="site-header__nav" aria-label="Main">
-        <ul class="site-header__links">
+        <ul class="site-header__links" role="list">
           {
             site.nav.map((item) => {
               const href = item.href.replace(/\/+$/, "") || "/";

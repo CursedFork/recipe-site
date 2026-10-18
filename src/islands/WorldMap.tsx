@@ -19,7 +19,7 @@
    list as text.
    --------------------------------------------------------------------------- */
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import type { MapShape, Place } from "./map-types";
 
@@ -90,13 +90,30 @@ export default function WorldMap({
     return () => window.removeEventListener("popstate", onPopState);
   }, [readUrl]);
 
+  /**
+   * Clearing removes the button that cleared it, so focus would fall to the
+   * body. Land on the results heading, which is where the change happened.
+   */
+  const resultsRef = useRef<HTMLHeadingElement>(null);
+
   const select = (key: string | null) => {
     setSelectedKey(key);
+
     const url =
       key === null
         ? window.location.pathname
         : `${window.location.pathname}?region=${encodeURIComponent(key)}`;
-    window.history.pushState(null, "", url);
+
+    // Pressing the same place twice used to stack identical history entries,
+    // which makes the back button look broken.
+    if (url !== window.location.pathname + window.location.search) {
+      window.history.pushState(null, "", url);
+    }
+  };
+
+  const clearSelection = () => {
+    select(null);
+    resultsRef.current?.focus();
   };
 
   const selected = selectedKey === null ? null : byKey.get(selectedKey) ?? null;
@@ -120,7 +137,7 @@ export default function WorldMap({
           role="img"
           aria-label={`World map. ${totalPlaces} place${
             totalPlaces === 1 ? "" : "s"
-          } have recipes, highlighted. The list below the map gives the same places as buttons.`}
+          } have recipes, highlighted. The list of places on this page gives the same places as buttons.`}
         >
           {shapes.map((shape, index) => {
             const has = shape.alpha3 !== null && codesWithRecipes.has(shape.alpha3);
@@ -148,7 +165,7 @@ export default function WorldMap({
         </svg>
 
         {selected !== null && (
-          <button type="button" className="map__clear" onClick={() => select(null)}>
+          <button type="button" className="map__clear" onClick={clearSelection}>
             Clear selection
           </button>
         )}
@@ -176,7 +193,7 @@ export default function WorldMap({
           {countries.length > 0 && (
             <>
               <h3 className="map__list-heading">Countries</h3>
-              <ul className="map__list">
+              <ul className="map__list" role="list">
                 {countries.map((place) => (
                   <PlaceButton
                     key={place.key}
@@ -192,7 +209,7 @@ export default function WorldMap({
           {groups.length > 0 && (
             <>
               <h3 className="map__list-heading">Regions</h3>
-              <ul className="map__list">
+              <ul className="map__list" role="list">
                 {groups.map((place) => (
                   <PlaceButton
                     key={place.key}
@@ -221,7 +238,12 @@ export default function WorldMap({
         <section className="map__results" aria-live="polite" aria-labelledby="results-heading">
           {selected === null ? (
             <>
-              <h2 id="results-heading" className="visually-hidden">
+              <h2
+                ref={resultsRef}
+                tabIndex={-1}
+                id="results-heading"
+                className="visually-hidden"
+              >
                 Selected place
               </h2>
               <p className="map__empty">
@@ -231,7 +253,7 @@ export default function WorldMap({
             </>
           ) : (
             <>
-              <h2 id="results-heading">
+              <h2 ref={resultsRef} tabIndex={-1} id="results-heading">
                 {selected.name}
                 <span className="map__count">
                   {" "}
@@ -239,7 +261,7 @@ export default function WorldMap({
                   {selected.recipes.length === 1 ? "" : "s"}
                 </span>
               </h2>
-              <ul className="map__recipes">
+              <ul className="map__recipes" role="list">
                 {selected.recipes.map((recipe) => (
                   <li key={recipe.slug}>
                     <a href={`/recipes/${recipe.slug}`}>{recipe.title}</a>

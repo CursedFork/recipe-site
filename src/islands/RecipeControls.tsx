@@ -48,16 +48,25 @@ export default function RecipeControls({
   const [cookMode, setCookMode] = useState(false);
 
   /**
-   * Whether the screen is actually being held awake right now.
+   * What has happened to the screen wake lock.
    *
-   * Deliberately separate from cookMode. The spec is explicit that we must not
-   * show a control claiming the screen will stay on when it will not, and the
-   * Wake Lock API needs HTTPS and is missing from several browsers. So cook
-   * mode always works for the large text, and the promise about the screen is
-   * only made once the lock has actually been granted.
+   * Deliberately separate from cookMode, because we must never show a control
+   * claiming the screen will stay on when it will not: the API needs HTTPS and
+   * is missing from several browsers.
+   *
+   * Three states rather than a boolean, because a boolean starting at false
+   * meant the note mounted saying "your browser will not let this page keep
+   * the screen awake", and then corrected itself a moment later when the lock
+   * arrived. A screen reader announced both, so the user was told the opposite
+   * thing twice and the first one was a lie. "pending" renders no promise at
+   * all, so the sentence appears once and is true when it does.
    */
-  const [screenHeldAwake, setScreenHeldAwake] = useState(false);
+  const [lockState, setLockState] = useState<"pending" | "held" | "unavailable">(
+    "pending",
+  );
   const wakeLock = useRef<WakeLockSentinelLike | null>(null);
+  /** Whether cook mode currently wants a lock, checked by an in-flight request. */
+  const wantsLock = useRef(false);
 
   /* ---- The unit choice persists ---------------------------------------- */
 
@@ -84,9 +93,14 @@ export default function RecipeControls({
   /* ---- Cook mode and the wake lock -------------------------------------- */
 
   const releaseWakeLock = useCallback(async () => {
+    // Record the intent first. A request may be in flight, and when it lands
+    // it checks this before holding on to the lock.
+    wantsLock.current = false;
+
     const lock = wakeLock.current;
     wakeLock.current = null;
-    setScreenHeldAwake(false);
+    setLockState("pending");
+
     if (lock) {
       try {
         await lock.release();
@@ -97,22 +111,51 @@ export default function RecipeControls({
   }, []);
 
   const requestWakeLock = useCallback(async () => {
+    wantsLock.current = true;
+
     const api = (navigator as Navigator & {
       wakeLock?: { request: (type: "screen") => Promise<WakeLockSentinelLike> };
     }).wakeLock;
 
-    if (!api) return; // Not supported. Cook mode still works, it just says nothing.
+    if (!api) {
+      // No API at all. Cook mode still works; we just say so honestly, and
+      // this resolves synchronously so the note never changes its mind.
+      setLockState("unavailable");
+      return;
+    }
 
     try {
       const lock = await api.request("screen");
+
+      // Cook mode was turned off while we were waiting. Hand the lock straight
+      // back, or the screen stays awake for a page whose cook mode is visibly
+      // off and whose banner has already gone.
+      if (!wantsLock.current) {
+        try {
+          await lock.release();
+        } catch {
+          /* Nothing to do. */
+        }
+        return;
+      }
+
       wakeLock.current = lock;
-      setScreenHeldAwake(true);
-      // The browser drops the lock on its own when the tab is hidden, or on
-      // low battery. When that happens, stop claiming the screen stays on.
-      lock.addEventListener("release", () => setScreenHeldAwake(false));
+      setLockState("held");
+
+      // Browsers drop the lock whenever the document is hidden, and on low
+      // battery. Clearing the ref here is what lets the visibility handler
+      // below ask for it again; without that, switching apps once lost the
+      // lock for the rest of the page's life. The identity check stops a late
+      // event from an old lock clobbering a newer one.
+      lock.addEventListener("release", () => {
+        if (wakeLock.current === lock) {
+          wakeLock.current = null;
+          setLockState("pending");
+        }
+      });
     } catch {
       // Refused, usually because the page is not on HTTPS. Degrade quietly.
-      setScreenHeldAwake(false);
+      setLockState("unavailable");
     }
   }, []);
 
@@ -167,6 +210,19 @@ export default function RecipeControls({
     setServings(Math.min(MAX_SERVINGS, Math.max(MIN_SERVINGS, next)));
   };
 
+  /**
+   * Reset removes itself as a direct result of being pressed, and a focused
+   * element leaving the DOM drops focus to the body, so the next Tab starts
+   * again from the top of the page. Hand focus to the plus button, which is
+   * right beside it and never disappears.
+   */
+  const plusRef = useRef<HTMLButtonElement>(null);
+
+  const resetServings = () => {
+    setServings(baseServings);
+    plusRef.current?.focus();
+  };
+
   return (
     <div className={`recipe${cookMode ? " is-cook-mode" : ""}`}>
       <div className="recipe__controls">
@@ -178,8 +234,14 @@ export default function RecipeControls({
             <button
               type="button"
               className="icon-button stepper__button"
-              onClick={() => changeServings(servings - 1)}
-              disabled={servings <= MIN_SERVINGS}
+              onClick={() => {
+                if (servings > MIN_SERVINGS) changeServings(servings - 1);
+              }}
+              // aria-disabled rather than disabled: a disabled button that is
+              // currently focused drops focus to the body, so holding Enter
+              // down to 1 serving loses the focus ring at exactly the wrong
+              // moment. This stays focusable and still announces as dimmed.
+              aria-disabled={servings <= MIN_SERVINGS}
               aria-label="One fewer serving"
               data-tooltip="One fewer serving"
             >
@@ -197,13 +259,21 @@ export default function RecipeControls({
               region: two of them firing on one button press means hearing the
               change announced twice.
             */}
-            <output className="stepper__value">{servings}</output>
+            <output className="stepper__value">
+              {servings}
+              {/* role="status" is atomic, so this rides along and the press
+                  announces "6 servings" rather than just "6". */}
+              <span className="visually-hidden"> servings</span>
+            </output>
 
             <button
+              ref={plusRef}
               type="button"
               className="icon-button stepper__button"
-              onClick={() => changeServings(servings + 1)}
-              disabled={servings >= MAX_SERVINGS}
+              onClick={() => {
+                if (servings < MAX_SERVINGS) changeServings(servings + 1);
+              }}
+              aria-disabled={servings >= MAX_SERVINGS}
               aria-label="One more serving"
               data-tooltip="One more serving"
             >
@@ -222,7 +292,7 @@ export default function RecipeControls({
             <button
               type="button"
               className="recipe__reset"
-              onClick={() => setServings(baseServings)}
+              onClick={resetServings}
             >
               Reset to {baseServings}
             </button>
@@ -270,10 +340,11 @@ export default function RecipeControls({
       {cookMode && (
         <p className="recipe__cook-note text-small" role="status">
           Cook mode is on, so the text is larger.{" "}
-          {/* Only claimed when the lock was actually granted. */}
-          {screenHeldAwake
-            ? "Your screen will stay awake while this page is open."
-            : "Your browser will not let this page keep the screen awake, so it may still dim."}
+          {/* Nothing is promised until the attempt has actually settled. */}
+          {lockState === "held" &&
+            "Your screen will stay awake while this page is open."}
+          {lockState === "unavailable" &&
+            "Your browser will not let this page keep the screen awake, so it may still dim."}
         </p>
       )}
 
@@ -287,7 +358,7 @@ export default function RecipeControls({
             </p>
           )}
 
-          <ul className="ingredients">
+          <ul className="ingredients" role="list">
             {ingredients.map((ingredient, index) => {
               const line = rendered[index];
 
@@ -333,7 +404,7 @@ export default function RecipeControls({
 
         <section className="recipe__section" aria-labelledby="instructions-heading">
           <h2 id="instructions-heading">Instructions</h2>
-          <ol className="instructions">
+          <ol className="instructions" role="list">
             {instructions.map((step, index) => (
               <li key={index} className="instructions__step">
                 {convertTemperatures(step, system)}

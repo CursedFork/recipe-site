@@ -155,6 +155,23 @@ describe("formatAmount", () => {
     expect(formatAmount(3.001)).toBe("3");
   });
 
+  it("never loses most of an amount it cannot express as a fraction", () => {
+    // The smallest fraction these denominators can write is 1/8, so a value
+    // sitting between the last eighth and the next whole number matches no
+    // candidate at all. It must round to the nearest whole number rather than
+    // fall back to flooring, which silently dropped nearly a whole cup.
+    //
+    // 3/4 cup scaled from 4 servings to 5 is exactly 0.9375, which is the
+    // most ordinary way to reach this.
+    expect(formatAmount(0.9375)).toBe("1");
+    expect(formatAmount(2.95)).toBe("3");
+    expect(formatAmount(1.96)).toBe("2");
+  });
+
+  it("still shows a genuinely tiny amount rather than rounding it to nothing", () => {
+    expect(formatAmount(0.05)).toBe("0.05");
+  });
+
   it("never returns a negative or zero amount as a fraction", () => {
     expect(formatAmount(0)).toBe("0");
     expect(formatAmount(-1)).toBe("0");
@@ -185,7 +202,7 @@ describe("volume conversion", () => {
 
   it("moves up to litres past 1000 ml", () => {
     const result = convertAmount(2, "quart", "stock", 1, "metric");
-    expect(result.unit).toBe("L");
+    expect(result.unit).toBe("l");
     expect(result.amountText).toBe("1.9");
   });
 
@@ -263,6 +280,13 @@ describe("unit pluralisation", () => {
     expect(renderIngredient(line, 1, "us").text).toBe("1/2 cup stock");
   });
 
+  it("says 1 cup even when the value is a hair over one", () => {
+    // 1.02 displays as "1", so the unit must agree with the text shown and
+    // not with the raw number behind it.
+    const line = ingredient(1.02, "cup", "stock");
+    expect(renderIngredient(line, 1, "us").text).toBe("1 cup stock");
+  });
+
   it("never pluralises an abbreviation", () => {
     expect(renderIngredient(ingredient(2, "tbsp", "olive oil"), 1, "us").text)
       .toBe("2 tbsp olive oil");
@@ -306,6 +330,12 @@ describe("temperatures", () => {
     for (const text of cases) {
       expect(convertTemperatures(text, "metric")).toBe(text);
     }
+  });
+
+  it("reads Fahrenheit written out with no degree sign", () => {
+    expect(convertTemperatures("Heat to 350 Fahrenheit.", "metric")).toBe(
+      "Heat to 175°C.",
+    );
   });
 
   it("does nothing at all in US mode", () => {

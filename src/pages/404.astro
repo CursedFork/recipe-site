@@ -1,0 +1,80 @@
+---
+/* ---------------------------------------------------------------------------
+   Not found.
+
+   Without this, Astro falls back to a bare host-generated page with no lang
+   attribute, no skip link and no navigation, which is a dead end if a shared
+   recipe link ever changes.
+   --------------------------------------------------------------------------- */
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { loadRecipes } from "../lib/load-recipes";
+
+// Something to offer rather than just an apology.
+const recipes = loadRecipes().slice(0, 5);
+---
+
+<BaseLayout
+  title="Page not found"
+  description="That page does not exist on this site."
+>
+  <section class="notfound">
+    <h1>That page is not here</h1>
+    <p class="notfound__lead">
+      The link may be out of date, or the recipe may have been renamed. Adding
+      a recipe changes its address, so an old link can stop working.
+    </p>
+
+    <p><a href="/">Back to all recipes</a></p>
+
+    {
+      recipes.length > 0 && (
+        <>
+          <h2 class="notfound__heading">While you are here</h2>
+          <ul class="notfound__list" role="list">
+            {recipes.map((recipe) => (
+              <li>
+                <a href={`/recipes/${recipe.slug}`}>{recipe.title}</a>
+              </li>
+            ))}
+          </ul>
+        </>
+      )
+    }
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    padding-block: var(--space-8) var(--space-9);
+    max-width: var(--measure);
+  }
+
+  .notfound__lead {
+    margin-top: var(--space-5);
+    font-size: var(--text-lead);
+    line-height: 1.4;
+  }
+
+  .notfound p + p {
+    margin-top: var(--space-5);
+  }
+
+  .notfound__heading {
+    margin-top: var(--space-8);
+    font-size: var(--text-lead);
+  }
+
+  .notfound__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .notfound__list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--control-min);
+  }
+</style>

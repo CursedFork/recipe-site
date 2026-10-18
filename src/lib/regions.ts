@@ -159,14 +159,3 @@ function distance(a: string, b: string): number {
   return previous[b.length];
 }
 
-/** Every region name the lookup knows, for the README and for Phase 5. */
-export function knownRegionNames(): { countries: string[]; groups: string[] } {
-  return {
-    countries: Object.values(countries)
-      .map((country) => country.name)
-      .sort(),
-    groups: Object.values(groupedRegions)
-      .map((group) => group.name)
-      .sort(),
-  };
-}

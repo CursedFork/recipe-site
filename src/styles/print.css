@@ -108,9 +108,14 @@
     background: none;
   }
 
-  /* A checked line still prints its text legibly. */
+  /* A checked line still prints its text legibly. The strike-through is
+     dropped on paper too: appearance:none removes the native tick, so a
+     ticked item would otherwise print as an EMPTY box with its text crossed
+     out, which says two opposite things at once. On paper every box starts
+     empty and you tick it yourself. */
   .ingredients__text.is-checked {
     color: #000000;
+    text-decoration: none;
   }
 
   /* Never split a step or an ingredient across two pages. */

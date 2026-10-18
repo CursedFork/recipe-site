@@ -71,7 +71,16 @@ export function formatAmount(value: number): string {
     }
   }
 
-  if (best === null) return String(whole === 0 ? round(value, 2) : whole);
+  if (best === null) {
+    // No candidate fitted. That happens in the gap between the last eighth and
+    // the next whole number, because the smallest fraction these denominators
+    // can write is 1/8 while WHOLE_TOLERANCE is only 1/32. Returning `whole`
+    // here used to floor the value, so 2.95 printed as "2" and 0.9375 printed
+    // as "0.94". Round to the nearest whole number instead, which is the right
+    // answer for anything that close to one.
+    const nearest = Math.round(value);
+    return String(nearest > 0 ? nearest : round(value, 2));
+  }
 
   const fractionText = `${best.numerator}/${best.denominator}`;
   return whole === 0 ? fractionText : `${whole} ${fractionText}`;
@@ -117,9 +126,30 @@ const PLURALISES = new Set(["cup", "pint", "quart", "gallon"]);
  * Plural only above one, which is how recipes are actually written:
  * "1/2 cup" and "1 cup" are singular, "1 1/2 cups" and "2 cups" are not.
  */
-export function displayUnit(unit: string | null, value: number): string | null {
+export function displayUnit(unit: string | null, amountText: string): string | null {
   if (unit === null || !PLURALISES.has(unit)) return unit;
-  return value > 1 ? `${unit}s` : unit;
+
+  // Decided from the text that is actually shown, not from the raw number.
+  // The two can disagree: anything from 1.0 to 1.03125 displays as "1" but is
+  // greater than one, which printed "1 cups".
+  return displayedValue(amountText) > 1 ? `${unit}s` : unit;
+}
+
+/**
+ * Read back the number a formatted amount shows.
+ * "1 1/2" -> 1.5, "3/4" -> 0.75, "2" -> 2.
+ */
+function displayedValue(text: string): number {
+  const mixed = text.match(/^(\d+)\s+(\d+)\/(\d+)$/);
+  if (mixed) return Number(mixed[1]) + Number(mixed[2]) / Number(mixed[3]);
+
+  const fraction = text.match(/^(\d+)\/(\d+)$/);
+  if (fraction) return Number(fraction[1]) / Number(fraction[2]);
+
+  const plain = Number.parseFloat(text);
+  // Anything unreadable is treated as one, so an odd amount never invents a
+  // plural it cannot justify.
+  return Number.isFinite(plain) ? plain : 1;
 }
 
 export function isVolumeUnit(unit: string | null): boolean {
@@ -240,7 +270,7 @@ export function convertAmount(
 
     const millilitres = scaled * VOLUME_IN_ML[unit];
     if (millilitres >= 1000) {
-      return { amountText: String(round(millilitres / 1000, 1)), unit: "L", keptOriginalUnit: false };
+      return { amountText: String(round(millilitres / 1000, 1)), unit: "l", keptOriginalUnit: false };
     }
     return { amountText: String(roundMetric(millilitres)), unit: "ml", keptOriginalUnit: false };
   }
@@ -286,11 +316,7 @@ export function renderIngredient(
     system,
   );
 
-  // The scaled value in the ORIGINAL unit, which is what decides the plural.
-  // In metric the unit will be ml or g, which never pluralise anyway.
-  const scaledValue = ingredient.amount * factor;
-
-  const parts = [amountText, displayUnit(unit, scaledValue), ingredient.item].filter(
+  const parts = [amountText, displayUnit(unit, amountText), ingredient.item].filter(
     (part): part is string => part !== null && part.length > 0,
   );
 
@@ -305,7 +331,8 @@ export function renderIngredient(
  * Matches: 350°F, 350 °F, 350F, 350 F, 350 degrees F, 350 degrees Fahrenheit
  * Does not match: a bare 350, or "350 Flour", because F must stand alone.
  */
-const FAHRENHEIT = /(\d+(?:\.\d+)?)\s*(?:°\s*F\b|°\s*Fahrenheit\b|degrees?\s+F\b|degrees?\s+Fahrenheit\b|\s*F(?![a-eg-zA-EG-Z]))/gi;
+const FAHRENHEIT =
+  /(\d+(?:\.\d+)?)\s*(?:°\s*Fahrenheit\b|°\s*F\b|degrees?\s+Fahrenheit\b|degrees?\s+F\b|\s*Fahrenheit\b|\s*F(?![a-eg-zA-EG-Z]))/gi;
 
 /** Fahrenheit to Celsius, rounded to a setting an oven dial actually has. */
 export function fahrenheitToCelsius(fahrenheit: number): number {

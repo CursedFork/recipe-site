@@ -85,6 +85,15 @@ const preview = photo
           <dt>Total</dt>
           <dd>{formatMinutes(total)}</dd>
         </div>
+        {/* Shown on screen, and more importantly on paper: the print
+            stylesheet hides the controls, so without this the printed sheet
+            scaled every amount and never said what it scaled them to. If you
+            have changed the servings, the "Scaled from X to Y" line prints
+            too and wins. */}
+        <div class="recipe-page__servings">
+          <dt>Serves</dt>
+          <dd>{recipe.servings}</dd>
+        </div>
       </dl>
 
       {
@@ -101,7 +110,13 @@ const preview = photo
         <figure class="recipe-page__figure">
           <Image
             src={photo}
-            alt={`Placeholder image standing in for a photo of ${recipe.title}`}
+            {/* Empty on purpose. The <h1> directly above already names the
+                dish, so a description here would be repetition, and we cannot
+                describe a photo we have not seen without inventing it. If a
+                photo ever shows something worth saying ("a dark ring of crust
+                around the edge of the pan"), the right fix is an optional
+                PhotoAlt: field in the recipe file rather than a guess here. */}
+            alt=""
             widths={[600, 1200]}
             sizes="(min-width: 56em) 44rem, 92vw"
             class="recipe-page__photo"

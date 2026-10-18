@@ -58,7 +58,7 @@ export default function ThemeToggle() {
     // when a private browsing mode has given us a zero-size quota.
     try {
       localStorage.setItem("theme", next);
-    } catch (error) {
+    } catch {
       /* The choice will not survive a reload. The site still works. */
     }
 

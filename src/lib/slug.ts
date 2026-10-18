@@ -88,6 +88,9 @@ function suggest(base: string): string {
   const suggestion = base
     .normalize("NFKD")
     // Strip accents, so "café" suggests "cafe".
+    // Written as escapes rather than literal combining marks, which are
+    // invisible in most editors and would be silently destroyed by one bad
+    // re-encode of this file.
     .replace(/[̀-ͯ]/g, "")
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")

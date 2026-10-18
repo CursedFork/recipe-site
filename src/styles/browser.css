@@ -34,7 +34,10 @@
 .browser__input {
   min-height: var(--control-min);
   padding: var(--space-2) var(--space-4);
-  border: none;
+  /* A control affordance, not a divider, which is why this one gets a border
+     where the house rules otherwise ban them. Without it the only thing
+     saying "you can type here" was a 1.09:1 fill step. */
+  border: 2px solid color-mix(in srgb, var(--ink) 40%, var(--bg));
   border-radius: var(--radius);
   background-color: var(--surface);
   color: var(--ink);
@@ -74,7 +77,7 @@
 .browser__status {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   gap: var(--space-4);
   margin-top: var(--space-7);
   margin-bottom: var(--space-5);
@@ -87,7 +90,10 @@
 }
 
 .browser__clear {
-  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-min);
+  padding-inline: var(--space-1);
   border: none;
   background: none;
   color: var(--accent);

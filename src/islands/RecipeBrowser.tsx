@@ -77,7 +77,13 @@ export default function RecipeBrowser({ recipes }: Props) {
     mounted.current = true;
 
     // The back and forward buttons move between filter states.
-    const onPopState = () => setFilters(readUrl());
+    const onPopState = () => {
+      // A debounced URL rewrite may still be queued from typing. Left alone it
+      // fires after the back press and stamps the old query onto the new
+      // entry, so the URL and the visible filters disagree.
+      clearTimeout(searchTimer.current);
+      setFilters(readUrl());
+    };
     window.addEventListener("popstate", onPopState);
     return () => window.removeEventListener("popstate", onPopState);
   }, [readUrl]);
@@ -129,7 +135,18 @@ export default function RecipeBrowser({ recipes }: Props) {
   const toggleHealthy = () =>
     apply({ ...filters, healthyOnly: !filters.healthyOnly }, "push");
 
-  const clearAll = () => apply(EMPTY_FILTERS, "push");
+  /**
+   * Clearing removes the button that cleared, and a focused element leaving
+   * the DOM drops focus to the body, so the next Tab restarts from the top of
+   * the page. Land on the count line instead: it is the thing that just
+   * changed, and it does not disappear.
+   */
+  const countRef = useRef<HTMLParagraphElement>(null);
+
+  const clearAll = () => {
+    apply(EMPTY_FILTERS, "push");
+    countRef.current?.focus();
+  };
 
   /* ---- Filtering --------------------------------------------------------
      All four combine: a recipe has to satisfy every active filter. Within one
@@ -160,9 +177,29 @@ export default function RecipeBrowser({ recipes }: Props) {
   const filtering = hasAnyFilter(filters);
   const total = recipes.length;
 
+  const countText = filtering
+    ? `Showing ${visible.length} of ${total} recipe${total === 1 ? "" : "s"}`
+    : `${total} recipe${total === 1 ? "" : "s"}`;
+
+  /**
+   * The same sentence, but lagging.
+   *
+   * Filtering is instant and the visible number updates on the same frame as
+   * the keystroke, which is the point. But a live region holding that number
+   * announces the whole sentence per character, so typing "tomato" queued six
+   * announcements and drowned out the typing echo. The visible count stays
+   * immediate; only the announced copy waits for you to stop typing.
+   */
+  const [announced, setAnnounced] = useState(countText);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setAnnounced(countText), 600);
+    return () => clearTimeout(timer);
+  }, [countText]);
+
   return (
     <div className="browser">
-      <search className="browser__controls">
+      <search role="search" className="browser__controls">
         <div className="browser__search">
           <label className="browser__label" htmlFor="recipe-search">
             Search by name or ingredient
@@ -216,15 +253,18 @@ export default function RecipeBrowser({ recipes }: Props) {
       </search>
 
       <div className="browser__status">
-        {/*
-          Announced to screen readers when it changes, because otherwise
-          someone filtering by keyboard gets no feedback at all: the list
-          silently becomes shorter somewhere below them.
-        */}
-        <p className="browser__count" role="status" aria-live="polite">
-          {filtering
-            ? `Showing ${visible.length} of ${total} recipe${total === 1 ? "" : "s"}`
-            : `${total} recipe${total === 1 ? "" : "s"}`}
+        {/* The visible count, which updates on the same frame as the
+            keystroke. Focusable so "Clear filters" has somewhere to land. */}
+        <p ref={countRef} tabIndex={-1} className="browser__count">
+          {countText}
+        </p>
+
+        {/* The announced copy. Separate, so a screen reader hears the result
+            once you stop typing rather than once per character. Without any
+            live region at all, someone filtering by keyboard gets no feedback:
+            the list just silently becomes shorter somewhere below them. */}
+        <p className="visually-hidden" role="status">
+          {announced}
         </p>
 
         {filtering && (
@@ -235,7 +275,7 @@ export default function RecipeBrowser({ recipes }: Props) {
       </div>
 
       {visible.length > 0 ? (
-        <ul className="browser__grid">
+        <ul className="browser__grid" role="list">
           {visible.map((recipe) => (
             <RecipeCard key={recipe.slug} recipe={recipe} />
           ))}

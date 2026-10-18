@@ -725,3 +725,123 @@ It described a generic Astro project and pointed at guides for Tailwind, content
 i18n that this site deliberately does not use. Since it is checked in and read as project
 instructions, it was actively misleading. Rewritten to describe this project, the three commands
 that matter, and the handful of things that have genuinely caught us out.
+
+---
+
+## 13. Phase 6: what the two audits found
+
+I ran the Accessibility Auditor and the Code Reviewer agents over everything. Both came back with
+real findings, including one genuine bug in maths I had written tests for. Everything below is
+fixed unless it says otherwise.
+
+### The worst one: the servings scaler could drop most of an amount
+
+`formatAmount` snaps to halves, thirds, quarters and eighths. The smallest of those is 1/8, but
+the "close enough to a whole number" tolerance was 1/32. Anything landing in the gap matched no
+fraction at all and fell into a branch that **floored the value**.
+
+It is reachable from the most ordinary scaling there is. Scale `3/4 cup stock` from 4 servings to
+5 and you get exactly 0.9375, which printed as **"0.94 cup"**. Worse with a whole part:
+`formatAmount(2.95)` returned **"2"**, losing almost a full cup.
+
+My 40 tests all passed because that one branch was the only line in the file with nothing
+asserting on it. There are now regression tests for both numbers, and the branch rounds to the
+nearest whole number instead of flooring.
+
+### Three ways the parser let a bad file through
+
+The spec's whole point is that a malformed file stops the build. Three holes:
+
+- **A duplicated `Ingredients:` section silently threw the first one away.** The flour and salt
+  vanished, the page shipped with one ingredient, and the build was green. Now an error.
+- **An unknown section after a known one was absorbed instead of flagged.** A `Toppings:` block
+  after `Instructions:` became three more instruction steps. The README promised this was an
+  error; now it is. Narrowly scoped so `For the sauce:` inside `Ingredients:` is still a group
+  heading, and `Notes:` stays free text.
+- **A blank separator line containing a space or tab** failed with "cannot find the blank line"
+  while the line sat right there. Several editors add that whitespace on save.
+
+Also `1/0` parsed to `Infinity` and the metric path printed the literal text "Infinity ml". Now an
+error naming the line.
+
+**And one I had assumed rather than tested:** the non-`.txt` sweep. Dropping a `notes.docx` into
+`recipes/` made Vite fail with a parse error *before* my friendly "only .txt recipe files belong
+here" message. The reviewer flagged it as worth an experiment, I ran it, and they were right.
+Fixed by adding `query: "?raw"` to that glob so any extension resolves. A photo in the wrong place
+was always fine; it was only exotic extensions.
+
+### Cook mode was lying about the screen
+
+Two bugs that together defeated the thing I was most careful about:
+
+1. **The wake lock was never re-acquired.** Browsers release it whenever the tab is hidden. The
+   release handler cleared the UI flag but left the reference pointing at the dead lock, and the
+   visibility handler only re-requested when that reference was null. So: turn on cook mode,
+   answer a text, come back, and the screen never stays awake again for the life of the page,
+   while the note claimed the browser had refused. The browser had allowed it and then done the
+   normal thing.
+2. **Turning cook mode off mid-request left the lock held.** The request is async; toggling off
+   before it resolved released nothing, and then the lock arrived and was kept. The screen stayed
+   awake for a page whose cook mode was visibly off.
+
+The note also announced the wrong thing first. It started as a boolean at false, so it mounted
+saying "your browser will not let this page keep the screen awake" and corrected itself when the
+lock arrived a moment later. A screen reader announced both, so you were told the opposite thing
+twice and the first one was false. It is now three states, and "pending" says nothing at all.
+
+### Accessibility: four serious findings
+
+- **Five controls destroyed keyboard focus.** "Clear filters" (twice), "Reset to 4" and "Clear
+  selection" each remove themselves as a direct result of being pressed, and the servings stepper
+  disabled itself while focused. A focused element leaving the DOM drops focus to the body, so the
+  next Tab restarts from the top of the page. Each now hands focus somewhere sensible first, and
+  the stepper uses `aria-disabled` so it stays focusable.
+- **The active state was a 1.01:1 fill.** My own comment claimed the active chip was carried by
+  "a filled background AND a heavier weight", and measured, the fill carried nothing: the bold
+  weight was doing the entire job alone. `tokens.css` says the accent belongs on the active
+  filter, so it now actually does. 6.05:1 from the chip beside it.
+- **Every list lost its list semantics in Safari.** WebKit drops the list role when
+  `list-style: none` is set, and again when the box becomes flex or grid. This site does both,
+  everywhere. On a phone with VoiceOver that means no "list, 14 items" and no "3 of 14" while
+  swiping the ingredients, which is exactly the position information you need when you are working
+  through them with wet hands. Fixed with an explicit `role="list"` on all six.
+- **The skip link did nothing in Safari.** `<main>` is not focusable, so WebKit scrolled to it and
+  left focus where it was. One `tabindex="-1"` fixes it.
+
+### The map's selected state was a rounding error
+
+Stroke widths are in viewBox units and the viewBox is 1000 wide, so the "heavier outline" that
+distinguished selected from merely-having-recipes worked out at **0.17 CSS pixels** on a phone.
+The selected state was resting entirely on a 2.33:1 fill change. It is now an accent halo drawn
+outside the shape, which is a difference in kind rather than degree.
+
+The coastlines had the same problem, at 0.17px and 2.48:1. `vector-effect: non-scaling-stroke`
+makes those numbers mean CSS pixels at any size, so the world is legible on a phone rather than a
+flat smear. The auditor was right that this undercut the whole point of showing a map.
+
+There is also a `forced-colors` block now. Without it, Windows High Contrast overrode every fill
+and the map became one undifferentiated landmass with no highlights at all.
+
+### Two print bugs
+
+- **A printed sheet never said how many servings it was for.** The print stylesheet hides the
+  controls, which is where the servings number lives. So "what comes out of the printer is what
+  you are about to cook" only half landed: the amounts were scaled and the page never said what
+  to. Servings is now in the header, on screen and on paper.
+- **A ticked ingredient printed as an empty box with its text crossed out**, saying two opposite
+  things at once.
+
+### Decided, not fixed
+
+- **Tooltips are not dismissible with Escape**, which is a WCAG 1.4.13 failure. I made them
+  hoverable (you can now move the pointer onto one without it vanishing), but adding Escape
+  handling means a keyboard listener per tooltip for something that is redundant with both the
+  icon and the `aria-label`. **Recording it as a known AA exception** rather than leaving it to be
+  rediscovered.
+- **Dark mode still defaults to light rather than following the operating system.** The auditor
+  makes a fair point that someone who has set their OS dark for photophobia or migraine gets a
+  bright page on first visit. But your spec says "default to light, remember the choice", so this
+  is your call rather than mine. Say the word and it is a few lines.
+- **Ingredient group headings are `<li>` elements**, so a list of 14 includes the 3 headings and
+  "4 of 14" means slightly less than a reader expects. The clean fix is one list per group, which
+  is only worth it if you write recipes with many groups.
