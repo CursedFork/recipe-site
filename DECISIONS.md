@@ -488,3 +488,79 @@ visitor arrived with. It renders the unfiltered grid and the island applies the 
 shared filtered link there is therefore a single frame where all recipes are present before the
 filter applies. The alternative is a hydration mismatch or duplicating the filter logic in an
 inline script, and neither is worth it for one frame.
+
+---
+
+## 10. Phase 4: the recipe page
+
+### The maths, and the three rules it holds to
+
+All of it is pure functions in `src/lib/units.ts`, with no DOM and no state, so the page and the
+tests run exactly the same code. `npm test` runs 40 assertions.
+
+1. **A line with no amount never scales and never converts.** "salt to taste" is advice, not a
+   measurement.
+2. **Volume is never converted to weight.** A cup of flour is not 125 g except for one particular
+   flour packed one particular way, and getting it wrong ruins a bake. Those lines keep their
+   original units and the reader is told once, under the list, rather than on every line.
+3. **A temperature converts only when the Fahrenheit is explicit.** `350°F`, `350 F` and
+   `350 degrees F` are safe to read. A bare `350` could be anything, so it is left completely alone.
+
+### Two judgement calls worth your eye
+
+**Which ingredients stay in cups.** Rule 2 needs to know which things a metric cook weighs rather
+than scoops, and there is no way to derive that: it is a list. It lives at the top of `units.ts`
+as `WEIGHED_NOT_SCOOPED` and currently covers flour, sugar, rice, oats, nuts, chocolate, cheese,
+butter and friends. Adding to it only ever makes the site more cautious, so add freely. If you
+write a recipe where something is wrongly converted, that list is the one place to fix it.
+
+**Fractions are snapped to halves, thirds, quarters and eighths.** Those are the measures you
+actually own. It means an awkward scale lands on the nearest one you can measure rather than
+printing `0.42 cup`: scaling `1/3 cup` by 1.25 gives `3/8 cup`. The trade is that such a line is
+rounded by a few percent. For everything that lands cleanly, and that is most of it, the answer is
+exact.
+
+### What I did not do, and why
+
+- **Servings and units are not in the URL.** Your spec puts the unit choice in localStorage, which
+  it does, and asks for URL state on the home page filters only. So a recipe link always opens at
+  the servings it was written for. Say the word if you would rather share "this recipe, doubled".
+- **Scaling a countable item can give you half of one.** Six servings of a four-serving recipe
+  turns `3 eggs` into `4 1/2 eggs`. That is arithmetically right and there is no honest way to
+  round it, since whether you can use half an egg depends on the recipe. It is left as it is.
+
+### The Web Interface Guidelines review
+
+Two findings, both fixed:
+
+| Finding | Fix |
+|---|---|
+| Two live regions announced the same action, so changing servings was read out twice | The servings `<output>` is now the only live region. The "Scaled from 4 to 6" line is ordinary visible text. |
+| Ingredient text had no `overflow-wrap`, so a long unbroken word could push out of its column | Added, with `min-width: 0` on the flex children that needed it before they would wrap. |
+
+**One conflict I did not act on.** The guidelines ask for Title Case on headings and buttons,
+Chicago style. The `design-taste-frontend` house rules call for sentence case and treat shouty
+labels as a tell, and your fixed look is warm rather than corporate. Sentence case wins: "Cook
+mode", not "Cook Mode". Flagging it because the two tools genuinely disagree and I picked a side.
+
+### Cook mode and the screen
+
+Cook mode always works: it makes the text larger and gives the rows more room. The screen wake
+lock is requested separately, and the page only says the screen will stay awake once the lock has
+actually been granted. If the browser has no Wake Lock API, or refuses because the page is not on
+HTTPS, or drops the lock on low battery, the note changes to say the screen may still dim. There
+is never a control claiming something that is not happening.
+
+The lock is re-requested when you come back to the tab, because browsers release it while you are
+away, and it is always released when you leave the page.
+
+### Print
+
+A stylesheet, not a separate route. That matters for one reason: the page you print is the page
+you are looking at, so **whatever servings and units you have selected are what comes out of the
+printer**, which is what you are about to cook from. A separate print route would have to work
+those out again and would get it wrong the first time you forgot.
+
+It hides the nav, the controls, the footer and the photo, forces black on white whatever the
+screen theme is, keeps the checkboxes as empty boxes to tick on paper, and avoids splitting a step
+across two pages.
