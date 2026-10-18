@@ -69,37 +69,6 @@
   gap: var(--space-3);
 }
 
-/* ---- Chips --------------------------------------------------------------
-   One shape, matching the site's single button shape. The active state is
-   carried by a filled background AND a heavier weight, so it never depends on
-   colour alone. */
-
-.chip {
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--control-min);
-  padding-inline: var(--space-4);
-  border: none;
-  border-radius: var(--radius);
-  background-color: var(--surface);
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  font-weight: var(--weight-emphasis);
-  line-height: 1.2;
-  cursor: pointer;
-  text-align: left;
-}
-
-.chip:hover {
-  background-color: var(--accent-wash);
-}
-
-.chip.is-active {
-  background-color: var(--accent-wash);
-  font-weight: 700;
-}
-
 /* ---- Count and clear ---------------------------------------------------- */
 
 .browser__status {
@@ -254,29 +223,7 @@
   }
 }
 
-/* ---- Touch and wrapping -------------------------------------------------
-   Phase 3, from the Web Interface Guidelines review. */
-
-/* Without this, a tap on a phone waits roughly 300ms for a possible
-   double-tap-to-zoom before the filter applies. This is exactly the
-   wet-hands-on-a-counter case, so the delay is worth removing. */
-.chip,
-.button,
-.browser__clear,
-.card__link,
-.browser__input {
-  touch-action: manipulation;
-}
-
-/* The default tap flash is a blue-grey that fights a warm palette. Replaced
-   with the site's own accent wash rather than switched off, because some
-   visible feedback on tap is the point. */
-.chip,
-.button,
-.browser__clear,
-.card__link {
-  -webkit-tap-highlight-color: color-mix(in srgb, var(--accent) 22%, transparent);
-}
+/* ---- Home page wrapping ---------------------------------------------- */
 
 /* Stops a long recipe title leaving one orphaned word on its last line. */
 .card__title,

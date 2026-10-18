@@ -1,0 +1,397 @@
+/* ---------------------------------------------------------------------------
+   The recipe page, and the controls island inside it.
+
+   A plain stylesheet rather than Astro scoped styles, because most of this
+   markup is rendered by React, which Astro's scoping does not reach.
+   --------------------------------------------------------------------------- */
+
+.recipe-page {
+  padding-block: var(--space-7) var(--space-8);
+}
+
+.recipe-page__header {
+  max-width: var(--measure);
+}
+
+.recipe-page__tags {
+  margin-top: var(--space-3);
+}
+
+/* ---- Times ---------------------------------------------------------------
+   A real description list: these are labelled values, not a layout trick. */
+
+.recipe-page__times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  margin: var(--space-5) 0 0;
+}
+
+.recipe-page__times div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.recipe-page__times dt {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-emphasis);
+  color: var(--muted);
+}
+
+.recipe-page__times dd {
+  margin: 0;
+  font-size: var(--text-lead);
+  font-family: var(--font-head);
+  font-weight: var(--weight-head);
+  /* Figures line up with each other when the numbers change. */
+  font-variant-numeric: tabular-nums;
+}
+
+.recipe-page__regions {
+  margin-top: var(--space-4);
+}
+
+/* ---- Photo --------------------------------------------------------------- */
+
+.recipe-page__figure {
+  margin: var(--space-7) 0 0;
+  max-width: 44rem;
+}
+
+.recipe-page__photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+}
+
+/* ---- Controls ------------------------------------------------------------ */
+
+.recipe__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-5) var(--space-6);
+  margin-top: var(--space-7);
+  padding: var(--space-5);
+  border-radius: var(--radius);
+  /* A tone step, not a border. */
+  background-color: var(--surface);
+}
+
+.recipe__control {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.recipe__control-label {
+  padding: 0;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-emphasis);
+  color: var(--muted);
+}
+
+.recipe__chips,
+.recipe__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.recipe__actions {
+  align-items: center;
+  /* Cook mode and Print belong on one row. They are short labels and wrapping
+     them looked like a mistake rather than a choice. */
+  flex-wrap: nowrap;
+}
+
+/* This group has no label above it, so it needs nudging down to sit on the
+   same baseline as the labelled groups beside it. */
+.recipe__actions {
+  align-self: flex-end;
+}
+
+/* The chips here are the same component as the home page filters. On this
+   surface they need to sit one tone step away from it, not match it. */
+.recipe__controls .chip {
+  background-color: var(--bg);
+}
+
+.recipe__controls .chip:hover,
+.recipe__controls .chip.is-active {
+  background-color: var(--accent-wash);
+}
+
+/* ---- Servings stepper ---------------------------------------------------- */
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.stepper__button {
+  background-color: var(--bg);
+}
+
+.stepper__button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.stepper__button:disabled:hover {
+  background-color: var(--bg);
+}
+
+.stepper__value {
+  min-width: 2.5ch;
+  text-align: center;
+  font-family: var(--font-head);
+  font-size: var(--text-lead);
+  font-weight: var(--weight-head);
+  font-variant-numeric: tabular-nums;
+}
+
+.recipe__reset {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--accent);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-emphasis);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+/* ---- Notes under the controls -------------------------------------------- */
+
+.recipe__cook-note,
+.recipe__scaled {
+  margin-top: var(--space-4);
+  color: var(--accent);
+  font-weight: var(--weight-emphasis);
+}
+
+.recipe__scaled {
+  margin-bottom: var(--space-4);
+}
+
+.recipe__unit-note {
+  margin-top: var(--space-5);
+  max-width: var(--measure);
+}
+
+/* ---- The two columns ------------------------------------------------------
+   Ingredients and instructions side by side on a wide screen, stacked on a
+   phone. Ingredients get less room because the lines are short. */
+
+.recipe__columns {
+  display: grid;
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+}
+
+@media (min-width: 56em) {
+  .recipe__columns {
+    grid-template-columns: minmax(16rem, 22rem) minmax(0, 1fr);
+    gap: var(--space-9);
+    align-items: start;
+  }
+}
+
+.recipe__section h2 {
+  margin-bottom: var(--space-5);
+}
+
+/* ---- Ingredients ---------------------------------------------------------- */
+
+.ingredients {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.ingredients__heading h3 {
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-2);
+  font-size: var(--text-base);
+}
+
+.ingredients__heading:first-child h3 {
+  margin-top: 0;
+}
+
+/* The label wraps the checkbox, so the whole row is one hit target. It is
+   deliberately at least 44px tall for the same reason everything else is. */
+.ingredients__label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  min-height: var(--control-min);
+  padding: var(--space-2) var(--space-2) var(--space-2) 0;
+  border-radius: var(--radius);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+.ingredients__label:hover {
+  background-color: var(--surface);
+}
+
+/* The focus ring belongs on the row, not on the small box inside it. */
+.ingredients__label:has(:focus-visible) {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.ingredients__box {
+  flex: none;
+  width: 1.375rem;
+  height: 1.375rem;
+  /* Nudged down to sit on the first line of text rather than above it. */
+  margin-top: 0.15em;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.ingredients__text {
+  line-height: var(--leading-body);
+  /* The ingredients column goes as narrow as 16rem. A long unbroken word in a
+     recipe file must wrap rather than push into the instructions beside it. */
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+/* Checked lines stay readable. Struck through and dimmed, but not to the point
+   of being unreadable, because you may want to re-read one. */
+.ingredients__text.is-checked {
+  text-decoration: line-through;
+  text-decoration-thickness: 0.07em;
+  color: var(--muted);
+}
+
+/* ---- Instructions --------------------------------------------------------- */
+
+.instructions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  counter-reset: step;
+  max-width: var(--measure);
+}
+
+.instructions__step {
+  display: flex;
+  gap: var(--space-4);
+  counter-increment: step;
+  /* Flex children need this before they are allowed to wrap their text. */
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+/* A real <ol>, so the numbering is the list's own and can never drift out of
+   order. This only styles the marker. */
+.instructions__step::before {
+  content: counter(step);
+  flex: none;
+  min-width: 1.5em;
+  font-family: var(--font-head);
+  font-weight: var(--weight-head);
+  font-size: var(--text-lead);
+  line-height: 1.25;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Notes and back ------------------------------------------------------- */
+
+.recipe-page__notes {
+  margin-top: var(--space-9);
+  max-width: var(--measure);
+}
+
+.recipe-page__notes h2 {
+  margin-bottom: var(--space-4);
+}
+
+.recipe-page__back {
+  margin-top: var(--space-8);
+}
+
+/* ---- Cook mode ------------------------------------------------------------
+   Bigger text and more room, for reading at arm's length across a counter.
+   It changes size and spacing only: no colour change, nothing hidden, so
+   nothing is lost by turning it on. */
+
+.recipe.is-cook-mode .ingredients__text,
+.recipe.is-cook-mode .instructions__step {
+  font-size: clamp(1.375rem, 1.1rem + 1.1vw, 1.75rem);
+  line-height: 1.5;
+}
+
+.recipe.is-cook-mode .ingredients__label {
+  min-height: 3.5rem;
+  padding-block: var(--space-3);
+}
+
+.recipe.is-cook-mode .ingredients__box {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.recipe.is-cook-mode .instructions {
+  gap: var(--space-7);
+}
+
+.recipe.is-cook-mode .instructions__step::before {
+  font-size: var(--text-head);
+}
+
+@media (min-width: 56em) {
+  .recipe.is-cook-mode .recipe__columns {
+    /* Give the bigger text more room to breathe. */
+    grid-template-columns: minmax(18rem, 26rem) minmax(0, 1fr);
+  }
+}
+
+/* ---- Controls on a phone --------------------------------------------------
+   Side by side, the three control groups jostle for room and the actions end
+   up floating at an odd height. On a narrow screen they each get their own
+   full-width row instead, which is also easier to hit with a thumb. */
+
+@media (max-width: 36em) {
+  .recipe__controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-5);
+  }
+
+  .recipe__control {
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .recipe__actions {
+    align-self: stretch;
+  }
+
+  /* Share the row evenly rather than hugging their text. */
+  .recipe__units .chip,
+  .recipe__actions .chip {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .stepper {
+    gap: var(--space-4);
+  }
+}

@@ -113,12 +113,13 @@ const PLURALISES = new Set(["cup", "pint", "quart", "gallon"]);
 
 /**
  * Put a unit back into the form a recipe would print.
- * `amountText` is used rather than the number because "1 1/2" is more than one
- * even though it starts with a 1.
+ *
+ * Plural only above one, which is how recipes are actually written:
+ * "1/2 cup" and "1 cup" are singular, "1 1/2 cups" and "2 cups" are not.
  */
-export function displayUnit(unit: string | null, amountText: string): string | null {
+export function displayUnit(unit: string | null, value: number): string | null {
   if (unit === null || !PLURALISES.has(unit)) return unit;
-  return amountText === "1" ? unit : `${unit}s`;
+  return value > 1 ? `${unit}s` : unit;
 }
 
 export function isVolumeUnit(unit: string | null): boolean {
@@ -285,7 +286,11 @@ export function renderIngredient(
     system,
   );
 
-  const parts = [amountText, displayUnit(unit, amountText), ingredient.item].filter(
+  // The scaled value in the ORIGINAL unit, which is what decides the plural.
+  // In metric the unit will be ml or g, which never pluralise anyway.
+  const scaledValue = ingredient.amount * factor;
+
+  const parts = [amountText, displayUnit(unit, scaledValue), ingredient.item].filter(
     (part): part is string => part !== null && part.length > 0,
   );
 

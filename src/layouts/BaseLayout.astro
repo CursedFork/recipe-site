@@ -12,6 +12,8 @@ import "@fontsource-variable/hanken-grotesk";
 
 import "../styles/tokens.css";
 import "../styles/global.css";
+// Loaded on every page, but every rule in it sits inside @media print.
+import "../styles/print.css";
 
 import { site } from "../config/site";
 import SiteHeader from "../components/SiteHeader.astro";

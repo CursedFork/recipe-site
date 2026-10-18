@@ -1,0 +1,130 @@
+---
+/* ---------------------------------------------------------------------------
+   One page per recipe, generated at build time.
+
+   The static half is here: the title, the photo, the times and the notes.
+   Everything the controls rewrite (ingredients and instructions) lives in the
+   island, because the servings scaler, the unit toggle and the checkboxes all
+   act on the same text.
+   --------------------------------------------------------------------------- */
+
+import { Image } from "astro:assets";
+
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import RecipeControls from "../../islands/RecipeControls.tsx";
+import { loadRecipes } from "../../lib/load-recipes";
+import { getPhoto } from "../../lib/photos";
+
+import "../../styles/recipe.css";
+
+export async function getStaticPaths() {
+  // Runs at build time. If any recipe file is broken this throws here, which
+  // is what stops a broken site being deployed.
+  const recipes = loadRecipes();
+
+  return recipes.map((recipe) => ({
+    params: { slug: recipe.slug },
+    props: { recipe },
+  }));
+}
+
+const { recipe } = Astro.props;
+const photo = recipe.photo ? getPhoto(recipe.photo) : undefined;
+
+function formatMinutes(minutes: number): string {
+  if (minutes < 60) return `${minutes} min`;
+  const hours = Math.floor(minutes / 60);
+  const rest = minutes % 60;
+  return rest === 0 ? `${hours} hr` : `${hours} hr ${rest} min`;
+}
+
+const total = recipe.prep + recipe.cook;
+
+// A plain-language description for search results and link previews.
+const description = `${recipe.cuisine} ${recipe.meals.join(" and ")}. Prep ${formatMinutes(
+  recipe.prep,
+)}, cook ${formatMinutes(recipe.cook)}, serves ${recipe.servings}.`;
+---
+
+<BaseLayout title={recipe.title} description={description}>
+  <article class="recipe-page">
+    <header class="recipe-page__header">
+      <h1>{recipe.title}</h1>
+
+      <p class="recipe-page__tags text-muted">
+        {recipe.cuisine}
+        {recipe.meals.length > 0 && <> &middot; {recipe.meals.join(", ")}</>}
+        {recipe.healthy && <> &middot; healthy</>}
+      </p>
+
+      <dl class="recipe-page__times">
+        <div>
+          <dt>Prep</dt>
+          <dd>{formatMinutes(recipe.prep)}</dd>
+        </div>
+        {
+          recipe.cook > 0 && (
+            <div>
+              <dt>Cook</dt>
+              <dd>{formatMinutes(recipe.cook)}</dd>
+            </div>
+          )
+        }
+        <div>
+          <dt>Total</dt>
+          <dd>{formatMinutes(total)}</dd>
+        </div>
+      </dl>
+
+      {
+        recipe.regions.length > 0 && (
+          <p class="recipe-page__regions text-small text-muted">
+            From {recipe.regions.map((region) => region.label).join(", ")}
+          </p>
+        )
+      }
+    </header>
+
+    {
+      photo && (
+        <figure class="recipe-page__figure">
+          <Image
+            src={photo}
+            alt={`Placeholder image standing in for a photo of ${recipe.title}`}
+            widths={[600, 1200]}
+            sizes="(min-width: 56em) 44rem, 92vw"
+            class="recipe-page__photo"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </figure>
+      )
+    }
+
+    {/*
+      client:load, because these are the controls someone reaches for while
+      standing at the counter. Astro has already rendered the ingredients and
+      instructions into the page at build time, so they are readable with no
+      JavaScript at all; hydration only makes the controls work.
+    */}
+    <RecipeControls
+      ingredients={recipe.ingredients}
+      instructions={recipe.instructions}
+      baseServings={recipe.servings}
+      client:load
+    />
+
+    {
+      recipe.notes && (
+        <section class="recipe-page__notes">
+          <h2>Notes</h2>
+          <p>{recipe.notes}</p>
+        </section>
+      )
+    }
+
+    <p class="recipe-page__back">
+      <a href="/">Back to all recipes</a>
+    </p>
+  </article>
+</BaseLayout>

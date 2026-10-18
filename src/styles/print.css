@@ -1,0 +1,141 @@
+/* ---------------------------------------------------------------------------
+   Printing a recipe.
+
+   A print stylesheet, not a separate page, which matters for one specific
+   reason: the page you print is the page you are looking at, so whatever
+   servings and units you have selected are what comes out of the printer.
+   That is the whole point, since those are the numbers you are about to cook
+   from. A separate print route would have to re-derive them and would get it
+   wrong the first time you forgot.
+   --------------------------------------------------------------------------- */
+
+@media print {
+  /* Always print on white with black text, whatever the screen theme is.
+     Printing a dark page wastes a cartridge and reads badly. */
+  :root,
+  :root[data-theme="dark"] {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --ink: #000000;
+    --muted: #333333;
+    --accent: #000000;
+    --accent-ink: #ffffff;
+    --accent-wash: #ffffff;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Chrome that has no business on paper. */
+  .site-header,
+  .site-footer,
+  .skip-link,
+  .recipe__controls,
+  .recipe__cook-note,
+  .recipe-page__back,
+  .browser__controls,
+  .browser__status {
+    display: none !important;
+  }
+
+  /* The photo is not worth a page of ink, and the recipe is what you need. */
+  .recipe-page__figure {
+    display: none !important;
+  }
+
+  .recipe-page {
+    padding: 0 !important;
+  }
+
+  /* Side by side on paper, which is a wide format even in portrait. */
+  .recipe__columns {
+    display: grid !important;
+    grid-template-columns: minmax(14rem, 20rem) minmax(0, 1fr) !important;
+    gap: 2rem !important;
+    margin-top: 1.5rem !important;
+    align-items: start !important;
+  }
+
+  /* Cook mode's large text is for a counter, not for paper. */
+  .recipe.is-cook-mode .ingredients__text,
+  .recipe.is-cook-mode .instructions__step {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  .recipe.is-cook-mode .ingredients__label {
+    min-height: 0 !important;
+    padding-block: 0.1rem !important;
+  }
+
+  .recipe.is-cook-mode .instructions {
+    gap: 0.6rem !important;
+  }
+
+  body {
+    font-size: 11pt;
+    line-height: 1.4;
+  }
+
+  h1 {
+    font-size: 20pt;
+  }
+
+  h2 {
+    font-size: 13pt;
+  }
+
+  /* The checkboxes stay: ticking things off on paper is the point of a
+     printed ingredient list. They just need to print as empty boxes. */
+  .ingredients__box {
+    width: 0.8rem;
+    height: 0.8rem;
+    -webkit-appearance: none;
+    appearance: none;
+    border: 1pt solid #000000;
+    border-radius: 2pt;
+  }
+
+  .ingredients__label {
+    min-height: 0;
+    padding: 0.1rem 0;
+  }
+
+  .ingredients__label:hover {
+    background: none;
+  }
+
+  /* A checked line still prints its text legibly. */
+  .ingredients__text.is-checked {
+    color: #000000;
+  }
+
+  /* Never split a step or an ingredient across two pages. */
+  .instructions__step,
+  .ingredients__item,
+  .ingredients__heading {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Links print as plain text. A URL in brackets after every link is noise on
+     a recipe you are about to get flour on. */
+  a {
+    color: #000000 !important;
+    text-decoration: none !important;
+  }
+
+  @page {
+    margin: 1.5cm;
+  }
+}
