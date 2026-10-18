@@ -638,3 +638,90 @@ of a map, not decoration around it.
 `/map?region=IND` for a country, `/map?region=middle-east` for a grouped region. Shareable, and
 the back button steps through the places you looked at. Choosing a grouped region lights every
 country in it: picking Middle East highlights all nine.
+
+---
+
+## 12. Phase 6: polish
+
+### Dark mode has no flash, and it is structural rather than lucky
+
+The theme script is a classic synchronous `<script>` in `<head>`. I checked where it actually
+lands in the built HTML: it sits at character 1020, and the stylesheet link at 1683, so the script
+runs **before the stylesheet is even requested**. A non-deferred script in the head blocks parsing
+and runs before anything is painted, so there is no moment at which a dark-mode visitor's page is
+styled light. That is a guarantee of how browsers work, not a race that happens to be won.
+
+Verified end to end: store dark, reload, and the page comes up dark with the browser chrome colour
+already matching.
+
+### SEO
+
+- **Canonical URL on every page.** This one earns its keep here specifically: the home page
+  filters and the map's region selection both live in the query string, so without a canonical,
+  `/map`, `/map?region=IND` and `/map?region=JPN` look like three competing pages.
+- **Open Graph and Twitter card tags**, so a link pasted into a message shows the recipe title and
+  times rather than a bare URL.
+- **`og:image` only where there is a real photo.** A recipe with no photo gets no preview image
+  rather than a stand-in, for the same reason the no-photo card has no empty frame: a generic
+  picture in a link preview is a small lie about what is behind the link.
+- **`/sitemap.xml` and `/robots.txt`**, generated from the recipes at build time. There is an
+  official `@astrojs/sitemap` integration and I wrote about twenty lines instead, because the page
+  list here is "the home page, the map, one page per recipe file" and that is less machinery than
+  configuring something to work it out.
+
+**`astro.config.mjs` is now `astro.config.ts`**, purely so it can import the URL from
+`src/config/site.ts`. When Vercel gives you a domain you change `url` in that one file and the
+canonical tags, the sitemap and robots.txt all follow. The alternative was the URL living in two
+places, where the second one quietly goes stale.
+
+### The favicon was still Astro's logo
+
+Worth saying plainly because it is the sort of thing that ships unnoticed: every tab was showing
+the framework's mark. It is now a bowl with steam, drawn in the accent, with a dark-mode variant so
+it stays legible on a dark browser tab. I rendered it at 16px to check it still reads, because a
+favicon with any fine detail turns to mush at that size.
+
+There is also a PNG fallback and an apple-touch-icon with the warm ground baked in, since iOS
+ignores transparency and would otherwise composite it onto black. The scaffold's `favicon.ico`,
+which was the Astro mark, is deleted.
+
+The mark is deliberately neutral rather than built from initials, because the site name is still a
+placeholder and anything lettered would have to be redrawn.
+
+### Fonts are preloaded now
+
+Deferred from Phase 3, done here. Without it the browser fetches the stylesheet, parses it, works
+out which `@font-face` it needs and only then asks for the font, so the first paint is in a
+fallback face and the text reshuffles when the real one lands.
+
+Two details that are easy to get wrong and were checked rather than assumed:
+
+- **Only the latin subsets are preloaded.** Fontsource splits each face by script, and preloading
+  cyrillic, greek and vietnamese would pull a few hundred kilobytes this site will never render.
+- **The `crossorigin` attribute is required even for our own fonts.** Without it the browser treats
+  the preload and the later CSS request as different fetches and downloads each file twice. I
+  confirmed the preload URL and the URL in the built CSS are byte-identical.
+
+### What the site actually weighs
+
+Measured on the built output, gzipped:
+
+| | |
+|---|---|
+| Home page HTML | **5.7 KB** |
+| A recipe page HTML | **4.7 to 5.2 KB** |
+| Map page HTML | **58.4 KB** (the country paths) |
+| JavaScript, all pages | **72.7 KB** (React is nearly all of it) |
+| CSS, all pages | **5.7 KB** |
+| Fonts, the two latin files | **83.6 KB** |
+
+So a first visit to the home page is roughly 168 KB and every page after that is a few kilobytes,
+since the JavaScript, CSS and fonts are already cached. No horizontal overflow on any page at
+375px.
+
+### `AGENTS.md` was scaffold boilerplate
+
+It described a generic Astro project and pointed at guides for Tailwind, content collections and
+i18n that this site deliberately does not use. Since it is checked in and read as project
+instructions, it was actively misleading. Rewritten to describe this project, the three commands
+that matter, and the handful of things that have genuinely caught us out.
