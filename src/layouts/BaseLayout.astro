@@ -24,24 +24,70 @@ interface Props {
   title?: string;
   /** Meta description for this page. Falls back to the site description. */
   description?: string;
+  /**
+   * An image for link previews, as a path the site serves. Only set it where
+   * there is a real picture of the page's subject: a recipe with a photo. A
+   * page with nothing to show gets no image rather than a stand-in, because a
+   * generic picture in a link preview is a small lie about what is behind it.
+   */
+  previewImage?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, previewImage } = Astro.props;
 
 const pageTitle = title ? `${title} | ${site.name}` : site.name;
 const pageDescription = description ?? site.description;
+
+// Absolute URLs, which link previews and canonical tags both require.
+// Astro.site comes from the `site` value in astro.config.ts.
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const previewImageUrl = previewImage
+  ? new URL(previewImage, Astro.site).href
+  : null;
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {/*
+      The SVG is the real icon: it is tiny and it carries its own dark-mode
+      variant, so it stays legible on a dark browser tab. The PNG is the
+      fallback for anything that will not take an SVG, and the apple-touch
+      icon is what iOS uses if someone saves this to their home screen. iOS
+      ignores transparency, which is why that one has the warm ground baked in.
+    */}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="generator" content={Astro.generator} />
 
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
+
+    {/*
+      The canonical address of this page. It stops a search engine treating
+      /map, /map/ and /map?region=IND as three different pages competing with
+      each other, which is exactly what the filter and region query strings
+      would otherwise cause.
+    */}
+    <link rel="canonical" href={canonical} />
+
+    {/* What a link to this page looks like when pasted into a message. */}
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonical} />
+    {previewImageUrl && <meta property="og:image" content={previewImageUrl} />}
+
+    <meta
+      name="twitter:card"
+      content={previewImageUrl ? "summary_large_image" : "summary"}
+    />
+
+    <meta name="author" content={site.author} />
+    <link rel="sitemap" href="/sitemap.xml" />
 
     {/*
       Matches the browser chrome to the page background, so a phone does not

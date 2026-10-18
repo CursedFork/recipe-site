@@ -8,7 +8,7 @@
    act on the same text.
    --------------------------------------------------------------------------- */
 
-import { Image } from "astro:assets";
+import { Image, getImage } from "astro:assets";
 
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import RecipeControls from "../../islands/RecipeControls.tsx";
@@ -44,9 +44,20 @@ const total = recipe.prep + recipe.cook;
 const description = `${recipe.cuisine} ${recipe.meals.join(" and ")}. Prep ${formatMinutes(
   recipe.prep,
 )}, cook ${formatMinutes(recipe.cook)}, serves ${recipe.servings}.`;
+
+// A link preview image, but only for a recipe that actually has a photo. One
+// without gets no image rather than a stand-in, because a generic picture in a
+// preview is a small lie about what is behind the link.
+const preview = photo
+  ? await getImage({ src: photo, width: 1200, height: 630, format: "jpeg" })
+  : null;
 ---
 
-<BaseLayout title={recipe.title} description={description}>
+<BaseLayout
+  title={recipe.title}
+  description={description}
+  previewImage={preview?.src}
+>
   <article class="recipe-page">
     <header class="recipe-page__header">
       <h1>{recipe.title}</h1>
