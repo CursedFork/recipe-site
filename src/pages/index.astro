@@ -1,0 +1,92 @@
+---
+/* ---------------------------------------------------------------------------
+   The home page.
+
+   Everything expensive happens here, at build time: the recipe files are
+   parsed and validated, the photos are resized and converted, and the search
+   text is precomputed. The React island below receives a small flat array and
+   does nothing but filter it.
+   --------------------------------------------------------------------------- */
+
+import { getImage } from "astro:assets";
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import RecipeBrowser from "../islands/RecipeBrowser.tsx";
+import type { RecipeCardData } from "../islands/recipe-types";
+import { loadRecipes } from "../lib/load-recipes";
+import { getPhoto } from "../lib/photos";
+import { site } from "../config/site";
+
+import "../styles/browser.css";
+
+const recipes = loadRecipes();
+
+const cards: RecipeCardData[] = await Promise.all(
+  recipes.map(async (recipe) => {
+    const metadata = recipe.photo ? getPhoto(recipe.photo) : undefined;
+
+    // Generated here rather than in the island, because image processing is a
+    // build-time job and React has no business doing it.
+    let photo: RecipeCardData["photo"] = null;
+    if (metadata) {
+      const optimized = await getImage({
+        src: metadata,
+        widths: [400, 800],
+        format: "webp",
+      });
+      photo = {
+        src: optimized.src,
+        srcSet: optimized.srcSet.attribute,
+        width: metadata.width,
+        height: metadata.height,
+      };
+    }
+
+    return {
+      slug: recipe.slug,
+      title: recipe.title,
+      cuisine: recipe.cuisine,
+      meals: [...recipe.meals],
+      healthy: recipe.healthy,
+      prep: recipe.prep,
+      cook: recipe.cook,
+      photo,
+      // Title plus ingredient ITEMS only, never the amounts. This is what
+      // makes "tomato" find "1 1/2 cups tomato puree" while "1" does not
+      // match every recipe in the collection.
+      searchText: [recipe.title, ...recipe.searchableIngredients]
+        .join(" ")
+        .toLowerCase(),
+    };
+  }),
+);
+---
+
+<BaseLayout>
+  <section class="home__intro">
+    <h1 class="display">{site.name}</h1>
+    {site.tagline && <p class="home__tagline">{site.tagline}</p>}
+  </section>
+
+  {/*
+    client:load, so the filters work as soon as the page is usable. Astro has
+    already rendered the cards below into the page source at build time; this
+    only makes them interactive.
+  */}
+  <RecipeBrowser recipes={cards} client:load />
+</BaseLayout>
+
+<style>
+  .home__intro {
+    /* The name is the dominant thing on the first screen, which is the one
+       place on this site where that is true. */
+    padding-block: var(--space-7) var(--space-8);
+  }
+
+  .home__tagline {
+    margin-top: var(--space-4);
+    max-width: 34ch;
+    font-size: var(--text-lead);
+    line-height: 1.4;
+  }
+</style>

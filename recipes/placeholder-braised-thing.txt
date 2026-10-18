@@ -1,0 +1,34 @@
+Title: Placeholder Braised Thing
+Cuisine: Invented
+Regions: India, Middle East
+Meal: dinner
+Healthy: no
+Prep: 20
+Cook: 95
+Servings: 4
+Photo: placeholder-braised-thing.jpg
+
+Ingredients:
+For the sauce:
+1 1/2 cups tomato puree
+2 tbsp butter
+1/3 cup water
+1 onion, sliced thin
+salt to taste
+For the rest:
+2 cups flour
+3 eggs
+500 g placeholder protein
+1.5 tsp ground spice blend
+
+Instructions:
+1. Heat the oven to 350°F and put a wide pan over a medium heat.
+2. Melt the butter, add the onion and cook it down until it goes soft and sweet.
+3. Stir in the tomato puree and the spice blend, then pour in the water.
+4. Cover the pan and slide it into the oven for about 350 of your favourite units of patience.
+5. Check the seasoning, add salt to taste, and leave it to sit for ten minutes before serving.
+
+Notes:
+Every word of this recipe is placeholder text for testing the parser. It is not
+a real dish and nobody has cooked it. The amounts are chosen to exercise the
+fraction and unit maths in Phase 4.

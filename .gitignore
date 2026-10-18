@@ -1,0 +1,38 @@
+# build output
+dist/
+
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# Vercel
+.vercel/
+
+# the design-taste-frontend skill's working files
+.taste-skill/
+
+# test coverage (arrives in Phase 4)
+coverage/
+
+# environment variables
+# This site needs no secrets and no API keys at all. These lines are belt and
+# braces, so a stray file can never be committed by accident.
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# editor
+.idea/

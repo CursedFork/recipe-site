@@ -1,0 +1,112 @@
+/* ---------------------------------------------------------------------------
+   Design tokens.
+
+   Settled in Phase 1 with the design-taste-frontend skill, working inside the
+   fixed look and feel choices in recipe-site-prompt.md. DECISIONS.md section 1
+   has the reasoning, the five conflicts with the skill and how each was
+   resolved, and the measured contrast figure for every colour pair below.
+
+   Nothing in the rest of the site should hard-code a colour, a size or a space.
+   If you want to change how the site looks, change it here.
+   --------------------------------------------------------------------------- */
+
+:root {
+  color-scheme: light;
+
+  /* ---- Faces ------------------------------------------------------------
+     Two faces, which is the skill's limit. A serif that is also a real text
+     serif, because most headings here are recipe titles at about 20px on a
+     card, not 60px banners. */
+  --font-head: "Source Serif 4 Variable", Georgia, "Times New Roman", serif;
+  --font-body: "Hanken Grotesk Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* ---- Five size steps, which is the skill's ceiling --------------------
+     Body sits at 17 to 19px, deliberately above the 16px floor, because this
+     gets read on a phone propped on a counter. */
+  --text-xs:      clamp(0.8125rem, 0.79rem + 0.1vw,  0.875rem);  /* 13-14px  meta, times, counts */
+  --text-base:    clamp(1.0625rem, 1rem    + 0.25vw, 1.1875rem); /* 17-19px  body, ingredients, steps */
+  --text-lead:    clamp(1.25rem,   1.15rem + 0.5vw,  1.5rem);    /* 20-24px  card titles */
+  --text-head:    clamp(1.75rem,   1.4rem  + 1.6vw,  2.5rem);    /* 28-40px  recipe title, section heads */
+  --text-display: clamp(2.5rem,    1.9rem  + 3vw,    4rem);      /* 40-64px  site name, home only */
+
+  /* ---- Leading and tracking, per role ---------------------------------- */
+  --leading-display: 1.05;
+  --leading-head:    1.1;
+  --leading-lead:    1.2;
+  --leading-body:    1.6;
+  --leading-small:   1.4;
+
+  --tracking-display: -0.02em;
+  --tracking-head:    -0.015em;
+  --tracking-lead:    -0.01em;
+
+  --weight-body:     400;
+  --weight-emphasis: 500;
+  --weight-head:     600;
+
+  /* ---- Space, on a 4px base -------------------------------------------- */
+  --space-1:  0.25rem;  /*   4px */
+  --space-2:  0.5rem;   /*   8px */
+  --space-3:  0.75rem;  /*  12px */
+  --space-4:  1rem;     /*  16px */
+  --space-5:  1.5rem;   /*  24px */
+  --space-6:  2rem;     /*  32px */
+  --space-7:  3rem;     /*  48px */
+  --space-8:  4rem;     /*  64px */
+  --space-9:  6rem;     /*  96px */
+  --space-10: 8rem;     /* 128px */
+
+  /* ---- Page shape ------------------------------------------------------
+     One pair of page margins used everywhere. Section gap is 56px on a phone
+     and 96px from tablet up, which is a deliberate step down from the skill's
+     120 to 220px. See DECISIONS.md: that range is right for a marketing page,
+     but a filter bar sitting 120px above its own card grid reads as a mistake.
+     What matters is that the section gap is clearly larger than any gap inside
+     a section, and 96px against 32px satisfies that. */
+  --page-margin:  1.25rem;  /*  20px on a phone */
+  --page-max:     75rem;    /* 1200px, the grid */
+  --measure:      68ch;     /* prose line length */
+  --section-gap:  3.5rem;   /*  56px on a phone */
+
+  /* The wet-hands rule, made concrete. Every control is at least this big. */
+  --control-min: 2.75rem;   /* 44px */
+
+  /* One radius, decided once, and it is nearly square. */
+  --radius: 0.25rem;
+
+  /* ---- Colour: light ---------------------------------------------------
+     One ground, one ink, one accent. The accent is spent on links, the active
+     filter and buttons, and nowhere else. Surfaces are separated from the
+     ground by a step in tone, never by a line and never by a shadow. */
+  --bg:           #F7F3EC;  /* warm off-white */
+  --surface:      #EFE9DE;  /* one tone step up, for cards */
+  --ink:          #262321;  /* warm charcoal, not pure black.  14.1:1 on bg */
+  --muted:        #5F5852;  /* secondary notes only.            6.3:1 on bg */
+  --accent:       #4F6238;  /* olive.                           6.1:1 on bg */
+  --accent-ink:   #FFFFFF;  /* label on an accent fill.         6.7:1       */
+  --accent-wash:  #E8EADB;  /* the active filter chip.         12.8:1 w/ ink */
+
+  --focus-ring: var(--accent);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg:           #1C1A18;
+  --surface:      #262320;
+  --ink:          #EDE7DD;  /* 14.1:1 on bg */
+  --muted:        #A39B91;  /*  6.3:1 on bg */
+  --accent:       #A7BE8E;  /* the olive, lightened. 8.6:1 on bg. The full
+                               strength olive is unreadable on a dark ground. */
+  --accent-ink:   #1C1A18;  /* 8.6:1 on the accent fill */
+  --accent-wash:  #333A2B;  /* 9.6:1 with ink */
+
+  --focus-ring: var(--accent);
+}
+
+@media (min-width: 48em) {
+  :root {
+    --page-margin: 2rem;   /* 32px */
+    --section-gap: 6rem;   /* 96px */
+  }
+}

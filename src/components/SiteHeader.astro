@@ -1,0 +1,124 @@
+---
+/* The site header. Static Astro. The only JavaScript it carries is the theme
+   toggle island inside it.
+
+   Following the skill's navigation rule: a wordmark, a few plain links, and
+   nothing else. No bar chrome, no border underneath, no backdrop blur, no
+   floating pill. It is separated from the content by space. */
+
+import { site } from "../config/site";
+import ThemeToggle from "../islands/ThemeToggle.tsx";
+
+// Mark the current page so the active link is obvious without relying on
+// colour alone. Astro gives us the path with a trailing slash sometimes, so
+// normalise before comparing.
+const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
+---
+
+<header class="site-header">
+  <div class="page site-header__inner">
+    <a class="site-header__mark" href="/">{site.name}</a>
+
+    {/* The nav and the toggle travel together. On a narrow screen the pair
+        wraps onto its own row as a group and lines up with the page's left
+        edge, rather than the toggle breaking away on its own. */}
+    <div class="site-header__end">
+      <nav class="site-header__nav" aria-label="Main">
+        <ul class="site-header__links">
+          {
+            site.nav.map((item) => {
+              const href = item.href.replace(/\/+$/, "") || "/";
+              const isCurrent = href === path;
+              return (
+                <li>
+                  <a
+                    href={item.href}
+                    aria-current={isCurrent ? "page" : undefined}
+                    class:list={["site-header__link", { "is-current": isCurrent }]}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </nav>
+
+      <ThemeToggle client:load />
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    padding-block: var(--space-5);
+  }
+
+  .site-header__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-6);
+  }
+
+  .site-header__end {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+  }
+
+  /* Once there is room for everything on one row, the group sits at the right.
+     Below that it has already wrapped, and it stays on the page's left edge
+     with the rest of the content. */
+  @media (min-width: 34em) {
+    .site-header__end {
+      margin-left: auto;
+    }
+  }
+
+  /* The wordmark is in the heading serif but kept modest. On the home page the
+     site name appears again at display size, and two display-sized versions of
+     the same words would fight. */
+  .site-header__mark {
+    margin-right: auto;
+    color: var(--ink);
+    font-family: var(--font-head);
+    font-size: var(--text-lead);
+    font-weight: var(--weight-head);
+    letter-spacing: var(--tracking-lead);
+    line-height: 1.2;
+    text-decoration: none;
+  }
+
+  .site-header__links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+  }
+
+  .site-header__link {
+    display: inline-flex;
+    align-items: center;
+    /* Comfortably tappable without looking like a button. */
+    min-height: var(--control-min);
+    color: var(--ink);
+    font-weight: var(--weight-emphasis);
+    text-decoration: none;
+  }
+
+  .site-header__link:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 0.1em;
+    text-underline-offset: 0.2em;
+  }
+
+  /* The current page is marked by weight and an underline as well as colour,
+     so colour is never the only signal. */
+  .site-header__link.is-current {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 0.12em;
+    text-underline-offset: 0.2em;
+  }
+</style>

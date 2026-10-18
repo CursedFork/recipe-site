@@ -1,0 +1,52 @@
+---
+/* The site footer. Static Astro, no JavaScript.
+
+   The skill's rule is that a footer is a designed close rather than a sitemap,
+   and that the name returns at the end. So: the name, one line about what this
+   is, and nothing else. No columns of links, no social icons, no newsletter. */
+
+import { site } from "../config/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="page site-footer__inner">
+    <p class="site-footer__mark">{site.name}</p>
+    <p class="site-footer__line text-muted text-small">
+      Written and cooked by {site.author}. {year}.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    /* Separated from the content by the full section gap, not by a rule. */
+    margin-top: var(--section-gap);
+    /* A step in tone, which is how surfaces are separated on this site. */
+    background-color: var(--surface);
+    padding-block: var(--space-8);
+  }
+
+  .site-footer__inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  /* The name returns larger at the close. It is a paragraph, not a heading,
+     because it is not a section title and should not appear in the document
+     outline a screen reader reads. */
+  .site-footer__mark {
+    font-family: var(--font-head);
+    font-size: var(--text-head);
+    font-weight: var(--weight-head);
+    letter-spacing: var(--tracking-head);
+    line-height: var(--leading-head);
+    color: var(--ink);
+  }
+
+  .site-footer__line {
+    max-width: var(--measure);
+  }
+</style>

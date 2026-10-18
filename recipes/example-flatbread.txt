@@ -1,0 +1,26 @@
+Title: Example Flatbread
+Cuisine: Test Kitchen
+Regions: Middle East
+Meal: lunch, snack
+Healthy: yes
+Prep: 15
+Cook: 10
+Servings: 6
+
+Ingredients:
+2 cups flour
+3/4 cup warm water
+1 tsp salt
+2 tbsp olive oil
+a pinch of something
+
+Instructions:
+1. Mix the flour and the salt in a bowl.
+2. Pour in the water and the oil, then bring it together into a rough dough.
+3. Knead it for a few minutes until it stops being sticky.
+4. Rest the dough for fifteen minutes under a cloth.
+5. Roll it thin, then cook each piece in a dry pan until it blisters.
+
+Notes:
+Placeholder content for testing a recipe with no photo. This one exists to
+prove the no-photo card looks deliberate rather than broken.

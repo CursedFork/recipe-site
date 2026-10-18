@@ -1,0 +1,105 @@
+---
+/* ---------------------------------------------------------------------------
+   The layout every page uses. Static Astro, no JavaScript of its own except
+   the theme script below, which is deliberately not React.
+   --------------------------------------------------------------------------- */
+
+// Self-hosted variable fonts. Served from our own domain, so there is no
+// request to Google on any page view and nothing breaks on a school network
+// that blocks third-party font CDNs.
+import "@fontsource-variable/source-serif-4";
+import "@fontsource-variable/hanken-grotesk";
+
+import "../styles/tokens.css";
+import "../styles/global.css";
+
+import { site } from "../config/site";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+
+interface Props {
+  /** Page title. The site name is appended automatically. */
+  title?: string;
+  /** Meta description for this page. Falls back to the site description. */
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+
+const pageTitle = title ? `${title} | ${site.name}` : site.name;
+const pageDescription = description ?? site.description;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+
+    {/*
+      Matches the browser chrome to the page background, so a phone does not
+      put a bright white address bar above a dark page.
+
+      It cannot be done with two media-query meta tags here, because the theme
+      follows a stored choice rather than the operating system setting. The
+      inline script below sets it to whichever theme actually applied, and the
+      toggle updates it when you switch.
+    */}
+    <meta id="theme-color" name="theme-color" content="#F7F3EC" />
+
+    {/*
+      The theme, applied before the browser paints anything.
+
+      This is the part that stops the page flashing light before it goes dark,
+      and it has to be an inline script in the head to work. The React toggle
+      cannot do this job, because by the time React runs the page has already
+      painted. `is:inline` tells Astro to leave this alone rather than bundle
+      it, which is what keeps it synchronous and ahead of first paint.
+
+      Reads are wrapped in try/catch because localStorage throws outright in
+      some private browsing modes rather than returning null.
+
+      No stored choice means light, which is the default the spec asks for.
+      Light needs no attribute, since :root is already light.
+    */}
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          if (stored === "dark" || stored === "light") {
+            document.documentElement.dataset.theme = stored;
+          }
+        } catch (error) {
+          /* No stored preference available. Light it is. */
+        }
+
+        // Keep the browser chrome colour in step with the theme that just
+        // applied. These two values are --bg from tokens.css.
+        var meta = document.getElementById("theme-color");
+        if (meta) {
+          meta.setAttribute(
+            "content",
+            document.documentElement.dataset.theme === "dark" ? "#1C1A18" : "#F7F3EC",
+          );
+        }
+      })();
+    </script>
+  </head>
+
+  <body>
+    <a class="visually-hidden skip-link" href="#main">Skip to content</a>
+
+    <SiteHeader />
+
+    <main id="main" class="page">
+      <slot />
+    </main>
+
+    <SiteFooter />
+  </body>
+</html>
