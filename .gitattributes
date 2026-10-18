@@ -1,0 +1,46 @@
+# Line endings.
+#
+# Without this file, how line endings get stored depends on each machine's
+# core.autocrlf setting rather than on the repository. Yours is set correctly
+# today, so everything in here is already stored with Unix line endings, but
+# that is luck rather than a rule. This makes it a rule, so a second machine,
+# a fresh clone, or Vercel's Linux builder all agree.
+#
+# "text=auto" means: decide per file whether it is text, and if it is, store it
+# with LF. Your working copy on Windows still gets CRLF, so nothing about how
+# you edit changes.
+* text=auto
+
+# Recipe files are the content of the site, so be explicit about them.
+*.txt text
+*.md text
+
+# Code and config.
+*.ts text
+*.tsx text
+*.js text
+*.mjs text
+*.cjs text
+*.astro text
+*.css text
+*.json text
+*.svg text
+*.html text
+
+# Binary files git must never try to convert. Doing so corrupts them.
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.webp binary
+*.avif binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.pdf binary
+
+# package-lock.json is generated. Marking it means a merge conflict in it shows
+# as one blob to regenerate rather than thousands of lines to read by hand.
+package-lock.json -diff linguist-generated
