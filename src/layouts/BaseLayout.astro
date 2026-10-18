@@ -10,6 +10,22 @@
 import "@fontsource-variable/source-serif-4";
 import "@fontsource-variable/hanken-grotesk";
 
+// The two latin files, imported for their URLs so they can be preloaded.
+//
+// Without this the browser has to download the stylesheet, parse it, work out
+// which @font-face it needs and only then ask for the font, so the first paint
+// is in a fallback face and the text visibly reshuffles when the real one
+// arrives. Preloading starts those two requests immediately.
+//
+// Only latin is preloaded. Fontsource splits each face into subsets by script,
+// and preloading the cyrillic, greek and vietnamese files would download a few
+// hundred kilobytes that this site will never render.
+//
+// Vite rewrites these to the hashed built filenames, which is why they are
+// imported rather than written out as paths that would go stale every build.
+import serifLatin from "@fontsource-variable/source-serif-4/files/source-serif-4-latin-wght-normal.woff2?url";
+import sansLatin from "@fontsource-variable/hanken-grotesk/files/hanken-grotesk-latin-wght-normal.woff2?url";
+
 import "../styles/tokens.css";
 import "../styles/global.css";
 // Loaded on every page, but every rule in it sits inside @media print.
@@ -61,6 +77,12 @@ const previewImageUrl = previewImage
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="generator" content={Astro.generator} />
+
+    {/* crossorigin is required even for our own fonts: without it the browser
+        treats the preload and the later CSS request as different fetches and
+        downloads each file twice. */}
+    <link rel="preload" href={serifLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={sansLatin} as="font" type="font/woff2" crossorigin />
 
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
