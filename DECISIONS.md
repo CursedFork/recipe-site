@@ -564,3 +564,77 @@ those out again and would get it wrong the first time you forgot.
 It hides the nav, the controls, the footer and the photo, forces black on white whatever the
 screen theme is, keeps the checkboxes as empty boxes to tick on paper, and avoids splitting a step
 across two pages.
+
+---
+
+## 11. Phase 5: the map
+
+### It cost no library JavaScript, as promised
+
+`d3-geo` and `topojson-client` are devDependencies. They run during `astro build`, turn the
+Natural Earth shapes into SVG path strings, and never reach the browser. Verified on the built
+output: **0 KB of map library is shipped.**
+
+### I got the size estimate wrong in Phase 1, and here are the real numbers
+
+I said the projected paths would be "roughly 25 to 35 KB gzipped". They were not. Measured on the
+built page:
+
+| | Map page, gzipped |
+|---|---|
+| Full-precision coordinates, as d3 emits them | **125 KB** |
+| Rounded to one decimal place | **86 KB** |
+| Rounded to whole numbers (what it ships) | **58 KB** |
+
+d3 writes full floats, so one border point costs something like
+`M123.45678901234,234.56789012345`. In a 1000-unit viewBox a whole number is accurate to half a
+unit, which is under a pixel at any size this map is drawn, so nothing visible is lost for a saving
+of more than half.
+
+**What that means for the choice I recommended.** At 58 KB this is still the lighter option:
+`react-simple-maps` would have been 39 KB of data plus 32 KB of library, about 71 KB, and would
+still have needed the same alpha-3 bridge and more accessibility work. So the recommendation
+stands, but by a smaller margin than the numbers I gave you in Phase 1. I would rather correct that
+than let the earlier figure stand.
+
+### Matching countries by name, and the one that got away
+
+Your lookup has 63 countries; the map data has 177. I match yours to the map by name, using the
+aliases already in `regions.ts`. Only two needed thought:
+
+- **United States.** The map calls it "United States of America". The alias was already there.
+- **Singapore.** It is not in the map data at all, because at 1:110m it is too small to draw.
+
+Singapore is the interesting one, because it is not a mistake to fix. The build prints a note
+naming any lookup country with no shape, and such a place still appears in the region list, which
+is the keyboard route anyway. It simply has no shape to click. If you ever write a recipe from
+Singapore it will be findable, just not clickable on the map.
+
+### The accessibility decisions, since maps routinely fail this
+
+- **The list is the control, not a fallback.** Every place with recipes is a real button in it,
+  with its count written as text. That is the keyboard and screen reader route, and it is also
+  genuinely the faster way to find a small country.
+- **The map's shapes are deliberately not in the tab order.** Tabbing through 176 mostly empty
+  countries to reach India would be worse than useless. The SVG carries `role="img"` and a label
+  saying what it shows and that the list gives the same places as buttons. `role="img"` also means
+  a screen reader sees one described picture rather than 176 unlabelled paths.
+- **Colour is never the only signal.** A country with recipes is filled in the accent *and* given a
+  heavier outline; a selected one is filled in the ink and heavier still. Three states, three
+  weights. The count is text in the list regardless of any of it.
+
+**One thing worth knowing about the colours.** I tried to carry land-versus-sea on fill alone and
+could not: against a near-white sea, a land tone quiet enough to stay in the background is about
+1.2:1 from it, and one dark enough to reach 3:1 then collapses into the accent so the recipe
+countries stop standing out. Measured both ways. The answer was the one paper maps have always
+used: outline the land. The stroke is derived from the ink with `color-mix`, so it follows the
+theme without a new token.
+
+The house rule against hairlines is about dividers in a user interface. A coastline is the content
+of a map, not decoration around it.
+
+### Selection is in the URL
+
+`/map?region=IND` for a country, `/map?region=middle-east` for a grouped region. Shareable, and
+the back button steps through the places you looked at. Choosing a grouped region lights every
+country in it: picking Middle East highlights all nine.

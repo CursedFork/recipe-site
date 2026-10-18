@@ -1,0 +1,132 @@
+---
+/* ---------------------------------------------------------------------------
+   The map page.
+
+   The projection, the shape matching and the recipe grouping all happen here,
+   at build time. The island receives path strings and a list of places.
+   --------------------------------------------------------------------------- */
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import WorldMap from "../islands/WorldMap.tsx";
+import type { Place, PlaceRecipe } from "../islands/map-types";
+import { loadRecipes } from "../lib/load-recipes";
+import {
+  buildMapGeometry,
+  MAP_HEIGHT,
+  MAP_WIDTH,
+} from "../lib/map-geometry";
+import { countries, groupedRegions } from "../data/regions";
+
+import "../styles/map.css";
+
+const recipes = loadRecipes();
+const { countries: shapes, missingShapes } = buildMapGeometry();
+
+/* ---- Group the recipes by place -----------------------------------------
+   A recipe tagged "India, Middle East" counts towards India, towards each of
+   the nine Middle East countries, and towards the Middle East region itself. */
+
+const byCountry = new Map<string, PlaceRecipe[]>();
+const byGroup = new Map<string, PlaceRecipe[]>();
+
+for (const recipe of recipes) {
+  const entry: PlaceRecipe = { slug: recipe.slug, title: recipe.title };
+
+  for (const region of recipe.regions) {
+    if (region.kind === "group" && region.groupKey) {
+      const list = byGroup.get(region.groupKey) ?? [];
+      if (!list.some((r) => r.slug === entry.slug)) list.push(entry);
+      byGroup.set(region.groupKey, list);
+    }
+  }
+
+  // Every code the recipe touches, whether named directly or via a group.
+  for (const code of recipe.regionCodes) {
+    const list = byCountry.get(code) ?? [];
+    if (!list.some((r) => r.slug === entry.slug)) list.push(entry);
+    byCountry.set(code, list);
+  }
+}
+
+const byTitle = (a: PlaceRecipe, b: PlaceRecipe) => a.title.localeCompare(b.title);
+
+const countryPlaces: Place[] = [...byCountry.entries()]
+  .map(([code, list]) => ({
+    key: code,
+    kind: "country" as const,
+    name: countries[code as keyof typeof countries]?.name ?? code,
+    codes: [code],
+    recipes: list.sort(byTitle),
+  }))
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const groupPlaces: Place[] = [...byGroup.entries()]
+  .map(([key, list]) => {
+    const group = groupedRegions[key as keyof typeof groupedRegions];
+    return {
+      key,
+      kind: "group" as const,
+      name: group.name,
+      codes: [...group.members],
+      recipes: list.sort(byTitle),
+    };
+  })
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const places = [...countryPlaces, ...groupPlaces];
+
+// Only warn about a country with no shape if it actually has recipes. One that
+// has neither a shape nor a recipe is of no interest to a visitor, and saying
+// it is "still in the list" would be wrong, because the list only holds places
+// that have something to show.
+const relevantMissing = missingShapes.filter((country) =>
+  byCountry.has(country.alpha3),
+);
+---
+
+<BaseLayout
+  title="Map"
+  description="Where these recipes come from, as a world map and a list of countries and regions."
+>
+  <div class="map-page">
+    <header class="map-page__header">
+      <h1>Map</h1>
+      <p class="map-page__lead">
+        Every country and region these recipes come from. Pick one on the map,
+        or from the list, to see what has been cooked from there.
+      </p>
+    </header>
+
+    {/*
+      client:load because the map is the content of this page, not something
+      below the fold. Astro has already rendered the SVG and the whole list
+      into the page at build time, so both are there before any JavaScript.
+    */}
+    <WorldMap
+      shapes={shapes}
+      places={places}
+      width={MAP_WIDTH}
+      height={MAP_HEIGHT}
+      missingShapes={relevantMissing}
+      client:load
+    />
+  </div>
+</BaseLayout>
+
+<style>
+  .map-page {
+    padding-block: var(--space-7) var(--space-8);
+  }
+
+  .map-page__header {
+    max-width: var(--measure);
+    margin-bottom: var(--space-7);
+  }
+
+  .map-page__lead {
+    margin-top: var(--space-4);
+    font-size: var(--text-lead);
+    line-height: 1.4;
+    max-width: 44ch;
+  }
+</style>
