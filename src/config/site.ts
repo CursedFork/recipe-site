@@ -19,18 +19,20 @@ export const site = {
   /* Used in the footer and in the page metadata. */
   author: "Andrew",
 
-  /* The live URL, which Vercel will give you in Phase 7. Astro needs it to
-     build absolute URLs for the sitemap and the social metadata. The trailing
-     slash is deliberate. Leave the placeholder until the domain exists. */
-  url: "https://example.com/",
+  /* The live URL. Everything absolute is built from this one value: the
+     canonical tag on every page, the link previews, every entry in the
+     sitemap and the Sitemap line in robots.txt. The trailing slash matters.
 
-  /* Fallback description for pages that do not set their own. Recipe pages
-     will build their own from the recipe itself in Phase 6. */
+     If you ever put a custom domain in front of this, change it here and
+     push, or all of the above will keep pointing at the vercel.app address. */
+  url: "https://andrews-recipes.vercel.app/",
+
+  /* Fallback description, used by any page that does not set its own.
+     Recipe pages build theirs from the recipe itself. */
   description:
     "A personal collection of recipes, searchable by ingredient, cuisine, meal and region.",
 
-  /* The main navigation. Order is the order shown. The map arrives in Phase 5
-     and the link is here already so the header does not change shape later. */
+  /* The main navigation. Order is the order shown. */
   nav: [
     { label: "Recipes", href: "/" },
     { label: "Map", href: "/map" },
