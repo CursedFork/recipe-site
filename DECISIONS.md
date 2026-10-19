@@ -845,3 +845,73 @@ and the map became one undifferentiated landmass with no highlights at all.
 - **Ingredient group headings are `<li>` elements**, so a list of 14 includes the 3 headings and
   "4 of 14" means slightly less than a reader expects. The clean fix is one list per group, which
   is only worth it if you write recipes with many groups.
+
+---
+
+## 14. Getting food onto the first screen, and spending the accent
+
+Two fixes you asked for after looking at the site on a phone. Both measured before and after,
+because both were the kind of thing that is easy to argue about from a screenshot.
+
+### The mobile fold
+
+At 390 by 844, **the first recipe card started at 878px**, so not a single pixel of food was on
+the first screen. The three filter groups took 383px between them, nearly half the phone, and the
+site name was set at display size directly underneath a header that already shows it.
+
+| | Before | After |
+|---|---|---|
+| First card starts at | 878px | **617px** |
+| Card visible on the first screen | **0px** | **227px** |
+| Filters occupy | 383px | 240px |
+
+What changed, all of it inside `max-width: 36em` so desktop is untouched:
+
+- Each filter group puts its label **beside** its chips rather than above them.
+- The site name steps down from display size to heading size, and the air around it tightens.
+- The header, the gaps between filter groups and the margin above the result count all tighten.
+
+**Nothing is hidden and nothing moved behind a tap.** A disclosure would have saved more room,
+but filtering is a main feature of this page and burying it to make room for the thing it filters
+is a poor trade. The filters simply stop outranking the food.
+
+### The accent
+
+The premise was worth checking rather than acting on, and it held, though not for the reason I
+expected. Measured on the home page at 390px, the only olive above the fold was the underline on
+the current nav link. Everything else was beige and charcoal.
+
+**Turning a filter on does not fix it either.** The filled chip adds about 3,000px², while
+filtering away cards removes their olive "Healthy" labels, so the total accent on screen actually
+*goes down*.
+
+So the accent was working exactly as section 1 describes, on links, the active filter and buttons.
+The trouble is that the home page at rest has no button and no active filter, so there was nothing
+for it to land on.
+
+Rather than invent a new scheme, this takes the one the dealt palette already described:
+
+> the accent filled solid, for the button and for **one inverted band with paper-coloured type**
+
+**The footer is that band.** It was already a designed close rather than content, which makes it
+the right place for the only full field of colour on the site, and it appears on every page.
+
+In dark mode the band **deepens** rather than inverting literally. The dark-mode accent is a light
+sage, and a full-width field of it would be a slab of glare in a kitchen at night. It is the same
+olive taken down instead. Paper on olive is 6.1:1 in light and 7.9:1 in dark, and the quieter
+second line clears 4.8:1 and 5.0:1.
+
+The band gets its own tokens (`--field-bg`, `--field-ink`, `--field-muted`) because the skill's
+palette format carries a `fields` list for exactly this, so it is part of the scheme rather than
+an addition to it.
+
+Accent coverage on the home page went from **13,608px² to 87,604px²**. Fixing the fold helps here
+too: the olive "Healthy" labels live on the cards, so bringing cards onto the first screen brings
+the accent with them.
+
+### Inspector, re-run at 390
+
+No new findings. What remains is the set section 8 already records as permanent for this site
+(`few-pictures` and `no-footage` from the no-stock-photos rule, `still-page` from the rejected
+motion floor, `focal-point` from the rejected marketing hero) plus `palette-cream`, which is still
+the open question in section 8 and still waiting on you.
