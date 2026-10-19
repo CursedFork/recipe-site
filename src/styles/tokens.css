@@ -86,6 +86,21 @@
   --accent-ink:   #FFFFFF;  /* label on an accent fill.         6.7:1       */
   --accent-wash:  #E8EADB;  /* the active filter chip.         12.8:1 w/ ink */
 
+  /* ---- One inverted band -----------------------------------------------
+     The palette the taste skill dealt described itself as "the accent filled
+     solid, for the button and for one inverted band with paper-coloured
+     type", and its own format carries a `fields` list for exactly this. The
+     band is the footer, which is the one place on the site that is a designed
+     close rather than content.
+
+     Without it the page carried almost no accent at all: measured on the home
+     page at 390px, the only olive above the fold was the underline on the
+     current nav link. A filter chip turning olive is the only other spend,
+     and it is not there until someone taps something. */
+  --field-bg: #4F6238;   /* the accent, filled */
+  --field-ink: #F7F3EC;  /* paper on it.   6.1:1 */
+  --field-muted: #D8DCCB; /* a quieter line. 4.8:1 */
+
   --focus-ring: var(--accent);
 }
 
@@ -100,6 +115,13 @@
                                strength olive is unreadable on a dark ground. */
   --accent-ink:   #1C1A18;  /* 8.6:1 on the accent fill */
   --accent-wash:  #333A2B;  /* 9.6:1 with ink */
+
+  /* The band deepens rather than using the light accent directly. At night in
+     a kitchen a full-width field of #A7BE8E would be a slab of glare, so it
+     is the same olive taken down instead of inverted literally. */
+  --field-bg: #39492A;
+  --field-ink: #EDE7DD;   /* 7.9:1 */
+  --field-muted: #B6BDA6; /* 5.0:1 */
 
   --focus-ring: var(--accent);
 }

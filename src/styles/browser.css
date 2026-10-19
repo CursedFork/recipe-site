@@ -236,3 +236,52 @@
 .browser__empty-title {
   text-wrap: balance;
 }
+
+/* ---- The first screen on a phone -----------------------------------------
+   Measured at 390 by 844: the first recipe card started at 878px, so not one
+   pixel of food was on the first screen. The filters alone took 383px, which
+   is nearly half the phone. For a site whose brief is "readable on a phone,
+   propped on a counter", the filters were outranking the food.
+
+   Nothing is hidden here and nothing moves behind a tap. The three filter
+   groups just stop each taking a label row of their own, and the branding
+   above them stops taking a quarter of the screen when the site name is
+   already in the header two lines up. */
+
+@media (max-width: 36em) {
+  /* The label sits beside its chips instead of above them. */
+  .browser__group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2) var(--space-3);
+  }
+
+  .browser__legend {
+    /* A legend inside a flex fieldset needs this to sit on the row rather
+       than claim one of its own. */
+    float: left;
+    width: 4.5rem;
+    margin-bottom: 0;
+  }
+
+  .browser__chips {
+    flex: 1;
+    min-width: 0;
+    gap: var(--space-2);
+  }
+
+  .browser__controls {
+    gap: var(--space-4);
+  }
+
+  .browser__search {
+    gap: var(--space-1);
+  }
+
+  /* The count sat 48px below the filters and 24px above the grid. */
+  .browser__status {
+    margin-top: var(--space-5);
+    margin-bottom: var(--space-4);
+  }
+}

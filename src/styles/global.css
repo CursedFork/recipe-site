@@ -425,3 +425,11 @@ h4,
 .card__link {
   -webkit-tap-highlight-color: color-mix(in srgb, var(--accent) 22%, transparent);
 }
+
+/* On a phone the header's own padding was costing 48px before the page even
+   started. The wordmark and the nav still get their full tap targets. */
+@media (max-width: 36em) {
+  .site-header {
+    padding-block: var(--space-3) var(--space-2);
+  }
+}

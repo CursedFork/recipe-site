@@ -89,4 +89,26 @@ const cards: RecipeCardData[] = await Promise.all(
     font-size: var(--text-lead);
     line-height: 1.4;
   }
+
+  /* On a phone it is not worth a quarter of the screen. The site name is
+     already in the header two lines above, so here it steps down from
+     display size to a heading and the air around it tightens. The recipes
+     are what someone came for. */
+  @media (max-width: 36em) {
+    .home__intro {
+      padding-block: var(--space-4) var(--space-5);
+    }
+
+    .home__intro h1 {
+      font-size: var(--text-head);
+      line-height: var(--leading-head);
+      letter-spacing: var(--tracking-head);
+    }
+
+    .home__tagline {
+      margin-top: var(--space-3);
+      font-size: var(--text-base);
+      max-width: 40ch;
+    }
+  }
 </style>

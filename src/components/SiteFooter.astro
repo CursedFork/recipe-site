@@ -23,8 +23,11 @@ const year = new Date().getFullYear();
   .site-footer {
     /* Separated from the content by the full section gap, not by a rule. */
     margin-top: var(--section-gap);
-    /* A step in tone, which is how surfaces are separated on this site. */
-    background-color: var(--surface);
+    /* The one inverted band. See the note on --field-bg in tokens.css: the
+       dealt palette called for the accent filled solid once, and a footer
+       that is already a designed close is where it belongs. */
+    background-color: var(--field-bg);
+    color: var(--field-ink);
     padding-block: var(--space-8);
   }
 
@@ -38,15 +41,18 @@ const year = new Date().getFullYear();
      because it is not a section title and should not appear in the document
      outline a screen reader reads. */
   .site-footer__mark {
+    color: var(--field-ink);
     font-family: var(--font-head);
     font-size: var(--text-head);
     font-weight: var(--weight-head);
     letter-spacing: var(--tracking-head);
     line-height: var(--leading-head);
-    color: var(--ink);
   }
 
+  /* Overrides .text-muted, which is tuned for the page ground and would be
+     unreadable on the band. */
   .site-footer__line {
     max-width: var(--measure);
+    color: var(--field-muted);
   }
 </style>
