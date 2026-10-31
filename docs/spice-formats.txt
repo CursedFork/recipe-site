@@ -34,6 +34,7 @@ Name = Base, kind: Variety
 A spice with nothing to group under it is just its name: Clove, Cumin. Use the singular and sentence case.
 If a spice has a Family, its Name MUST be the family's Name, then a colon and a space, then its variety:
   Family: Pepper, black     Name: Pepper, black: Tellicherry
+The other way round too: a Name that contains a colon is a variety, and MUST have a Family line naming a spice that exists.
 
 ================================================================================
 SPICE FILE

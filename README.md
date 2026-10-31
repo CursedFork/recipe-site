@@ -219,16 +219,17 @@ A grouped region expands to all of its member countries, so a recipe tagged
 | Group | Covers |
 |---|---|
 | Middle East | Egypt, Iran, Iraq, Israel, Jordan, Lebanon, Saudi Arabia, Syria, Turkey |
+| Levant | Israel, Jordan, Lebanon, Palestine, Syria |
 | North Africa | Algeria, Egypt, Morocco, Tunisia |
 | West Africa | Ghana, Nigeria, Senegal |
-| East Africa | Ethiopia, Kenya |
+| East Africa | Eritrea, Ethiopia, Kenya, Tanzania |
 | East Asia | China, Japan, South Korea, Taiwan |
-| South Asia | India, Nepal, Pakistan, Sri Lanka |
-| Southeast Asia | Indonesia, Malaysia, Philippines, Singapore, Thailand, Vietnam |
+| South Asia | Bangladesh, India, Nepal, Pakistan, Sri Lanka |
+| Southeast Asia | Cambodia, Indonesia, Laos, Malaysia, Myanmar, Philippines, Singapore, Thailand, Vietnam |
 | Mediterranean | France, Greece, Italy, Morocco, Portugal, Spain, Turkey |
 | Scandinavia | Denmark, Norway, Sweden |
-| Caribbean | Cuba, Jamaica |
-| Latin America | Argentina, Brazil, Colombia, Mexico, Peru |
+| Caribbean | Cuba, Grenada, Jamaica, Trinidad and Tobago |
+| Latin America | Argentina, Brazil, Colombia, Guatemala, Mexico, Peru |
 
 ### Adding a country or a group
 

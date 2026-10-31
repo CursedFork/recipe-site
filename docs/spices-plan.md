@@ -1,6 +1,6 @@
 # Spices section: Phase 1 plan
 
-**Status: draft, waiting for your approval.** Nothing here is built into the site yet. There are no pages, no parsers, and nothing reads the new data files. The only things added are this plan, the format text, the vocabulary files in `src/data/`, a staples config, and three sample spices and three sample blends.
+**Status: approved with all nine defaults. Phase 2 (the parsers and validators) is built and tested.** No page reads them yet, so the live site is unchanged. Section 16 at the end says what was built.
 
 The paste-ready file formats are in [`spice-formats.txt`](spice-formats.txt).
 
@@ -336,3 +336,38 @@ I checked the six files with a throwaway script (not kept): every food, method, 
 | 7 | The finder, with passing tests for: eggs, a family match, a specific-spice miss, an optional ingredient, classic against also-works order, and "select all shown" with a filter on. |
 | 8 | Top picks, Buy next and the shopping list, with tests for the counts. |
 | 9 | Mobile, dark mode, accessibility, page titles, nav, and the README section on adding a spice or blend. |
+
+---
+
+## 16. Phase 2: what was built
+
+**The parsers and validators**, in `src/lib/spices/`. Nothing imports them yet, so none of it ships to visitors.
+
+| File | Job |
+|---|---|
+| `parse-spice.ts` | Checks everything one spice file can say about itself |
+| `parse-blend.ts` | The same for a blend, and reads the Ingredients list |
+| `build-library.ts` | The checks that need every file (names, families, ingredients), and works out allergens and the "go easy" list |
+| `vocab.ts` | Looks a typed word up in the foods, methods, uses, cuisines and allergens lists, with suggestions |
+| `fields.ts`, `text.ts`, `constants.ts`, `types.ts` | Shared pieces |
+| `load-spices.ts` | Reads the real `/spices` and `/blends` folders. **Not called by any page yet.** |
+
+**The rules, as they now stand** (each one has a test that asserts its exact error message):
+
+- Every problem across every file is collected and reported together, as `spices/file.txt: problem`, ordered by file. One mistake never hides another.
+- **Required and missing fields**, unknown fields (with "did you mean"), repeated fields (except Source), empty values, text where none is allowed.
+- **Power** must be a whole number from 1 to 5 and is not allowed on salts, sugars or other ingredients. **Heat** must be 0 to 5 and is required on chiles.
+- **Unknown foods, cuisines, methods, uses, allergens, categories, forms and origins** are errors with the closest match suggested.
+- **Names:** a duplicate Name, two names landing on one address, and a filename that does not match the Name are all errors. When two files claim one name, the correctly named file is treated as the owner and the other one is blamed.
+- **Aka:** a word that is another spice's Name, or used by two spices, is an error.
+- **Families:** the family must be a real spice, one level only, and a member's Name must start with `Family: `. A Name with a colon and no Family line is an error too.
+- **Ingredients:** an unknown spice is an error with a suggestion; the same spice twice (even by two names) is an error; zero amounts and zero denominators are errors; amounts in teaspoons get a specific message; fewer than two ingredients, or all of them optional, is an error.
+- **Classic and Also** may not list the same food.
+- **Confidence below high needs a Doubt line.**
+- **Pantry staples** must be real spices.
+
+**Two friendlier messages for the old draft's layout.** A renamed field (`Use`, `Cuisine`, `Sources`) says what it is now called instead of suggesting the wrong field. A blend with no blank line before `Ingredients:` gets one clear message instead of a pile.
+
+**Region lookup (decision I):** a real Levant group of five, and 17 new countries (Palestine among them); Bangladesh, Cambodia, Laos, Myanmar, Eritrea, Tanzania, Grenada, Trinidad and Tobago and Guatemala joined the groups they belong in. No existing recipe uses any of them, so the map page is unchanged.
+
+**Tests:** 180 now pass across the project (44 before this phase). The 136 new ones cover the rules above, and I broke three rules on purpose to confirm the tests catch them.

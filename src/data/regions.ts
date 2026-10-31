@@ -103,6 +103,27 @@ export const countries = {
   },
   VNM: { name: "Vietnam", aliases: ["Viet Nam"] },
   ZAF: { name: "South Africa" },
+
+  // Added for the Spices section, where a spice or blend can come from places
+  // a cook's recipes rarely name. Several are too small to draw at the map's
+  // scale; the build already says so and they still resolve here.
+  ARE: { name: "United Arab Emirates", aliases: ["UAE", "Emirates"] },
+  ARM: { name: "Armenia" },
+  BGD: { name: "Bangladesh" },
+  ERI: { name: "Eritrea" },
+  GEO: { name: "Georgia" },
+  GRD: { name: "Grenada" },
+  GTM: { name: "Guatemala" },
+  KHM: { name: "Cambodia" },
+  LAO: { name: "Laos", aliases: ["Lao PDR"] },
+  MDG: { name: "Madagascar" },
+  MMR: { name: "Myanmar", aliases: ["Burma"] },
+  OMN: { name: "Oman" },
+  PSE: { name: "Palestine", aliases: ["State of Palestine", "Palestinian Territories"] },
+  TTO: { name: "Trinidad and Tobago", aliases: ["Trinidad"] },
+  TZA: { name: "Tanzania", aliases: ["Zanzibar"] },
+  UZB: { name: "Uzbekistan" },
+  YEM: { name: "Yemen" },
 } as const satisfies Record<string, Country>;
 
 export type Alpha3 = keyof typeof countries;
@@ -124,8 +145,16 @@ export interface GroupedRegion {
 export const groupedRegions = {
   "middle-east": {
     name: "Middle East",
-    aliases: ["Middle Eastern", "Levant"],
+    aliases: ["Middle Eastern"],
     members: ["EGY", "IRN", "IRQ", "ISR", "JOR", "LBN", "SAU", "SYR", "TUR"],
+  },
+  // The Levant is its own small region. It used to be an alias of the group
+  // above, which put Egypt, Iran and Saudi Arabia in it, wrong for anything
+  // that is really Levantine, such as za'atar.
+  levant: {
+    name: "Levant",
+    aliases: ["Levantine"],
+    members: ["ISR", "JOR", "LBN", "PSE", "SYR"],
   },
   "west-africa": {
     name: "West Africa",
@@ -135,7 +164,7 @@ export const groupedRegions = {
   "east-africa": {
     name: "East Africa",
     aliases: ["East African"],
-    members: ["ETH", "KEN"],
+    members: ["ERI", "ETH", "KEN", "TZA"],
   },
   "north-africa": {
     name: "North Africa",
@@ -150,12 +179,12 @@ export const groupedRegions = {
   "south-asia": {
     name: "South Asia",
     aliases: ["South Asian", "Indian Subcontinent"],
-    members: ["IND", "LKA", "NPL", "PAK"],
+    members: ["BGD", "IND", "LKA", "NPL", "PAK"],
   },
   "southeast-asia": {
     name: "Southeast Asia",
     aliases: ["South East Asia", "Southeast Asian", "South-East Asia"],
-    members: ["IDN", "MYS", "PHL", "SGP", "THA", "VNM"],
+    members: ["IDN", "KHM", "LAO", "MMR", "MYS", "PHL", "SGP", "THA", "VNM"],
   },
   mediterranean: {
     name: "Mediterranean",
@@ -168,12 +197,12 @@ export const groupedRegions = {
   },
   caribbean: {
     name: "Caribbean",
-    members: ["CUB", "JAM"],
+    members: ["CUB", "GRD", "JAM", "TTO"],
   },
   "latin-america": {
     name: "Latin America",
     aliases: ["Latin American", "South America"],
-    members: ["ARG", "BRA", "COL", "MEX", "PER"],
+    members: ["ARG", "BRA", "COL", "GTM", "MEX", "PER"],
   },
 } as const satisfies Record<string, GroupedRegion>;
 
