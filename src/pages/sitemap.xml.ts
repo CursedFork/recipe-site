@@ -11,14 +11,19 @@
 import type { APIRoute } from "astro";
 
 import { loadRecipes } from "../lib/load-recipes";
+import { loadLibrary } from "../lib/spices/load-spices";
 import { site } from "../config/site";
 
 export const GET: APIRoute = () => {
   const recipes = loadRecipes();
+  const spices = loadLibrary().spices;
 
   const paths = [
     "/",
     "/map",
+    "/spices",
+    "/spices/library",
+    ...spices.map((spice) => `/spices/library/${spice.slug}`),
     ...recipes.map((recipe) => `/recipes/${recipe.slug}`),
   ];
 
@@ -27,7 +32,7 @@ export const GET: APIRoute = () => {
       const absolute = new URL(path, site.url).href;
       // The home page is the entry point and the recipes are the content, so
       // they rank above the map in the site's own ordering.
-      const priority = path === "/" ? "1.0" : path === "/map" ? "0.5" : "0.8";
+      const priority = path === "/" ? "1.0" : path.startsWith("/recipes/") ? "0.8" : "0.5";
       return `  <url>\n    <loc>${absolute}</loc>\n    <priority>${priority}</priority>\n  </url>`;
     })
     .join("\n");

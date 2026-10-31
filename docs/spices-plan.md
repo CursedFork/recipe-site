@@ -371,3 +371,27 @@ I checked the six files with a throwaway script (not kept): every food, method, 
 **Region lookup (decision I):** a real Levant group of five, and 17 new countries (Palestine among them); Bangladesh, Cambodia, Laos, Myanmar, Eritrea, Tanzania, Grenada, Trinidad and Tobago and Guatemala joined the groups they belong in. No existing recipe uses any of them, so the map page is unchanged.
 
 **Tests:** 180 now pass across the project (44 before this phase). The 136 new ones cover the rules above, and I broke three rules on purpose to confirm the tests catch them.
+
+---
+
+## 17. Phase 5: the library page
+
+**What exists now.** `/spices` (a small hub), `/spices/library` (the list) and one page per spice at `/spices/library/<slug>` (79 pages). "Spices" is in the main navigation and in the sitemap.
+
+| Piece | Where |
+|---|---|
+| The saved cabinet rules (add, remove, clear, read safely) | `src/lib/spices/cabinet.ts`, tested |
+| Search, filters, letter groups, pantry staples | `src/lib/spices/library-filter.ts`, tested |
+| Power and Heat words | `src/lib/spices/scales.ts`, tested |
+| The one place that touches localStorage | `src/islands/spices/cabinet-store.ts` |
+| The library island | `src/islands/spices/SpiceLibrary.tsx` |
+| Power and Heat meters (five segments plus words) | `src/islands/spices/Meter.tsx` |
+| "I have this" on a spice page | `src/islands/spices/OwnToggle.tsx` |
+| Styles for the whole section | `src/styles/spices.css`, loaded by `src/layouts/SpicesLayout.astro` so no page can miss them |
+
+**Behaviour.** Tick boxes save to this browser only. Search matches the name and every Aka. Filters: kind of spice (any of several), one cuisine (a Global spice matches every cuisine), "Go easy" (Power 4 and 5), and All, In my cabinet, Not in my cabinet. Select all shown and Deselect all shown act only on what the filters show. Clear my cabinet shows an Undo until the next change. Spices saved earlier that no longer exist are listed under "No longer in the library" with a button to forget them. If the browser refuses to save, the page says so.
+
+**Things to know.**
+- The server renders an empty cabinet, so a saved tick appears a moment after the page loads. This is what stops the server and browser disagreeing on first paint.
+- Used-in lists on a spice page show blend names as plain text. They become links in Phase 6, when blend pages exist.
+- Blend suggestions based on the cabinet arrive in Phase 7. The staples switch is saved now and does nothing visible yet except mark the pantry staples.

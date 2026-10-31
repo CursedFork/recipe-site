@@ -1,0 +1,36 @@
+---
+/* ---------------------------------------------------------------------------
+   The Spices home. A short hub for now: it links to what exists. The blend
+   finder, Top picks, Buy next and the shopping list arrive in later phases and
+   will be added here when they are real pages.
+   --------------------------------------------------------------------------- */
+
+import SpicesLayout from "../../layouts/SpicesLayout.astro";
+import { loadLibrary } from "../../lib/spices/load-spices";
+
+const library = loadLibrary();
+---
+
+<SpicesLayout
+  title="Spices"
+  description="A library of spices with how strong each one is, and which to use with what. Tick the ones in your kitchen."
+>
+  <div class="spices-page">
+    <h1>Spices</h1>
+    <p class="spices-page__lead">
+      Ideas for the kitchen, not tied to any recipe here. Start with what is in
+      your cabinet.
+    </p>
+
+    <div class="spices-hub__cards">
+      <a class="spices-hub__card" href="/spices/library">
+        <span class="spices-hub__card-title">Spice library</span>
+        <p class="spices-hub__card-text">
+          {library.spices.length} spices, each with how strong it is and what it goes
+          with. Tick the ones you own. Your ticks stay in this browser and are
+          not sent anywhere.
+        </p>
+      </a>
+    </div>
+  </div>
+</SpicesLayout>

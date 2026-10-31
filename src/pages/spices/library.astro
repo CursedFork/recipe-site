@@ -1,0 +1,86 @@
+---
+/* ---------------------------------------------------------------------------
+   The spice library page.
+
+   The list is prerendered, so every spice is in the HTML before any
+   JavaScript runs. The island adds the tick boxes, search and filters.
+   --------------------------------------------------------------------------- */
+
+import SpicesLayout from "../../layouts/SpicesLayout.astro";
+import SpiceLibrary from "../../islands/spices/SpiceLibrary.tsx";
+import { staples } from "../../config/pantry";
+import { CATEGORIES } from "../../lib/spices/constants";
+import { stapleSlugs, type LibrarySpice } from "../../lib/spices/library-filter";
+import { loadLibrary } from "../../lib/spices/load-spices";
+import { norm, slugifyName } from "../../lib/spices/text";
+
+const library = loadLibrary();
+
+const lean: LibrarySpice[] = library.spices.map((spice) => ({
+  slug: spice.slug,
+  name: spice.name,
+  label: spice.family !== null ? spice.name.slice(spice.name.lastIndexOf(": ") + 2) : spice.name,
+  aka: spice.aka,
+  category: spice.category,
+  familySlug: spice.family !== null ? slugifyName(spice.family) : null,
+  power: spice.power,
+  heat: spice.heat,
+  cuisines: spice.cuisines,
+  forms: spice.forms,
+  flavor: spice.flavor,
+}));
+
+const present = new Set(lean.map((spice) => spice.category));
+const categories = CATEGORIES.filter((category) => present.has(category));
+
+const cuisines = [...new Set(lean.flatMap((spice) => spice.cuisines))]
+  .filter((cuisine) => cuisine !== "Global")
+  .sort((a, b) => a.localeCompare(b));
+
+/** "Pepper, black" is "black pepper" when said aloud. */
+const say = (name: string) => {
+  const [first, second] = name.split(", ");
+  return second ? `${second} ${first}`.toLowerCase() : name.toLowerCase();
+};
+const spoken = staples.map(say);
+const stapleNote =
+  spoken.length > 1 ? `${spoken.slice(0, -1).join(", ")} and ${spoken[spoken.length - 1]}` : spoken[0];
+
+const stapleList = stapleSlugs(
+  library.spices.map((spice) => ({ slug: spice.slug, name: spice.name, family: spice.family })),
+  staples,
+);
+---
+
+<SpicesLayout
+  title="Spice library"
+  description="Every spice in the library, with how strong it is. Tick the ones in your kitchen."
+>
+  <div class="spices-page">
+    <h1>Spice library</h1>
+    <p class="spices-page__lead">
+      Tick the spices you have. Power shows how easily a spice takes over a dish,
+      and Heat shows how hot a chile is.
+    </p>
+    <p class="lib__hint">
+      Your ticks are saved in this browser only. Nothing is sent anywhere, and
+      there are no accounts.
+    </p>
+
+    <SpiceLibrary
+      spices={lean}
+      categories={categories}
+      cuisines={cuisines}
+      stapleSlugs={stapleList}
+      stapleNote={stapleNote}
+      client:load
+    />
+
+    {/* Without JavaScript the island above is still the full server-rendered
+        list, minus the working tick boxes. This says so rather than leaving
+        dead boxes unexplained. */}
+    <noscript>
+      <p>Ticking spices and filtering need JavaScript, which is switched off here.</p>
+    </noscript>
+  </div>
+</SpicesLayout>

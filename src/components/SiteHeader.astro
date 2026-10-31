@@ -28,7 +28,8 @@ const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
           {
             site.nav.map((item) => {
               const href = item.href.replace(/\/+$/, "") || "/";
-              const isCurrent = href === path;
+              // A section link stays marked on its own sub-pages (/spices/library).
+              const isCurrent = href === path || (href !== "/" && path.startsWith(`${href}/`));
               return (
                 <li>
                   <a

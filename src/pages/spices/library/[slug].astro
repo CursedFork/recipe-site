@@ -1,0 +1,196 @@
+---
+/* ---------------------------------------------------------------------------
+   One spice. Fully prerendered: the Power meter, the facts and the sources
+   need no JavaScript. Only the "I have this" box is an island.
+   --------------------------------------------------------------------------- */
+
+import SpicesLayout from "../../../layouts/SpicesLayout.astro";
+import Meter from "../../../islands/spices/Meter.tsx";
+import OwnToggle from "../../../islands/spices/OwnToggle.tsx";
+import { loadLibrary } from "../../../lib/spices/load-spices";
+import { slugifyName } from "../../../lib/spices/text";
+
+export function getStaticPaths() {
+  const library = loadLibrary();
+
+  return library.spices.map((spice) => {
+    const umbrella =
+      spice.family !== null ? library.spices.find((other) => other.name === spice.family) ?? null : null;
+    const members = library.spices.filter((other) => other.family === spice.name);
+
+    // Blends that call for this spice, or for the whole family it belongs to.
+    const umbrellaSlug = umbrella?.slug ?? null;
+    const blends = library.blends
+      .filter((blend) =>
+        blend.ingredients.some(
+          (ingredient) =>
+            ingredient.spiceSlug === spice.slug ||
+            (umbrellaSlug !== null && ingredient.spiceSlug === umbrellaSlug),
+        ),
+      )
+      .map((blend) => blend.name);
+
+    return {
+      params: { slug: spice.slug },
+      props: { spice, umbrella, members, blends },
+    };
+  });
+}
+
+const { spice, umbrella, members, blends } = Astro.props;
+
+const label =
+  spice.family !== null ? spice.name.slice(spice.name.lastIndexOf(": ") + 2) : spice.name;
+
+const hostOf = (url: string) => {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
+};
+
+const confidenceWords = {
+  high: "Confidence: high",
+  medium: "Confidence: medium",
+  low: "Confidence: low",
+} as const;
+---
+
+<SpicesLayout title={spice.name} description={spice.tip}>
+  <article class="spices-page spice">
+    <header class="spice__head">
+      <p class="spice__crumbs">
+        <a href="/spices/library">Spice library</a>
+        {
+          umbrella && (
+            <>
+              {" / "}
+              <a href={`/spices/library/${umbrella.slug}`}>{umbrella.name}</a>
+            </>
+          )
+        }
+      </p>
+      <h1>{label}</h1>
+      {
+        umbrella && <p class="spice__aka">A kind of {umbrella.name.toLowerCase()}.</p>
+      }
+      {
+        spice.aka.length > 0 && (
+          <p class="spice__aka">Also called: {spice.aka.join(", ")}</p>
+        )
+      }
+
+      <div class="spice__facts">
+        {spice.power !== null && <Meter kind="power" value={spice.power} />}
+        {spice.heat !== null && spice.heat > 0 && <Meter kind="heat" value={spice.heat} />}
+        <OwnToggle slug={spice.slug} name={label} client:load />
+      </div>
+    </header>
+
+    {
+      spice.careful && (
+        <section class="spice__section spice__careful">
+          <h2>Careful</h2>
+          <p>{spice.careful}</p>
+        </section>
+      )
+    }
+
+    <section class="spice__section">
+      <h2>How to use it</h2>
+      <p>{spice.tip}</p>
+    </section>
+
+    <section class="spice__section">
+      <h2>At a glance</h2>
+      <dl class="spice__defs">
+        <dt>Kind</dt>
+        <dd>{spice.category}</dd>
+        <dt>Comes as</dt>
+        <dd>{spice.forms.join(", ")}</dd>
+        <dt>Tastes</dt>
+        <dd>{spice.flavor.join(", ")}</dd>
+        <dt>From</dt>
+        <dd>{spice.origin.map((place) => place.name).join(", ")}</dd>
+        <dt>Cuisines</dt>
+        <dd>{spice.cuisines.join(", ")}</dd>
+        {
+          spice.allergen && (
+            <>
+              <dt>Allergen</dt>
+              <dd>{spice.allergen} (check labels, this is not a complete allergen guide)</dd>
+            </>
+          )
+        }
+      </dl>
+    </section>
+
+    {
+      spice.pairsWith.length > 0 && (
+        <section class="spice__section">
+          <h2>Goes well with</h2>
+          <p>{spice.pairsWith.map((food) => food.name).join(", ")}</p>
+        </section>
+      )
+    }
+
+    {
+      spice.typicalDishes.length > 0 && (
+        <section class="spice__section">
+          <h2>Found in</h2>
+          <p>{spice.typicalDishes.join(", ")}</p>
+        </section>
+      )
+    }
+
+    {
+      members.length > 0 && (
+        <section class="spice__section">
+          <h2>Kinds of {spice.name.toLowerCase()}</h2>
+          <ul class="spice__list">
+            {members.map((member) => (
+              <li>
+                <a href={`/spices/library/${member.slug}`}>
+                  {member.name.slice(member.name.lastIndexOf(": ") + 2)}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    {
+      blends.length > 0 && (
+        <section class="spice__section">
+          <h2>Used in these blends</h2>
+          <p>{blends.join(", ")}</p>
+        </section>
+      )
+    }
+
+    <section class="spice__section">
+      <h2>Where this comes from</h2>
+      <p>
+        <span class="spice__confidence">{confidenceWords[spice.confidence]}</span>
+      </p>
+      {spice.doubt && <p class="spice__doubt">{spice.doubt}</p>}
+      <ul class="spice__list spice__sources">
+        {
+          spice.sources.map((url) => (
+            <li>
+              <a href={url} rel="noopener noreferrer" target="_blank">
+                {hostOf(url)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="spice__doubt">
+        Power and Heat are rated by the site, using a typical amount for four people
+        (Power) and the Scoville range (Heat). They are guides, not measurements.
+      </p>
+    </section>
+  </article>
+</SpicesLayout>

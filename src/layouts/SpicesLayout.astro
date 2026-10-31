@@ -1,0 +1,46 @@
+---
+/* ---------------------------------------------------------------------------
+   The layout for every Spices page.
+
+   Wraps the site layout and loads the Spices stylesheet in one place, so a
+   style used by two Spices pages can never silently go missing on one of them
+   (the per-page stylesheet trap noted in AGENTS.md).
+   --------------------------------------------------------------------------- */
+
+import BaseLayout from "./BaseLayout.astro";
+
+import "../styles/browser.css";
+import "../styles/spices.css";
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+
+const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
+
+// The section's own links. More arrive with their pages.
+const links = [
+  { label: "Spices home", href: "/spices" },
+  { label: "Library", href: "/spices/library" },
+];
+
+// Library pages count as "Library", so a single spice page keeps it marked.
+const isCurrent = (href: string) =>
+  href === "/spices" ? path === href : path === href || path.startsWith(`${href}/`);
+---
+
+<BaseLayout title={title} description={description}>
+  <nav class="spices-nav" aria-label="Spices section">
+    {
+      links.map((link) => (
+        <a href={link.href} aria-current={isCurrent(link.href) ? "page" : undefined}>
+          {link.label}
+        </a>
+      ))
+    }
+  </nav>
+  <slot />
+</BaseLayout>

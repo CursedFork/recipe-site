@@ -36,6 +36,7 @@ export const site = {
   nav: [
     { label: "Recipes", href: "/" },
     { label: "Map", href: "/map" },
+    { label: "Spices", href: "/spices" },
   ],
 } as const;
 
