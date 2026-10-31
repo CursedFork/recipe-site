@@ -1,0 +1,25 @@
+Name: Sri Lankan Roasted Curry Powder
+Aka: Sri Lankan curry powder, roasted curry powder, Ceylon curry powder, thuna paha
+Cuisines: Sri Lankan
+Origin: Sri Lanka
+Uses: Cooking base or sauce, Dry rub
+Methods: Braise or stew, Simmer or boil, Sauté or stir-fry
+Classic: Curry, Chicken, Fish
+Also: Goat meat, Lentils, Vegetables
+Tip: Dry-roast the whole spices until dark brown before grinding. This gives the deep, almost chocolatey flavor. Use quite a lot, as the recipe says.
+Typical version: Coriander, cumin and fennel as the base, with mustard, black pepper, fenugreek, cardamom, clove, cinnamon and curry leaves. The source also roasts in lentils, pandan and coconut, which are not in this library.
+Source: https://www.hungrylankan.com/recipes/sri-lankan-roasted-curry-powder/
+Confidence: medium
+Doubt: The proportions come from one recipe page that I read (Hungry Lankan), which weighs the three main seeds in grams and measures the others by the spoon or the piece. I rounded everything to parts of about 5 grams, so the small spices are approximate. The recipe's lentils, pandan leaf and coconut are left out.
+
+Ingredients:
+10 parts Coriander
+7 parts Cumin
+5 parts Fennel seed
+2 parts Mustard seed
+1 part Pepper, black
+1 part Fenugreek
+1 part Cardamom
+1 part Clove
+1 part Cinnamon
+1 part Curry leaf

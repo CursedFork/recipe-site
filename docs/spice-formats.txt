@@ -227,3 +227,10 @@ Ingredients:
 2 parts Sesame seed
 2 parts Oregano (optional)
 pinch Salt (optional)
+
+NOTE ON FOODS WITH A COMMA IN THEIR NAME
+Pairs with, Classic and Also are comma-separated lists, so a food whose name
+contains a comma ("Sandwiches, tacos and wraps", "Stews and braises" is fine,
+"Mussels, clams and oysters" is not) cannot be written in full. Use one of its
+aliases instead, for example "taco", "sandwich" or "fajitas". The list of
+aliases is src/data/foods.json.
