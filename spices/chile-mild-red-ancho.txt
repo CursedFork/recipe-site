@@ -1,0 +1,18 @@
+Name: Chile, mild red: Ancho
+Aka: ancho, ancho chile, ancho chili, ancho powder, dried poblano
+Category: Chiles
+Family: Chile, mild red
+Form: whole, ground
+Origin: Mexico
+Cuisines: Mexican, Tex-Mex
+Flavor: mild, sweet, fruity, raisin-like
+Power: 2
+Heat: 1
+Tip: Ground ancho goes straight into rubs, chili and sauces. Whole dried pods are soaked in hot water and blended into a smooth paste.
+Pairs with: Chicken, Turkey, Pork, Beef
+Typical dishes: mole poblano, chili con carne
+Source: https://en.wikipedia.org/wiki/Poblano
+Source: https://en.wikipedia.org/wiki/Mole_(sauce)
+Source: https://en.wikipedia.org/wiki/Chili_powder
+Confidence: medium
+Doubt: The heat figure is a Scoville range for the fresh poblano (1,000 to 1,500) that the source applies to ancho, so it is approximate. Your draft said smoky, which I left out: ancho is a dried poblano, not a smoked one, and the sources I read describe it as sweet and fruity. Your draft also listed enchilada sauce, corn and sweet potato, which I could not confirm from a page I read.

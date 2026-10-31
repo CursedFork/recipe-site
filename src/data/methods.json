@@ -1,0 +1,15 @@
+{
+  "note": "DRAFT for approval. Cooking methods a blend suits. Entries marked proposed are additions to the list you gave me.",
+  "methods": [
+    { "id": "grill", "name": "Grill", "aliases": ["barbecue", "BBQ", "broil"] },
+    { "id": "roast", "name": "Roast", "aliases": ["roasting", "oven roast"] },
+    { "id": "bake", "name": "Bake", "aliases": ["baking"] },
+    { "id": "saute-stir-fry", "name": "Sauté or stir-fry", "aliases": ["saute", "stir-fry", "stir fry"] },
+    { "id": "braise-stew", "name": "Braise or stew", "aliases": ["braise", "stew", "casserole"] },
+    { "id": "fry", "name": "Fry", "aliases": ["deep-fry", "pan-fry", "shallow fry", "air fry"] },
+    { "id": "smoke", "name": "Smoke", "aliases": ["smoking"] },
+    { "id": "slow-cook", "name": "Slow cook", "aliases": ["slow cooker", "crockpot", "pressure cooker", "Instant Pot"] },
+    { "id": "simmer-boil", "name": "Simmer or boil", "aliases": ["simmer", "boil", "poach"], "proposed": true },
+    { "id": "raw-finishing", "name": "Raw or finishing", "aliases": ["raw", "finishing", "garnish", "no cook"] }
+  ]
+}

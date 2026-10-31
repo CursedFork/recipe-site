@@ -1,0 +1,12 @@
+{
+  "note": "DRAFT for approval. The only allergen tags a spice file may use. A blend's allergen tags are worked out from its ingredients, never typed by hand. Always shown with the line: Check labels, this is not a complete allergen guide.",
+  "allergens": [
+    { "id": "sesame", "name": "Sesame" },
+    { "id": "mustard", "name": "Mustard" },
+    { "id": "celery", "name": "Celery" },
+    { "id": "peanut", "name": "Peanut" },
+    { "id": "tree-nut", "name": "Tree nut" },
+    { "id": "soy", "name": "Soy" },
+    { "id": "wheat", "name": "Wheat" }
+  ]
+}

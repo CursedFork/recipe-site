@@ -1,0 +1,228 @@
+SPICE AND BLEND FILE FORMATS (version 1, DRAFT awaiting approval)
+
+Paste everything below this line into the instructions of any agent that writes spice or blend files.
+================================================================================
+
+You write plain .txt files for a spice library website. There are two kinds: one file per SPICE in /spices and one file per BLEND in /blends. A program reads them at build time. If a file breaks any rule below, the whole site build fails and names the file and the problem, so follow the rules exactly.
+
+GENERAL RULES
+
+1. Plain text, UTF-8. Each line is "Field: value". A field name is exactly as written below, with a capital first letter.
+2. All the single-line fields come first. Then ONE blank line. Then, in a blend file only, the "Ingredients:" section.
+3. Leave out an optional field completely when you have nothing to put in it. Do not write an empty field.
+4. Do not invent anything. Every blend must be a real, documented blend, and every fact must come from a source you actually read. If you cannot find a source, leave the entry out or mark it Confidence: low and say why in Doubt.
+5. Write every description in your own words. Never copy sentences from a website. Ingredient lists and ratios are facts and may be recorded.
+6. Use generic names, never brand names.
+7. Make no health claims. Add a Careful line only where a reliable source gives a real safety point.
+8. Pairings are traditional suggestions, not rules. Leave out a pairing you are unsure of rather than guessing.
+9. Use "to" for number ranges and plain commas and colons. Do not use long dashes.
+
+FILENAMES
+
+The filename is the web address, and it must equal the slug of the Name:
+lowercase; accents removed; apostrophes removed; each run of anything that is not a letter or digit becomes one hyphen; no hyphen at the start or end.
+  Pepper, black: Tellicherry   ->  pepper-black-tellicherry.txt
+  Za'atar                       ->  zaatar.txt
+  Chile, mild red: Ancho        ->  chile-mild-red-ancho.txt
+
+NAMING A SPICE
+
+Name = Base, kind: Variety
+  Base    the word a cook looks up first (Pepper, Chile, Cinnamon, Cumin)
+  kind    the broad type, after a comma (black, white, mild red)
+  Variety the named cultivar or origin, after a colon (Tellicherry, Ancho)
+A spice with nothing to group under it is just its name: Clove, Cumin. Use the singular and sentence case.
+If a spice has a Family, its Name MUST be the family's Name, then a colon and a space, then its variety:
+  Family: Pepper, black     Name: Pepper, black: Tellicherry
+
+================================================================================
+SPICE FILE
+================================================================================
+
+Name:            required. Follows the naming rule. Must be unique.
+Aka:             optional. Comma list of other names, spellings and plurals. Each word must be unique across ALL spice files and must not equal any other spice's Name.
+Category:        required. Exactly one of the CATEGORIES below.
+Family:          optional. The exact Name of another spice file (the "umbrella"). One level only.
+Form:            required. Comma list of: whole, ground, flakes, leaves, granules.
+Origin:          required. Where it TRADITIONALLY comes from, not where it is grown today. Countries or regions, comma separated.
+Cuisines:        required. Comma list from the CUISINES list. Use Global for a spice used everywhere.
+Flavor:          required. Comma list of plain words.
+Power:           required, whole number 1 to 5 (see POWER). NOT used for the categories Salts and sugars or Other ingredients: leave it out there.
+Heat:            whole number 0 to 5 (see HEAT). REQUIRED for the category Chiles. Leave it out for everything else unless a source gives a real figure.
+Allergen:        optional. One of the ALLERGENS below.
+Tip:             required. One short sentence of usage advice.
+Pairs with:      required. Comma list from the FOODS list (a group name or an item name).
+Typical dishes:  optional. Comma list of free text.
+Careful:         optional. One sentence, only for a real safety point from a reliable source.
+Source:          required, and may be repeated, one URL per line. At least one.
+Confidence:      required. high, medium or low.
+Doubt:           optional. One or two sentences saying what you are unsure of. Required whenever Confidence is not high.
+
+A spice is ONE entry whatever its form. Ancho pods and ancho powder are the same entry.
+
+================================================================================
+BLEND FILE
+================================================================================
+
+Name:            required. The common English name. Unique. A regional variant that really differs may add a comma and a qualifier: Chili Powder, American.
+Aka:             optional. Comma list. Unique across all blend files.
+Cuisines:        required. Comma list from CUISINES. The first is the primary cuisine.
+Origin:          required. Where it traditionally comes from. Countries or regions.
+Uses:            required. Comma list from USES.
+Methods:         required. Comma list from METHODS.
+Classic:         required. Comma list of foods from FOODS that it is traditionally paired with. At least one.
+Also:            optional. Comma list of foods that it also works with. A food may not be in both Classic and Also.
+Tip:             required. One short sentence on how to use it.
+Typical version: required. One to three sentences saying this is ONE typical version, not the only correct one, and noting how real versions differ. If sources disagree, use the most common version and say so here.
+Careful:         optional. One sentence, only for a real safety point from a reliable source.
+Source:          required, repeatable, one URL per line.
+Confidence:      required. high, medium or low.
+Doubt:           optional, but required whenever Confidence is not high.
+
+(one blank line)
+
+Ingredients:
+<one ingredient per line>
+
+Allergens are NEVER typed on a blend. The site works them out from its ingredients.
+
+INGREDIENT LINES
+
+  <amount> <spice name>
+  <amount> <spice name> (optional)
+
+  amount     a number then the word part or parts: "8 parts", "1 part", "1/2 part", "2 1/4 parts", "1.5 parts". Parts are by VOLUME and assume ground spices. Or the single word "pinch", or the two words "to taste".
+  spice name the Name (or an Aka) of a spice file, exactly. Commas and colons are part of the name.
+  (optional) means it is nice to have and never blocks the blend. Anything without it is REQUIRED.
+
+Write a FAMILY name (an umbrella spice) when any member would do, for example "Pepper, black". Write a VARIETY name only when exactly that spice is needed, for example "Chile, hot red: Cayenne".
+Convert recipes to parts. Keep the ratio faithful to the source. Round only if you must, and say so in Typical version.
+Every spice named in a blend must exist as a spice file. If it does not, say so; do not invent it.
+
+================================================================================
+SCALES
+================================================================================
+
+POWER: how easily it overwhelms a dish. Judge by the typical amount in a dish for four people.
+  1  a tablespoon or more          mild and forgiving       (sweet paprika, parsley, sesame)
+  2  two teaspoons to a tablespoon  gentle                  (ancho, coriander, thyme)
+  3  about a teaspoon              moderate                 (cumin, black pepper, oregano)
+  4  a quarter to a half teaspoon   use sparingly            (white pepper, nutmeg, cardamom, cayenne)
+  5  a pinch to an eighth teaspoon  a pinch goes a long way  (clove, asafoetida)
+These are editorial judgments. If you are unsure between two levels, pick one and set Confidence to low with a Doubt line.
+
+HEAT: capsaicin heat, by Scoville range. Use a published figure.
+  0 none    1 up to 2,500    2 from 2,500 to 15,000    3 from 15,000 to 50,000    4 from 50,000 to 100,000    5 above 100,000
+
+================================================================================
+CONTROLLED VALUES (use these exactly; an unknown value fails the build)
+================================================================================
+
+CATEGORIES
+Peppercorns | Chiles | Paprika | Seeds and pods | Warm spices | Roots and rhizomes | Dried herbs | Alliums and aromatics | Salts and sugars | Tangy and floral | Other ingredients
+
+ALLERGENS
+sesame | mustard | celery | peanut | tree nut | soy | wheat
+
+METHODS
+Grill | Roast | Bake | Sauté or stir-fry | Braise or stew | Fry | Smoke | Slow cook | Simmer or boil (proposed addition) | Raw or finishing
+
+USES
+Dry rub | Wet marinade or paste | Finishing sprinkle | Cooking base or sauce | Table seasoning | Sweet or baking | Pickling or brining (proposed addition) | Drink or infusion (proposed addition)
+
+FOODS (a group name matches every item in the group; write the group or an item name)
+Beef:
+    Steak; Roast beef; Brisket and beef ribs; Ground beef; Stew beef
+Pork:
+    Pork chops; Pork roast; Pulled pork; Pork ribs; Bacon; Sausage; Ham; Ground pork
+Lamb and goat (also: lamb, goat, mutton):
+    Lamb chops; Roast lamb; Ground lamb; Lamb stew and shanks; Goat meat
+Poultry (also: fowl):
+    Chicken; Turkey; Duck
+Game (also: wild game):
+    Venison; Rabbit; Wild boar; Game birds
+Fish:
+    Salmon; White fish; Oily fish; Tuna and swordfish
+Shellfish:
+    Shrimp; Crab and lobster; Scallops; Mussels, clams and oysters; Squid and octopus
+Eggs (also: egg):
+    Scrambled and fried eggs; Omelets and frittatas; Boiled and deviled eggs; Poached and baked eggs
+Dairy and cheese (also: dairy):
+    Cheese; Yogurt; Butter and ghee; Milk and cream
+Tofu and tempeh:
+    Tofu; Tempeh; Seitan
+Beans and lentils (also: pulses, legumes):
+    Lentils; Chickpeas; Black beans; Kidney and pinto beans; White beans
+Vegetables (also: veggies, vegetable):
+    Cauliflower and broccoli; Cabbage and Brussels sprouts; Eggplant; Squash and zucchini; Tomatoes; Bell peppers; Onions and leeks; Mushrooms; Leafy greens; Corn; Green beans and peas
+Potatoes and root vegetables (also: root vegetables):
+    Potatoes; Sweet potatoes; Carrots; Beets; Parsnips, turnips and celeriac; Cassava and yuca
+Rice and grains (also: grains):
+    Rice; Pilaf and biryani; Fried rice; Quinoa; Couscous; Bulgur, farro and barley; Polenta and grits; Oats and porridge
+Pasta and bread:
+    Pasta; Noodles; Pizza; Flatbread; Bread and toast; Dumplings; Sandwiches, tacos and wraps
+Soups and stews:
+    Soup; Cream soups and chowders; Stews and braises; Chili; Curry; Broth and stock
+Fruit (also: fruits):
+    Apples and pears; Berries; Citrus; Stone fruit; Tropical fruit; Melon; Dried fruit; Cooked fruit
+Baking and sweets (also: baking, desserts):
+    Cakes and muffins; Cookies; Pies and tarts; Sweet breads and buns; Custards and puddings; Chocolate; Ice cream and frozen desserts
+Snacks and nuts (also: snacks):
+    Nuts and seeds; Popcorn; Chips and crackers; Dips and spreads; Snack mixes
+Drinks (also: beverages) (proposed addition):
+    Tea and chai; Coffee and hot chocolate; Mulled wine and cider; Syrups and cocktails
+Sauces and dressings (also: sauces) (proposed addition):
+    Salad dressings; Tomato sauces; Barbecue and hot sauces; Gravy and pan sauces; Mayonnaise and creamy sauces
+
+CUISINES
+Reserved: Global
+South Asia: Indian, Pakistani, Bangladeshi, Nepali, Sri Lankan
+Southeast Asia: Thai, Vietnamese, Indonesian, Malaysian, Singaporean, Filipino, Burmese, Cambodian
+East and Central Asia: Chinese, Sichuan, Japanese, Korean, Taiwanese, Uzbek
+Middle East: Levantine, Lebanese, Syrian, Palestinian, Jordanian, Israeli, Turkish, Persian, Iraqi, Yemeni, Gulf Arab, Armenian, Georgian
+Africa: Moroccan, Algerian, Tunisian, Egyptian, Ethiopian, East African, West African, Nigerian, South African
+Europe: French, Italian, Spanish, Portuguese, German, Dutch, Scandinavian, British, Irish, Polish, Hungarian, Russian, Greek, Eastern European
+The Americas: American, American BBQ, Cajun and Creole, Tex-Mex, Mexican, Caribbean, Jamaican, Peruvian, Brazilian, Argentine, Latin American
+
+================================================================================
+EXAMPLES
+================================================================================
+
+--- /spices/clove.txt ---
+Name: Clove
+Aka: cloves, whole cloves, ground cloves, ground clove
+Category: Warm spices
+Form: whole, ground
+Origin: Indonesia
+Cuisines: Indonesian, Indian, Dutch
+Flavor: warm, sweet, sharply aromatic, almost medicinal
+Power: 5
+Tip: A very little goes a long way, so start with one or two whole cloves in a pot or a pinch of ground. Fish whole cloves out before serving.
+Pairs with: Ham, Curry, Apples and pears
+Typical dishes: baked ham, curries, pumpkin pie spice, speculaas, hot spiced drinks
+Source: https://en.wikipedia.org/wiki/Clove
+Confidence: high
+
+--- /blends/zaatar.txt ---
+Name: Za'atar
+Aka: zaatar, zatar
+Cuisines: Levantine, Lebanese, Syrian, Palestinian, Jordanian, Israeli
+Origin: Levant
+Uses: Finishing sprinkle, Wet marinade or paste
+Methods: Bake, Raw or finishing
+Classic: Flatbread, Yogurt, Dips and spreads
+Also: Vegetables
+Tip: Sprinkle it dry over hummus, yogurt or roasted vegetables, or stir it into olive oil to make a spread for flatbread.
+Typical version: A common home version, adapted from one tested recipe. The traditional herb is a wild relative of oregano (Origanum syriacum), which home cooks replace with thyme, oregano or marjoram, so oregano is marked optional here because many versions use only one of them. Lebanese versions lean on sumac, Palestinian versions often add caraway, and the amounts differ a great deal from cook to cook.
+Careful: Some shop-bought blends add fillers such as wheat flour, so check the label if that matters to you.
+Source: https://www.americastestkitchen.com/recipes/9962-zaatar
+Source: https://en.wikipedia.org/wiki/Za%27atar
+Confidence: medium
+Doubt: The proportions come from one recipe (thyme 2, oregano 1, sumac 1 1/2, toasted sesame 1, by tablespoon), doubled to avoid fractions. Its salt is a quarter teaspoon, shown here as a pinch. The pairings come from the traditional uses listed on the Wikipedia page.
+
+Ingredients:
+4 parts Thyme
+3 parts Sumac
+2 parts Sesame seed
+2 parts Oregano (optional)
+pinch Salt (optional)

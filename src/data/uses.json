@@ -1,0 +1,13 @@
+{
+  "note": "DRAFT for approval. How a blend is used. Entries marked proposed are additions to the list you gave me, because real blends such as pickling spice, chai masala and mulling spice have no honest home in the original six.",
+  "uses": [
+    { "id": "dry-rub", "name": "Dry rub", "aliases": ["rub", "seasoning rub"] },
+    { "id": "marinade-paste", "name": "Wet marinade or paste", "aliases": ["marinade", "paste", "wet rub", "spice paste"] },
+    { "id": "finishing-sprinkle", "name": "Finishing sprinkle", "aliases": ["sprinkle", "garnish", "finish"] },
+    { "id": "base-sauce", "name": "Cooking base or sauce", "aliases": ["base", "sauce", "curry base", "simmer sauce"] },
+    { "id": "table-seasoning", "name": "Table seasoning", "aliases": ["table", "shaker"] },
+    { "id": "sweet-baking", "name": "Sweet or baking", "aliases": ["baking spice", "dessert spice"] },
+    { "id": "pickling-brining", "name": "Pickling or brining", "aliases": ["pickle", "brine", "cure"], "proposed": true },
+    { "id": "drink-infusion", "name": "Drink or infusion", "aliases": ["tea", "infusion", "mulling"], "proposed": true }
+  ]
+}

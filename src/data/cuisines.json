@@ -1,0 +1,13 @@
+{
+  "note": "DRAFT for approval. The controlled list of cuisines, so a typo in a file is a build error with a suggestion instead of a quiet duplicate filter. Global is a reserved value for a spice used everywhere. Add a name here, in one line, the first time a new cuisine is needed.",
+  "groups": [
+    { "name": "Reserved", "cuisines": ["Global"] },
+    { "name": "South Asia", "cuisines": ["Indian", "Pakistani", "Bangladeshi", "Nepali", "Sri Lankan"] },
+    { "name": "Southeast Asia", "cuisines": ["Thai", "Vietnamese", "Indonesian", "Malaysian", "Singaporean", "Filipino", "Burmese", "Cambodian"] },
+    { "name": "East and Central Asia", "cuisines": ["Chinese", "Sichuan", "Japanese", "Korean", "Taiwanese", "Uzbek"] },
+    { "name": "Middle East", "cuisines": ["Levantine", "Lebanese", "Syrian", "Palestinian", "Jordanian", "Israeli", "Turkish", "Persian", "Iraqi", "Yemeni", "Gulf Arab", "Armenian", "Georgian"] },
+    { "name": "Africa", "cuisines": ["Moroccan", "Algerian", "Tunisian", "Egyptian", "Ethiopian", "East African", "West African", "Nigerian", "South African"] },
+    { "name": "Europe", "cuisines": ["French", "Italian", "Spanish", "Portuguese", "German", "Dutch", "Scandinavian", "British", "Irish", "Polish", "Hungarian", "Russian", "Greek", "Eastern European"] },
+    { "name": "The Americas", "cuisines": ["American", "American BBQ", "Cajun and Creole", "Tex-Mex", "Mexican", "Caribbean", "Jamaican", "Peruvian", "Brazilian", "Argentine", "Latin American"] }
+  ]
+}

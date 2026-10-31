@@ -1,0 +1,271 @@
+{
+  "note": "DRAFT for approval. The controlled list of foods that blends and spices pair with. A group name matches every item in it. Every name and alias must be unique across this whole file, and an unknown food in a spice or blend file is a build error that suggests the closest match. Nothing reads this file yet.",
+  "groups": [
+    {
+      "id": "beef",
+      "name": "Beef",
+      "aliases": [],
+      "items": [
+        { "id": "steak", "name": "Steak", "aliases": ["sirloin", "ribeye", "rib-eye", "strip steak", "New York strip", "filet", "filet mignon", "flank steak", "skirt steak", "hanger steak", "T-bone", "porterhouse"] },
+        { "id": "roast-beef", "name": "Roast beef", "aliases": ["prime rib", "rib roast", "chuck roast", "pot roast", "tri-tip", "eye of round"] },
+        { "id": "brisket-ribs", "name": "Brisket and beef ribs", "aliases": ["brisket", "short ribs", "beef ribs"] },
+        { "id": "ground-beef", "name": "Ground beef", "aliases": ["mince", "hamburger", "burgers", "meatballs", "meatloaf", "beef patties"] },
+        { "id": "beef-stew", "name": "Stew beef", "aliases": ["stew meat", "beef stew", "braising beef", "chuck cubes", "oxtail"] }
+      ]
+    },
+    {
+      "id": "pork",
+      "name": "Pork",
+      "aliases": [],
+      "items": [
+        { "id": "pork-chops", "name": "Pork chops", "aliases": ["pork cutlets", "pork steaks"] },
+        { "id": "pork-roast", "name": "Pork roast", "aliases": ["pork loin", "pork butt", "Boston butt", "roast pork", "pork tenderloin", "loin roast"] },
+        { "id": "pulled-pork", "name": "Pulled pork", "aliases": ["carnitas", "pork shoulder", "slow-cooked pork"] },
+        { "id": "pork-ribs", "name": "Pork ribs", "aliases": ["baby back ribs", "spare ribs", "St. Louis ribs"] },
+        { "id": "bacon", "name": "Bacon", "aliases": ["pancetta", "guanciale"] },
+        { "id": "sausage", "name": "Sausage", "aliases": ["bratwurst", "chorizo", "Italian sausage", "breakfast sausage"] },
+        { "id": "ham", "name": "Ham", "aliases": ["gammon", "baked ham", "glazed ham"] },
+        { "id": "ground-pork", "name": "Ground pork", "aliases": ["pork mince"] }
+      ]
+    },
+    {
+      "id": "lamb-goat",
+      "name": "Lamb and goat",
+      "aliases": ["lamb", "goat", "mutton"],
+      "items": [
+        { "id": "lamb-chops", "name": "Lamb chops", "aliases": ["lamb cutlets", "rack of lamb"] },
+        { "id": "roast-lamb", "name": "Roast lamb", "aliases": ["leg of lamb", "lamb shoulder"] },
+        { "id": "ground-lamb", "name": "Ground lamb", "aliases": ["lamb mince", "kofta", "lamb burgers"] },
+        { "id": "lamb-stew", "name": "Lamb stew and shanks", "aliases": ["lamb shanks", "lamb stew", "braised lamb"] },
+        { "id": "goat-meat", "name": "Goat meat", "aliases": ["curry goat", "goat curry"] }
+      ]
+    },
+    {
+      "id": "poultry",
+      "name": "Poultry",
+      "aliases": ["fowl"],
+      "items": [
+        { "id": "chicken", "name": "Chicken", "aliases": ["chicken breast", "chicken thighs", "drumsticks", "whole chicken", "roast chicken", "fried chicken", "grilled chicken", "chicken tenders", "chicken wings", "rotisserie chicken"] },
+        { "id": "turkey", "name": "Turkey", "aliases": ["roast turkey", "turkey breast", "ground turkey"] },
+        { "id": "duck", "name": "Duck", "aliases": ["duck breast", "roast duck", "goose"] }
+      ]
+    },
+    {
+      "id": "game",
+      "name": "Game",
+      "aliases": ["wild game"],
+      "items": [
+        { "id": "venison", "name": "Venison", "aliases": ["deer", "elk", "moose", "antelope"] },
+        { "id": "rabbit", "name": "Rabbit", "aliases": ["hare"] },
+        { "id": "wild-boar", "name": "Wild boar", "aliases": ["boar"] },
+        { "id": "game-birds", "name": "Game birds", "aliases": ["quail", "pheasant", "partridge", "guinea fowl"] }
+      ]
+    },
+    {
+      "id": "fish",
+      "name": "Fish",
+      "aliases": [],
+      "items": [
+        { "id": "salmon", "name": "Salmon", "aliases": ["salmon fillet", "salmon steak"] },
+        { "id": "white-fish", "name": "White fish", "aliases": ["cod", "haddock", "halibut", "snapper", "sea bass", "tilapia", "pollock", "flounder", "sole", "mahi-mahi"] },
+        { "id": "oily-fish", "name": "Oily fish", "aliases": ["mackerel", "sardines", "herring", "anchovies", "trout", "bluefish"] },
+        { "id": "tuna-swordfish", "name": "Tuna and swordfish", "aliases": ["tuna steak", "swordfish", "marlin"] }
+      ]
+    },
+    {
+      "id": "shellfish",
+      "name": "Shellfish",
+      "aliases": [],
+      "items": [
+        { "id": "shrimp", "name": "Shrimp", "aliases": ["prawns", "scampi"] },
+        { "id": "crab-lobster", "name": "Crab and lobster", "aliases": ["crab", "lobster", "crawfish", "crayfish"] },
+        { "id": "scallops", "name": "Scallops", "aliases": [] },
+        { "id": "mussels-clams", "name": "Mussels, clams and oysters", "aliases": ["mussels", "clams", "oysters"] },
+        { "id": "squid-octopus", "name": "Squid and octopus", "aliases": ["calamari", "octopus", "cuttlefish"] }
+      ]
+    },
+    {
+      "id": "eggs",
+      "name": "Eggs",
+      "aliases": ["egg"],
+      "items": [
+        { "id": "scrambled-fried-eggs", "name": "Scrambled and fried eggs", "aliases": ["scrambled eggs", "fried eggs", "sunny side up", "eggs over easy"] },
+        { "id": "omelets", "name": "Omelets and frittatas", "aliases": ["omelette", "frittata", "tortilla espanola", "quiche"] },
+        { "id": "boiled-eggs", "name": "Boiled and deviled eggs", "aliases": ["hard-boiled eggs", "soft-boiled eggs", "deviled eggs", "egg salad"] },
+        { "id": "poached-baked-eggs", "name": "Poached and baked eggs", "aliases": ["poached eggs", "shakshuka", "eggs benedict", "baked eggs"] }
+      ]
+    },
+    {
+      "id": "dairy",
+      "name": "Dairy and cheese",
+      "aliases": ["dairy"],
+      "items": [
+        { "id": "cheese", "name": "Cheese", "aliases": ["cheddar", "feta", "paneer", "halloumi", "mozzarella", "parmesan", "cheese sauce", "mac and cheese", "cheese board", "ricotta"] },
+        { "id": "yogurt", "name": "Yogurt", "aliases": ["labneh", "raita", "tzatziki", "Greek yogurt", "kefir"] },
+        { "id": "butter-ghee", "name": "Butter and ghee", "aliases": ["ghee", "compound butter", "brown butter"] },
+        { "id": "milk-cream", "name": "Milk and cream", "aliases": ["cream sauce", "bechamel", "white sauce", "sour cream", "creme fraiche"] }
+      ]
+    },
+    {
+      "id": "tofu-tempeh",
+      "name": "Tofu and tempeh",
+      "aliases": [],
+      "items": [
+        { "id": "tofu", "name": "Tofu", "aliases": ["bean curd", "tofu scramble", "fried tofu"] },
+        { "id": "tempeh", "name": "Tempeh", "aliases": [] },
+        { "id": "seitan", "name": "Seitan", "aliases": ["wheat gluten", "mock meat"] }
+      ]
+    },
+    {
+      "id": "beans-lentils",
+      "name": "Beans and lentils",
+      "aliases": ["pulses", "legumes"],
+      "items": [
+        { "id": "lentils", "name": "Lentils", "aliases": ["dal", "dahl", "lentil soup", "red lentils", "green lentils", "Puy lentils"] },
+        { "id": "chickpeas", "name": "Chickpeas", "aliases": ["garbanzo beans", "chana", "falafel", "chickpea curry"] },
+        { "id": "black-beans", "name": "Black beans", "aliases": [] },
+        { "id": "kidney-pinto", "name": "Kidney and pinto beans", "aliases": ["kidney beans", "pinto beans", "refried beans", "rajma"] },
+        { "id": "white-beans", "name": "White beans", "aliases": ["cannellini", "navy beans", "great northern beans", "butter beans", "baked beans"] }
+      ]
+    },
+    {
+      "id": "vegetables",
+      "name": "Vegetables",
+      "aliases": ["veggies", "vegetable"],
+      "items": [
+        { "id": "cauliflower-broccoli", "name": "Cauliflower and broccoli", "aliases": ["cauliflower", "broccoli", "romanesco"] },
+        { "id": "cabbage-sprouts", "name": "Cabbage and Brussels sprouts", "aliases": ["cabbage", "Brussels sprouts", "coleslaw", "sauerkraut"] },
+        { "id": "eggplant", "name": "Eggplant", "aliases": ["aubergine", "brinjal"] },
+        { "id": "squash", "name": "Squash and zucchini", "aliases": ["zucchini", "courgette", "summer squash", "butternut squash", "pumpkin", "acorn squash", "winter squash"] },
+        { "id": "tomatoes", "name": "Tomatoes", "aliases": ["tomato", "cherry tomatoes", "tomato salad"] },
+        { "id": "bell-peppers", "name": "Bell peppers", "aliases": ["capsicum", "stuffed peppers"] },
+        { "id": "onions-leeks", "name": "Onions and leeks", "aliases": ["onion", "leek", "caramelized onions"] },
+        { "id": "mushrooms", "name": "Mushrooms", "aliases": ["mushroom"] },
+        { "id": "leafy-greens", "name": "Leafy greens", "aliases": ["spinach", "kale", "chard", "collards", "arugula", "salad greens"] },
+        { "id": "corn", "name": "Corn", "aliases": ["corn on the cob", "elote", "sweet corn"] },
+        { "id": "green-beans-peas", "name": "Green beans and peas", "aliases": ["string beans", "snap peas", "green peas"] }
+      ]
+    },
+    {
+      "id": "roots",
+      "name": "Potatoes and root vegetables",
+      "aliases": ["root vegetables"],
+      "items": [
+        { "id": "potatoes", "name": "Potatoes", "aliases": ["roast potatoes", "mashed potatoes", "French fries", "fries", "potato wedges", "hash browns", "baked potato", "potato salad"] },
+        { "id": "sweet-potatoes", "name": "Sweet potatoes", "aliases": ["yams", "sweet potato fries"] },
+        { "id": "carrots", "name": "Carrots", "aliases": ["carrot"] },
+        { "id": "beets", "name": "Beets", "aliases": ["beetroot"] },
+        { "id": "parsnips-turnips", "name": "Parsnips, turnips and celeriac", "aliases": ["parsnips", "turnips", "rutabaga", "swede", "celery root", "radishes"] },
+        { "id": "cassava", "name": "Cassava and yuca", "aliases": ["manioc", "yuca"] }
+      ]
+    },
+    {
+      "id": "grains",
+      "name": "Rice and grains",
+      "aliases": ["grains"],
+      "items": [
+        { "id": "rice", "name": "Rice", "aliases": ["white rice", "basmati", "jasmine rice", "brown rice", "sticky rice", "rice bowls"] },
+        { "id": "pilaf", "name": "Pilaf and biryani", "aliases": ["pilaf", "pilau", "pulao", "biryani", "jollof", "paella", "risotto"] },
+        { "id": "fried-rice", "name": "Fried rice", "aliases": [] },
+        { "id": "quinoa", "name": "Quinoa", "aliases": [] },
+        { "id": "couscous", "name": "Couscous", "aliases": [] },
+        { "id": "bulgur-farro", "name": "Bulgur, farro and barley", "aliases": ["bulgur", "farro", "freekeh", "barley", "tabbouleh"] },
+        { "id": "polenta-grits", "name": "Polenta and grits", "aliases": ["polenta", "grits", "cornmeal", "ugali"] },
+        { "id": "oats", "name": "Oats and porridge", "aliases": ["oatmeal", "granola", "porridge", "overnight oats"] }
+      ]
+    },
+    {
+      "id": "pasta-bread",
+      "name": "Pasta and bread",
+      "aliases": [],
+      "items": [
+        { "id": "pasta", "name": "Pasta", "aliases": ["spaghetti", "penne", "lasagna", "gnocchi", "pasta salad"] },
+        { "id": "noodles", "name": "Noodles", "aliases": ["ramen", "udon", "soba", "rice noodles", "lo mein", "pad thai", "pho"] },
+        { "id": "pizza", "name": "Pizza", "aliases": ["pizza dough", "flatbread pizza"] },
+        { "id": "flatbread", "name": "Flatbread", "aliases": ["naan", "pita", "lavash", "roti", "paratha", "focaccia", "manakish", "chapati", "tortillas"] },
+        { "id": "bread", "name": "Bread and toast", "aliases": ["sourdough", "garlic bread", "croutons", "stuffing", "cornbread", "bread dough"] },
+        { "id": "dumplings", "name": "Dumplings", "aliases": ["pierogi", "gyoza", "momos", "empanadas", "samosa", "potstickers", "wontons"] },
+        { "id": "sandwiches-tacos", "name": "Sandwiches, tacos and wraps", "aliases": ["sandwich", "taco", "burrito", "fajitas", "wrap", "gyro", "quesadilla"] }
+      ]
+    },
+    {
+      "id": "soups-stews",
+      "name": "Soups and stews",
+      "aliases": [],
+      "items": [
+        { "id": "soup", "name": "Soup", "aliases": ["broth soup", "vegetable soup", "chicken soup", "minestrone", "noodle soup"] },
+        { "id": "cream-soup", "name": "Cream soups and chowders", "aliases": ["chowder", "bisque", "potato soup", "pumpkin soup", "tomato soup", "cream of mushroom"] },
+        { "id": "stew", "name": "Stews and braises", "aliases": ["stew", "goulash", "tagine", "casserole", "hotpot", "ragout"] },
+        { "id": "chili", "name": "Chili", "aliases": ["chili con carne", "bean chili", "white chili", "chilli"] },
+        { "id": "curry", "name": "Curry", "aliases": ["curries", "korma", "vindaloo", "massaman", "Thai curry", "dal curry", "tikka masala", "butter chicken"] },
+        { "id": "stock", "name": "Broth and stock", "aliases": ["bone broth", "stock", "consomme"] }
+      ]
+    },
+    {
+      "id": "fruit",
+      "name": "Fruit",
+      "aliases": ["fruits"],
+      "items": [
+        { "id": "apples-pears", "name": "Apples and pears", "aliases": ["apple", "pear", "applesauce"] },
+        { "id": "berries", "name": "Berries", "aliases": ["strawberries", "blueberries", "raspberries", "cranberries"] },
+        { "id": "citrus", "name": "Citrus", "aliases": ["orange", "lemon", "lime", "grapefruit"] },
+        { "id": "stone-fruit", "name": "Stone fruit", "aliases": ["peaches", "plums", "cherries", "apricots", "nectarines"] },
+        { "id": "tropical-fruit", "name": "Tropical fruit", "aliases": ["mango", "pineapple", "banana", "papaya"] },
+        { "id": "melon", "name": "Melon", "aliases": ["watermelon", "cantaloupe"] },
+        { "id": "dried-fruit", "name": "Dried fruit", "aliases": ["raisins", "dates", "figs", "prunes"] },
+        { "id": "cooked-fruit", "name": "Cooked fruit", "aliases": ["compote", "poached pears", "baked apples", "stewed fruit"] }
+      ]
+    },
+    {
+      "id": "baking",
+      "name": "Baking and sweets",
+      "aliases": ["baking", "desserts"],
+      "items": [
+        { "id": "cakes", "name": "Cakes and muffins", "aliases": ["cake", "cupcakes", "muffins", "banana bread", "gingerbread", "spice cake", "carrot cake", "coffee cake"] },
+        { "id": "cookies", "name": "Cookies", "aliases": ["shortbread", "speculaas", "biscotti", "gingersnaps"] },
+        { "id": "pies", "name": "Pies and tarts", "aliases": ["apple pie", "pumpkin pie", "pecan pie", "cobbler", "crumble", "tart"] },
+        { "id": "sweet-breads", "name": "Sweet breads and buns", "aliases": ["cinnamon rolls", "brioche", "hot cross buns", "stollen", "sweet rolls"] },
+        { "id": "custards", "name": "Custards and puddings", "aliases": ["rice pudding", "flan", "creme brulee", "panna cotta", "bread pudding", "custard"] },
+        { "id": "chocolate", "name": "Chocolate", "aliases": ["brownies", "chocolate truffles", "cocoa"] },
+        { "id": "frozen-desserts", "name": "Ice cream and frozen desserts", "aliases": ["ice cream", "sorbet", "gelato"] }
+      ]
+    },
+    {
+      "id": "snacks",
+      "name": "Snacks and nuts",
+      "aliases": ["snacks"],
+      "items": [
+        { "id": "nuts-seeds", "name": "Nuts and seeds", "aliases": ["roasted nuts", "almonds", "peanuts", "cashews", "pumpkin seeds", "sunflower seeds", "spiced nuts", "pecans", "walnuts"] },
+        { "id": "popcorn", "name": "Popcorn", "aliases": ["kettle corn"] },
+        { "id": "chips-crackers", "name": "Chips and crackers", "aliases": ["potato chips", "tortilla chips", "crackers", "pretzels"] },
+        { "id": "dips", "name": "Dips and spreads", "aliases": ["hummus", "guacamole", "salsa", "spinach dip", "cheese dip", "baba ganoush"] },
+        { "id": "snack-mixes", "name": "Snack mixes", "aliases": ["trail mix", "party mix", "chex mix", "roasted chickpeas"] }
+      ]
+    },
+    {
+      "id": "drinks",
+      "name": "Drinks",
+      "aliases": ["beverages"],
+      "proposed": true,
+      "items": [
+        { "id": "tea-chai", "name": "Tea and chai", "aliases": ["chai", "masala chai", "spiced tea", "iced tea"] },
+        { "id": "coffee-cocoa", "name": "Coffee and hot chocolate", "aliases": ["coffee", "mocha", "hot cocoa"] },
+        { "id": "mulled", "name": "Mulled wine and cider", "aliases": ["mulled wine", "gluhwein", "hot cider", "wassail"] },
+        { "id": "syrups", "name": "Syrups and cocktails", "aliases": ["simple syrup", "infused syrup", "cocktails"] }
+      ]
+    },
+    {
+      "id": "sauces",
+      "name": "Sauces and dressings",
+      "aliases": ["sauces"],
+      "proposed": true,
+      "items": [
+        { "id": "dressings", "name": "Salad dressings", "aliases": ["vinaigrette", "ranch", "salad dressing"] },
+        { "id": "tomato-sauces", "name": "Tomato sauces", "aliases": ["marinara", "pizza sauce", "ragu", "arrabbiata"] },
+        { "id": "bbq-hot-sauces", "name": "Barbecue and hot sauces", "aliases": ["barbecue sauce", "hot sauce", "glaze"] },
+        { "id": "gravy", "name": "Gravy and pan sauces", "aliases": ["gravy", "pan sauce", "jus"] },
+        { "id": "creamy-sauces", "name": "Mayonnaise and creamy sauces", "aliases": ["aioli", "mayonnaise", "remoulade", "tartar sauce"] }
+      ]
+    }
+  ]
+}
