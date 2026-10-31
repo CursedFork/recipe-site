@@ -1,0 +1,24 @@
+Name: Khmeli Suneli
+Aka: khmeli-suneli, Georgian spice mix, hops suneli
+Cuisines: Georgian
+Origin: Georgia
+Uses: Cooking base or sauce, Dry rub
+Methods: Braise or stew, Simmer or boil, Roast
+Classic: Chicken, Beans and lentils, Stews and braises
+Also: Lamb, Tomatoes, Eggplant
+Tip: Add it to stews, bean dishes and chicken, or stir it into walnut sauces. It is an herb-heavy mix with a fenugreek note.
+Typical version: The page lists coriander seed, celery seed, basil, dill, parsley, blue fenugreek, summer savory, bay leaf, mint and marigold.
+Source: https://en.wikipedia.org/wiki/Khmeli_suneli
+Confidence: low
+Doubt: The ingredient list is from the page. Marigold is left out because it is not in this library, and I used ordinary fenugreek for blue fenugreek. The parts are my guess, and Georgian cooks vary.
+
+Ingredients:
+3 parts Coriander
+2 parts Basil
+2 parts Savory
+1 part Fenugreek
+1 part Dill
+1 part Parsley
+1 part Mint
+1 part Bay leaf
+1 part Celery seed (optional)

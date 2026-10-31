@@ -1,0 +1,22 @@
+Name: Chai Masala
+Aka: masala chai spice, tea masala, chai spice
+Cuisines: Indian, Pakistani
+Origin: India
+Uses: Drink or infusion
+Methods: Simmer or boil
+Classic: Tea and chai
+Also: Milk and cream, Cakes and muffins, Oats and porridge
+Tip: Simmer a spoonful in water and milk with black tea, then strain. Use whole spices lightly crushed if you have them.
+Typical version: Cardamom and cinnamon lead, with ginger, black pepper and clove. Star anise and nutmeg are optional extras that many families add.
+Source: https://en.wikipedia.org/wiki/Masala_chai
+Confidence: medium
+Doubt: The page says masala chai is tea, milk, spices and sugar, and I did not find a standard spice list. This ratio is a typical home version that I chose.
+
+Ingredients:
+4 parts Cardamom
+4 parts Cinnamon
+3 parts Ginger
+2 parts Pepper, black
+1 part Clove
+1 part Star anise (optional)
+1/2 part Nutmeg (optional)

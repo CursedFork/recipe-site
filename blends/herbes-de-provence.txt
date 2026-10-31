@@ -1,0 +1,22 @@
+Name: Herbes de Provence
+Aka: Provencal herbs, herbs of Provence
+Cuisines: French
+Origin: France
+Uses: Dry rub, Table seasoning
+Methods: Roast, Grill, Bake
+Classic: Chicken, Lamb, Potatoes
+Also: Tomatoes, Eggplant, Fish, Bread and toast
+Tip: Crumble it over chicken, lamb, roasted vegetables and potatoes before cooking, so the herbs release their oils.
+Typical version: Thyme and savory lead, with rosemary, marjoram and oregano. Basil and tarragon are optional, and some modern blends add lavender.
+Source: https://en.wikipedia.org/wiki/Herbes_de_Provence
+Confidence: medium
+Doubt: The page says these blends often contain savory, marjoram, rosemary, thyme, oregano, tarragon, basil and black pepper. The parts are my typical ratio.
+
+Ingredients:
+3 parts Thyme
+2 parts Savory
+2 parts Rosemary
+1 part Marjoram
+1 part Oregano
+1 part Basil (optional)
+1 part Tarragon (optional)

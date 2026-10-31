@@ -1,0 +1,20 @@
+Name: Pumpkin Pie Spice
+Aka: pumpkin spice, pumpkin pie seasoning
+Cuisines: American
+Origin: United States
+Uses: Sweet or baking
+Methods: Bake
+Classic: Pies and tarts, Cakes and muffins, Custards and puddings
+Also: Oats and porridge, Coffee and hot chocolate, Cookies
+Tip: Use a teaspoon or so in a pie, quick bread or oatmeal. It is already a mix, so there is no need to add the other spices.
+Typical version: Mostly cinnamon, with ginger, nutmeg and clove, and allspice if you like it.
+Source: https://en.wikipedia.org/wiki/Pumpkin_pie_spice
+Confidence: medium
+Doubt: The page says it is generally a blend of cinnamon, nutmeg, ginger, cloves, and sometimes allspice. The parts are a common home ratio that I chose.
+
+Ingredients:
+4 parts Cinnamon
+2 parts Ginger
+1 part Nutmeg
+1 part Clove
+1 part Allspice (optional)

@@ -1,0 +1,22 @@
+Name: Berbere
+Aka: berbere spice, Ethiopian red spice, berberé
+Cuisines: Ethiopian, East African
+Origin: Ethiopia
+Uses: Cooking base or sauce, Dry rub
+Methods: Braise or stew, Sauté or stir-fry
+Classic: Chicken, Lentils, Stews and braises
+Also: Beef, Lamb, Eggs
+Tip: Fry it in oil or clarified butter before adding liquid. Berbere is hot and deep, so start with less than a recipe calls for.
+Typical version: Mostly dried red chile, with coriander, ginger, garlic, ajwain, nigella and fenugreek. Many versions also use korarima, rue and besobela, which are not in this library.
+Source: https://en.wikipedia.org/wiki/Berbere
+Confidence: medium
+Doubt: The page lists chili peppers, coriander, garlic, ginger, ajwain, nigella and fenugreek among its ingredients. Several Ethiopian ingredients are missing here, and the parts are my typical ratio.
+
+Ingredients:
+8 parts Chile, hot red
+1 part Coriander
+1 part Ginger
+1 part Garlic powder
+1 part Ajwain
+1 part Nigella
+1 part Fenugreek

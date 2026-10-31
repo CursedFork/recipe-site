@@ -15,9 +15,8 @@ import { readLibrary } from "./load-spices";
 describe("the real spice and blend files", () => {
   const library = readLibrary();
 
-  it("have no problem except spices that do not exist yet", () => {
-    const other = library.problems.filter((problem) => !problem.includes("is not a spice in the library"));
-    expect(other).toEqual([]);
+  it("have no problems at all", () => {
+    expect(library.problems).toEqual([]);
   });
 
   it("parse every spice file that exists", () => {

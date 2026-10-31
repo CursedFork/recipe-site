@@ -1,0 +1,22 @@
+Name: Mixed Spice
+Aka: pudding spice, British mixed spice
+Cuisines: British
+Origin: United Kingdom
+Uses: Sweet or baking
+Methods: Bake
+Classic: Cakes and muffins, Sweet breads and buns, Dried fruit
+Also: Cookies, Pies and tarts, Cooked fruit
+Tip: Add a teaspoon to fruit cakes, hot cross buns and puddings. It is the British cousin of pumpkin pie spice, with more coriander and allspice.
+Typical version: Cinnamon and allspice lead, with nutmeg, ginger and clove. Coriander and mace are common extras.
+Source: https://en.wikipedia.org/wiki/Mixed_spice
+Confidence: medium
+Doubt: The page describes it as a British blend of sweet spices, similar to pumpkin pie spice. The exact spices and parts are my typical version, since recipes vary.
+
+Ingredients:
+4 parts Cinnamon
+2 parts Allspice
+1 part Nutmeg
+1 part Ginger
+1/2 part Clove
+1 part Coriander (optional)
+1/2 part Mace (optional)

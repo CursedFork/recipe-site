@@ -1,0 +1,26 @@
+Name: Jerk Seasoning
+Aka: jerk spice, Jamaican jerk, dry jerk rub
+Cuisines: Jamaican, Caribbean
+Origin: Jamaica
+Uses: Dry rub, Wet marinade or paste
+Methods: Grill, Smoke, Roast
+Classic: Chicken, Pork, Pork ribs
+Also: Fish, Sweet potatoes, Corn
+Tip: Mix with oil, lime juice or soy sauce into a paste, rub it in, and rest it for a few hours. Grill slowly over a moderate fire.
+Typical version: Allspice and thyme lead. Scotch bonnet is the traditional chile, and cayenne stands in here because fresh chile is not in this library.
+Source: https://en.wikipedia.org/wiki/Jerk_(cooking)
+Confidence: medium
+Doubt: The page names allspice and Scotch bonnet peppers as the main ingredients of the jerk seasoning. The other spices and the parts are a typical dry version that I chose.
+
+Ingredients:
+3 parts Allspice
+3 parts Thyme
+2 parts Garlic powder
+2 parts Onion powder
+1 part Chile, hot red: Cayenne
+1 part Ginger
+1 part Pepper, black
+1 part Sugar
+1/2 part Cinnamon
+1/2 part Nutmeg
+1 part Salt (optional)

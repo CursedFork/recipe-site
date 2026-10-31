@@ -1,0 +1,22 @@
+Name: Curry Powder
+Aka: British curry powder, yellow curry powder, curry masala
+Cuisines: British, Indian
+Origin: United Kingdom
+Uses: Cooking base or sauce, Dry rub
+Methods: Sauté or stir-fry, Braise or stew, Simmer or boil
+Classic: Chicken, Curry, Potatoes
+Also: Lentils, Eggs, Rice
+Tip: Fry it in oil for a minute before adding liquid, because raw curry powder tastes dusty. Turmeric makes it yellow.
+Typical version: A mild everyday version built from coriander, turmeric and cumin, with fenugreek, ginger, black pepper and chile for depth and heat. There is no single standard, and the commercial products differ a lot.
+Source: https://en.wikipedia.org/wiki/Curry_powder
+Confidence: medium
+Doubt: The page confirms that coriander, chilli, mustard seed, pepper and cumin appear in curry powders. The turmeric-heavy proportions here are my typical home ratio and not a published standard.
+
+Ingredients:
+4 parts Coriander
+3 parts Turmeric
+3 parts Cumin
+1 part Fenugreek
+1 part Ginger
+1 part Pepper, black
+1 part Chile, hot red
