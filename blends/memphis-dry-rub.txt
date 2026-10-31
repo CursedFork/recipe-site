@@ -1,0 +1,24 @@
+Name: Memphis Dry Rub
+Aka: Memphis rub, Memphis-style dry rub, Memphis BBQ rub
+Cuisines: American BBQ, American
+Origin: United States
+Uses: Dry rub
+Methods: Smoke, Grill, Roast
+Classic: Pork ribs, Pulled pork, Chicken
+Also: Pork chops, Brisket and beef ribs
+Tip: Rub it inside and out of a chicken or over 3 to 4 pounds of ribs. Memphis ribs are served dry, with no sauce, so the rub is the flavor.
+Typical version: Mostly paprika with sugar, salt, celery, black pepper, mustard, onion, garlic and cayenne.
+Source: https://www.kentuckyliving.com/recipes/memphis-style-dry-rub
+Confidence: medium
+Doubt: The proportions come from one recipe page that I read (Kentucky Living), with the amounts converted to parts (1 part is a teaspoon). Seasoning blends have no single standard, and other recipes differ. The recipe also uses celery salt and dry mustard, which I turned into celery seed, salt and ground mustard seed. The recipe uses brown sugar, which is not in this library, so plain sugar stands in.
+
+Ingredients:
+12 parts Paprika
+8 parts Sugar
+3 parts Salt
+1 part Celery seed
+1 part Pepper, black
+1 part Mustard seed
+1 part Onion powder
+1 part Garlic powder
+1 part Chile, hot red: Cayenne
