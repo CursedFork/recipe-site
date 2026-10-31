@@ -1,0 +1,14 @@
+Name: Chervil
+Aka: dried chervil, French parsley
+Category: Dried herbs
+Form: leaves
+Origin: Russia
+Cuisines: French
+Flavor: delicate, mild anise, parsley-like
+Power: 1
+Tip: Very delicate and loses flavor when dried. Add it at the end, not the start.
+Pairs with: Scrambled and fried eggs, Salmon, Chicken, Mayonnaise and creamy sauces
+Typical dishes: fines herbes, bearnaise, omelets
+Source: https://en.wikipedia.org/wiki/Chervil
+Confidence: medium
+Doubt: Dried chervil is weak, so Power 1 is generous. The origin is a broad pointer from general knowledge.

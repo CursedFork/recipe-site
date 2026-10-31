@@ -1,0 +1,13 @@
+Name: Cocoa
+Aka: cocoa powder, unsweetened cocoa, cacao powder
+Category: Other ingredients
+Form: ground
+Origin: Mexico
+Cuisines: Mexican, American
+Flavor: bitter, deep, chocolatey, earthy
+Tip: Dutch-process cocoa is milder and darker, and natural cocoa is sharper. Sift it into dry mixes to avoid lumps.
+Pairs with: Chocolate, Cakes and muffins, Coffee and hot chocolate, Chili
+Typical dishes: mole, brownies, hot chocolate
+Source: https://en.wikipedia.org/wiki/Cocoa_solids
+Confidence: medium
+Doubt: The origin is a broad pointer from the history of cacao in Mesoamerica, which I did not find stated on this page.

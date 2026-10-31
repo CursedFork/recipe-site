@@ -1,0 +1,16 @@
+Name: Chile, hot red: Arbol
+Aka: chile de arbol, arbol chile, arbol chili, tree chile
+Category: Chiles
+Family: Chile, hot red
+Form: whole, ground
+Origin: Mexico
+Cuisines: Mexican, Tex-Mex
+Flavor: hot, sharp, nutty, grassy
+Power: 4
+Heat: 3
+Tip: Toast the whole dried pods briefly and blend them into salsas, or use them whole in oil. Hotter than guajillo.
+Pairs with: Beef, Tomatoes, Pork, Barbecue and hot sauces
+Typical dishes: salsa roja, hot sauces, pozole
+Source: https://en.wikipedia.org/wiki/Chile_de_%C3%A1rbol
+Confidence: medium
+Doubt: The Heat rating is from a published range of about 15,000 to 30,000 Scoville units that I recalled and did not confirm.

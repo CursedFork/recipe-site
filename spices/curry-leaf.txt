@@ -1,0 +1,14 @@
+Name: Curry leaf
+Aka: curry leaves, dried curry leaves, kadi patta
+Category: Dried herbs
+Form: leaves
+Origin: India, Sri Lanka
+Cuisines: Indian, Sri Lankan
+Flavor: citrusy, nutty, slightly bitter, savory
+Power: 2
+Tip: Fry whole leaves in hot oil at the start. Fresh leaves are far better than dried, which have a faint flavor.
+Pairs with: Lentils, Rice
+Typical dishes: sambar, dal tadka, South Indian chutneys
+Source: https://en.wikipedia.org/wiki/Curry_tree
+Confidence: medium
+Doubt: Dried curry leaves are much weaker than fresh, so the rating is for dried. The page says the tree is native to the Indian subcontinent and parts of Asia.

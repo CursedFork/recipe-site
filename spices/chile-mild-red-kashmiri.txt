@@ -1,0 +1,16 @@
+Name: Chile, mild red: Kashmiri
+Aka: Kashmiri chili, Kashmiri chile, Kashmiri chilli powder, Kashmiri mirch
+Category: Chiles
+Family: Chile, mild red
+Form: whole, ground
+Origin: India
+Cuisines: Indian
+Flavor: mild, fruity, sweet, deep red
+Power: 2
+Heat: 1
+Tip: Used mostly for its brilliant red color. It brightens tandoori marinades and curries with very little heat.
+Pairs with: Chicken, Lamb, Curry, Lentils
+Typical dishes: tandoori chicken, rogan josh, butter chicken
+Source: https://en.wikipedia.org/wiki/Kashmiri_chili
+Confidence: medium
+Doubt: The Heat rating comes from a published range for this chile of roughly 1,000 to 2,000 Scoville units, which I recalled and did not confirm on a page.

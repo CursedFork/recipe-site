@@ -1,0 +1,14 @@
+Name: Mint
+Aka: dried mint, spearmint, peppermint, mint leaves
+Category: Dried herbs
+Form: leaves
+Origin: Iran
+Cuisines: Levantine, Persian, Turkish, Greek
+Flavor: cool, sweet, fresh, menthol
+Power: 2
+Tip: Dried mint is warmer and more earthy than fresh. Crush it into yogurt sauces, salads and meat dishes.
+Pairs with: Yogurt, Lamb, Salad dressings, Lentils
+Typical dishes: tzatziki, tabbouleh, kibbeh
+Source: https://en.wikipedia.org/wiki/Mentha
+Confidence: medium
+Doubt: Mint grows across the world, so the origin is a broad pointer. The Power rating is mine.

@@ -1,0 +1,14 @@
+Name: Poppy seed
+Aka: poppy seeds, blue poppy seed, maw
+Category: Seeds and pods
+Form: whole
+Origin: Turkey
+Cuisines: Eastern European, German, Indian, Turkish
+Flavor: nutty, mild, slightly sweet
+Power: 1
+Tip: Toast lightly and grind to a paste for fillings, or scatter whole on bread and dressings.
+Pairs with: Bread and toast, Cakes and muffins, Noodles, Salad dressings
+Typical dishes: bagels, lemon poppy seed muffins, hamantaschen
+Source: https://en.wikipedia.org/wiki/Poppy_seed
+Confidence: medium
+Doubt: The origin is a broad pointer from general knowledge. The Power rating is mine.

@@ -1,0 +1,16 @@
+Name: Chile, mild red: Urfa
+Aka: Urfa biber, Urfa pepper, Urfa chile, isot pepper, isot
+Category: Chiles
+Family: Chile, mild red
+Form: flakes
+Origin: Turkey
+Cuisines: Turkish
+Flavor: smoky, raisin-like, earthy, chocolatey
+Power: 2
+Heat: 1
+Tip: A dark, oily flake with a smoky-sweet taste. Sprinkle it on at the table, or add to kebabs and eggs.
+Pairs with: Lamb, Eggs, Tomatoes, Dips and spreads
+Typical dishes: Turkish kebabs, hummus, roasted vegetables
+Source: https://en.wikipedia.org/wiki/Urfa_biber
+Confidence: medium
+Doubt: I set Heat to 1 from sellers who describe it as mild. Published figures vary, and some place it higher.

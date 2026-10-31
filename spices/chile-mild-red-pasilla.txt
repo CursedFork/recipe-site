@@ -1,0 +1,16 @@
+Name: Chile, mild red: Pasilla
+Aka: pasilla chile, chile negro, pasilla negro, pasilla powder
+Category: Chiles
+Family: Chile, mild red
+Form: whole, ground
+Origin: Mexico
+Cuisines: Mexican
+Flavor: mild, raisin-like, earthy, cocoa-like
+Power: 2
+Heat: 1
+Tip: Toast the pods lightly and soak, then blend them into sauces. Ground pasilla works in rubs and moles.
+Pairs with: Pork, Chicken, Beef, Tomato sauces
+Typical dishes: mole negro, adobo sauces, enchilada sauce
+Source: https://en.wikipedia.org/wiki/Pasilla
+Confidence: medium
+Doubt: The Heat rating is from a published range of about 1,000 to 2,500 Scoville units that I recalled and did not confirm.

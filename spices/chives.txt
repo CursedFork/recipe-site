@@ -1,0 +1,14 @@
+Name: Chives
+Aka: dried chives, chive, freeze-dried chives
+Category: Dried herbs
+Form: leaves
+Origin: Germany
+Cuisines: French, German, Scandinavian
+Flavor: mild, oniony, fresh, grassy
+Power: 1
+Tip: Dried chives are mild and a bit bland. Use plenty, and stir them in at the end.
+Pairs with: Potatoes, Scrambled and fried eggs, Yogurt, Dips and spreads
+Typical dishes: fines herbes, ranch, baked potatoes
+Source: https://en.wikipedia.org/wiki/Chives
+Confidence: medium
+Doubt: The origin is a broad pointer from general knowledge, since chives grow wild across Europe and Asia. The Power rating is mine.

@@ -1,0 +1,14 @@
+Name: Savory
+Aka: summer savory, winter savory, dried savory
+Category: Dried herbs
+Form: leaves
+Origin: Italy
+Cuisines: French, German, Eastern European
+Flavor: peppery, thyme-like, minty, piney
+Power: 3
+Tip: Known as the bean herb. Add to beans, lentils and sausages early, since the leaves are tough.
+Pairs with: Kidney and pinto beans, White beans, Sausage, Green beans and peas
+Typical dishes: herbes de Provence, bean soups, sausage
+Source: https://en.wikipedia.org/wiki/Satureja_hortensis
+Confidence: medium
+Doubt: The page says summer savory is native to southeastern Europe and Asia, so Italy is a broad pointer. The Power rating is mine.

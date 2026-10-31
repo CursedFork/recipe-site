@@ -1,0 +1,13 @@
+Name: Parsley
+Aka: dried parsley, parsley flakes, parsley leaves
+Category: Dried herbs
+Form: leaves
+Origin: Greece, Morocco
+Cuisines: Italian, French, Greek, Levantine
+Flavor: fresh, grassy, mild, slightly peppery
+Power: 1
+Tip: Dried parsley is faint and mostly adds color. Fresh is much better, so treat dried as a background note.
+Pairs with: Potatoes, Chicken, Pasta, Fish
+Typical dishes: herb blends, seasoned salt, soup
+Source: https://en.wikipedia.org/wiki/Parsley
+Confidence: high

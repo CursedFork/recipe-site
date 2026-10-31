@@ -1,0 +1,14 @@
+Name: Tarragon
+Aka: dried tarragon, French tarragon, tarragon leaves
+Category: Dried herbs
+Form: leaves
+Origin: Russia
+Cuisines: French
+Flavor: anise-like, sweet, grassy, slightly bitter
+Power: 3
+Tip: Dried tarragon is weaker than fresh and tastes more of hay. Use French tarragon where you can.
+Pairs with: Chicken, Scrambled and fried eggs, White fish, Mayonnaise and creamy sauces
+Typical dishes: bearnaise, fines herbes, chicken tarragon
+Source: https://en.wikipedia.org/wiki/Tarragon
+Confidence: medium
+Doubt: The origin is a broad pointer from general knowledge. The Power rating is mine.

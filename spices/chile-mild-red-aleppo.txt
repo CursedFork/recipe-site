@@ -1,0 +1,16 @@
+Name: Chile, mild red: Aleppo
+Aka: Aleppo pepper, Aleppo chile, Halaby pepper, Aleppo flakes, Maras pepper
+Category: Chiles
+Family: Chile, mild red
+Form: flakes
+Origin: Syria, Turkey
+Cuisines: Syrian, Turkish, Levantine
+Flavor: fruity, cumin-like, mildly salty, tangy
+Power: 2
+Heat: 2
+Tip: Use it as a finishing flake or in marinades. It gives gentle heat and a fruity tang, and it is often salted and oily.
+Pairs with: Lamb, Eggs, Tomatoes, Dips and spreads
+Typical dishes: muhammara, kebabs, shakshuka
+Source: https://en.wikipedia.org/wiki/Aleppo_pepper
+Confidence: medium
+Doubt: Maras pepper is a Turkish cousin that I grouped here as an alias. The Heat rating is from a published range of about 10,000 Scoville units that I recalled and did not confirm.
