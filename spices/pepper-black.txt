@@ -1,0 +1,13 @@
+Name: Pepper, black
+Aka: black pepper, ground black pepper, peppercorns, black peppercorns
+Category: Peppercorns
+Form: whole, ground
+Origin: India
+Cuisines: Global
+Flavor: pungent, sharp, woody, warm
+Power: 3
+Tip: Grind it fresh. Pre-ground pepper loses its aroma within weeks.
+Pairs with: Steak, Scrambled and fried eggs, Pasta, Salad dressings
+Typical dishes: steak au poivre, cacio e pepe, scrambled eggs
+Source: https://en.wikipedia.org/wiki/Black_pepper
+Confidence: high

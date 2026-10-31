@@ -1,0 +1,13 @@
+Name: Oregano
+Aka: dried oregano, Greek oregano, Mediterranean oregano
+Category: Dried herbs
+Form: leaves
+Origin: Greece, Turkey
+Cuisines: Italian, Greek, Mexican
+Flavor: earthy, peppery, slightly bitter, minty
+Power: 3
+Tip: Dried oregano is stronger than fresh, so add it early and let it cook into the dish.
+Pairs with: Tomato sauces, Pizza, Lamb, Chicken, Eggplant
+Typical dishes: pizza, souvlaki, tomato sauce
+Source: https://en.wikipedia.org/wiki/Oregano
+Confidence: high

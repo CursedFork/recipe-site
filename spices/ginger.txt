@@ -1,0 +1,14 @@
+Name: Ginger
+Aka: ground ginger, dried ginger, ginger powder
+Category: Roots and rhizomes
+Form: ground
+Origin: India, China
+Cuisines: Chinese, Indian, Jamaican, British
+Flavor: warm, peppery, citrusy
+Power: 3
+Tip: Dried ground ginger is warmer and less bright than fresh. Use it in baking, spice blends and marinades, and about a quarter as much as fresh.
+Pairs with: Pork, Carrots, Cookies, Sweet breads and buns, Tea and chai
+Typical dishes: gingerbread, curries, pumpkin pie spice
+Source: https://en.wikipedia.org/wiki/Ginger
+Confidence: medium
+Doubt: The Power rating is mine. The quarter-of-fresh conversion is a common rule of thumb that I could not source.

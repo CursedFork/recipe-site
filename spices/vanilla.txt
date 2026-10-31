@@ -1,0 +1,12 @@
+Name: Vanilla
+Aka: vanilla bean, vanilla pod, vanilla extract, vanilla powder
+Category: Other ingredients
+Form: whole
+Origin: Mexico, Madagascar
+Cuisines: French, Mexican, American
+Flavor: sweet, creamy, floral, warm
+Tip: Split a bean and scrape out the seeds, or use extract. Add it at the end of heating so the flavor is not boiled away.
+Pairs with: Custards and puddings, Cakes and muffins, Ice cream and frozen desserts, Berries
+Typical dishes: custard, ice cream, cakes
+Source: https://en.wikipedia.org/wiki/Vanilla
+Confidence: high

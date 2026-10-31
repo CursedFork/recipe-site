@@ -1,0 +1,16 @@
+Name: Chile, mild red
+Aka: mild red chile, mild chile powder, mild red chili
+Category: Chiles
+Form: whole, ground
+Origin: Mexico
+Cuisines: Mexican, Tex-Mex, American
+Flavor: mild, sweet, earthy
+Power: 2
+Heat: 1
+Tip: This is the general entry for a mild ground red chile, the base of chili powder. It adds color and gentle flavor, not fire.
+Pairs with: Beef, Chicken, Chili, Beans and lentils
+Typical dishes: chili powder, chili con carne, enchilada sauce
+Source: https://en.wikipedia.org/wiki/Chili_pepper
+Source: https://en.wikipedia.org/wiki/Chili_powder
+Confidence: medium
+Doubt: This umbrella stands for any mild ground red chile, so Power and Heat are a middle guess. Real products differ a lot.

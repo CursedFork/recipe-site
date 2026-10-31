@@ -1,0 +1,15 @@
+Name: Chile, hot red: Cayenne
+Aka: cayenne, cayenne pepper, ground cayenne
+Category: Chiles
+Family: Chile, hot red
+Form: whole, ground
+Origin: Mexico
+Cuisines: Cajun and Creole, Mexican, Indian
+Flavor: hot, sharp, clean, lightly fruity
+Power: 4
+Heat: 3
+Tip: Use a pinch at a time and taste after a minute, because the heat builds. It adds heat without much flavor of its own.
+Pairs with: Shrimp, Chicken, Scrambled and fried eggs, Barbecue and hot sauces
+Typical dishes: Cajun seasoning, hot sauce, deviled eggs
+Source: https://en.wikipedia.org/wiki/Cayenne_pepper
+Confidence: high

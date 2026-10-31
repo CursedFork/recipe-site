@@ -1,0 +1,14 @@
+Name: Allspice
+Aka: pimento, Jamaica pepper, ground allspice, allspice berries
+Category: Warm spices
+Form: whole, ground
+Origin: Jamaica, Guatemala
+Cuisines: Jamaican, Caribbean, Levantine
+Flavor: warm, peppery, clove-like, sweet
+Power: 3
+Tip: One berry or a pinch tastes like cinnamon, nutmeg and clove together, which is why it is named allspice.
+Pairs with: Pork, Beef, Sausage, Cakes and muffins, Mulled wine and cider
+Typical dishes: jerk seasoning, Cincinnati chili, pumpkin pie
+Source: https://en.wikipedia.org/wiki/Allspice
+Confidence: medium
+Doubt: Its strength sits between Power 3 and Power 4, and I chose 3. The origin note covers where it grows.

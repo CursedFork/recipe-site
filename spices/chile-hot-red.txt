@@ -1,0 +1,15 @@
+Name: Chile, hot red
+Aka: hot red chile, hot red chili, hot chile powder
+Category: Chiles
+Form: whole, ground, flakes
+Origin: Mexico
+Cuisines: Mexican, Indian, Thai, Sichuan
+Flavor: hot, sharp, bright
+Power: 4
+Heat: 3
+Tip: This is the general entry for a hot dried red chile when you do not care which. Start with a pinch, taste, and add more.
+Pairs with: Chicken, Beef, Shrimp, Chili, Curry
+Typical dishes: hot sauces, curries, chili
+Source: https://en.wikipedia.org/wiki/Chili_pepper
+Confidence: medium
+Doubt: This umbrella stands for any hot dried red chile, so its Power and Heat are a middle guess. Your own cayenne, arbol or similar may be hotter or milder.

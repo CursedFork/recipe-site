@@ -1,0 +1,13 @@
+Name: Rosemary
+Aka: dried rosemary, rosemary leaves, rosemary needles
+Category: Dried herbs
+Form: leaves
+Origin: Italy, Spain
+Cuisines: Italian, French, Greek
+Flavor: piney, resinous, woody, lemony
+Power: 3
+Tip: Chop the needles finely or crush them, because whole dried needles are sharp and tough. It stands up to long roasting.
+Pairs with: Lamb, Potatoes, Chicken, Bread and toast
+Typical dishes: roast lamb, focaccia, roast potatoes
+Source: https://en.wikipedia.org/wiki/Rosemary
+Confidence: high

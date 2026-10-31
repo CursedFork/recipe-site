@@ -31,3 +31,10 @@ describe("the real spice and blend files", () => {
     expect(names).toContain("Chile, mild red: Ancho");
   });
 });
+
+describe("the spice files on their own", () => {
+  it("have no problems at all, not even a spice that is missing", () => {
+    const own = readLibrary().problems.filter((problem) => problem.startsWith("spices/"));
+    expect(own).toEqual([]);
+  });
+});

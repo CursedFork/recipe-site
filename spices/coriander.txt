@@ -1,0 +1,14 @@
+Name: Coriander
+Aka: coriander seed, ground coriander, coriander seeds
+Category: Seeds and pods
+Form: whole, ground
+Origin: Greece
+Cuisines: Indian, Levantine, Mexican
+Flavor: citrusy, mild, sweet-woody
+Power: 2
+Tip: Toast the seeds briefly before grinding. This is the seed of the cilantro plant, and it tastes lemony and warm, not like the fresh leaf.
+Pairs with: Pork, Lamb, Lentils, Carrots
+Typical dishes: curry powder, falafel, garam masala
+Source: https://en.wikipedia.org/wiki/Coriander
+Confidence: medium
+Doubt: The page says coriander is native to the Mediterranean Basin, which covers many countries, so Greece (where the oldest written name appears) is a broad pointer.

@@ -1,0 +1,15 @@
+Name: Chile flakes
+Aka: red pepper flakes, crushed red pepper, chili flakes, chilli flakes, crushed chile
+Category: Chiles
+Form: flakes
+Origin: Italy, Turkey
+Cuisines: Italian, Turkish, American
+Flavor: hot, fruity, slightly smoky
+Power: 3
+Heat: 3
+Tip: Sprinkle on at the table or bloom in warm oil at the start so the heat spreads through the dish.
+Pairs with: Pizza, Pasta, Scrambled and fried eggs, Tomato sauces
+Typical dishes: pizza, aglio e olio, arrabbiata
+Source: https://en.wikipedia.org/wiki/Crushed_red_pepper
+Confidence: medium
+Doubt: Flakes are a blend of chile types, so heat varies by brand. I set Heat to 3 for the usual cayenne-type pepper flakes. Aleppo or Maras flakes are milder.

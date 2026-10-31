@@ -1,0 +1,14 @@
+Name: Marjoram
+Aka: dried marjoram, sweet marjoram, marjoram leaves
+Category: Dried herbs
+Form: leaves
+Origin: Turkey, Egypt
+Cuisines: Italian, German, Levantine
+Flavor: sweet, floral, woody, mild oregano-like
+Power: 2
+Tip: A gentler cousin of oregano. Add it near the end because heat dulls its aroma.
+Pairs with: Chicken, Sausage, Mushrooms, Soup
+Typical dishes: sausage, zaatar variants, roast chicken
+Source: https://en.wikipedia.org/wiki/Marjoram
+Confidence: medium
+Doubt: The page says marjoram is native to Cyprus, Turkey, the Levant and the Arabian Peninsula (marked as needing a citation there), so the two countries are broad pointers. Power 2 is my rating.

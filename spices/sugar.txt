@@ -1,0 +1,13 @@
+Name: Sugar
+Aka: granulated sugar, white sugar, caster sugar, cane sugar
+Category: Salts and sugars
+Form: granules
+Origin: India
+Cuisines: Global
+Flavor: sweet
+Tip: A small pinch rounds out sharp tomato sauces and balances heat in curries and rubs, even in savory dishes.
+Pairs with: Tomato sauces, Cakes and muffins, Barbecue and hot sauces, Cookies
+Typical dishes: barbecue rub, tomato sauce, baking
+Source: https://en.wikipedia.org/wiki/Sugar
+Confidence: medium
+Doubt: India is where sugarcane was first refined into crystals, per the general history on the page, but the page is wide, so the origin is a broad pointer.

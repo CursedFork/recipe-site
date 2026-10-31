@@ -1,0 +1,14 @@
+Name: Pepper, Sichuan
+Aka: Sichuan pepper, Szechuan pepper, Sichuan peppercorns, Szechuan peppercorns
+Category: Peppercorns
+Form: whole, ground
+Origin: China
+Cuisines: Sichuan, Chinese, Nepali
+Flavor: citrusy, floral, numbing, tingly
+Power: 4
+Tip: Toast the husks, then grind and sift out the black seeds. The numbing tingle is not heat, so it pairs well with chiles.
+Pairs with: Pork, Tofu, Chicken, Noodles
+Typical dishes: mapo tofu, dan dan noodles, five-spice powder
+Source: https://en.wikipedia.org/wiki/Sichuan_pepper
+Confidence: medium
+Doubt: The Power rating is mine. Its tingle is a different sensation than heat, so it carries no Heat rating.

@@ -1,0 +1,15 @@
+Name: Paprika: Smoked
+Aka: smoked paprika, pimenton, pimenton de la Vera, Spanish smoked paprika
+Category: Paprika
+Family: Paprika
+Form: ground
+Origin: Spain
+Cuisines: Spanish, American BBQ
+Flavor: smoky, sweet, earthy
+Power: 2
+Heat: 0
+Tip: A little gives a feel of a wood fire to dishes cooked on the stove or in the oven. Sweet, bittersweet and hot types exist, so check the tin.
+Pairs with: Chicken, Potatoes, Chickpeas, Barbecue and hot sauces
+Typical dishes: chorizo, paella, patatas bravas
+Source: https://en.wikipedia.org/wiki/Smoked_paprika
+Confidence: high

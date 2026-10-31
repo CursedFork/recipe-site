@@ -1,0 +1,13 @@
+Name: Turmeric
+Aka: ground turmeric, haldi, turmeric powder
+Category: Roots and rhizomes
+Form: ground
+Origin: India
+Cuisines: Indian, Thai, Moroccan
+Flavor: earthy, bitter, mustardy, mild
+Power: 3
+Tip: Bloom in oil to lose the raw edge. It stains hands, boards and clothes yellow.
+Pairs with: Rice, Cauliflower and broccoli, Lentils, Chicken
+Typical dishes: curries, dal, golden milk
+Source: https://en.wikipedia.org/wiki/Turmeric
+Confidence: high

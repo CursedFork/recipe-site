@@ -1,0 +1,14 @@
+Name: Paprika
+Aka: sweet paprika, ground paprika, Hungarian paprika
+Category: Paprika
+Form: ground
+Origin: Hungary, Spain
+Cuisines: Hungarian, Spanish, American
+Flavor: sweet, mild, fruity, earthy
+Power: 1
+Heat: 0
+Tip: Paprika scorches fast. Stir it into oil off the heat, or add it with liquid. It gives color and sweetness more than heat.
+Pairs with: Chicken, Potatoes, Boiled and deviled eggs, Stews and braises
+Typical dishes: goulash, deviled eggs, roast chicken
+Source: https://en.wikipedia.org/wiki/Paprika
+Confidence: high

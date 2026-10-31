@@ -1,0 +1,13 @@
+Name: Salt
+Aka: table salt, kosher salt, sea salt, salt flakes
+Category: Salts and sugars
+Form: whole, ground, flakes
+Origin: Romania
+Cuisines: Global
+Flavor: salty, mineral
+Tip: Season in small steps and taste. Kosher and flaky salts are less dense than table salt, so a spoonful of table salt is much saltier.
+Pairs with: Scrambled and fried eggs, Potatoes, Steak, Pasta
+Typical dishes: nearly everything
+Source: https://en.wikipedia.org/wiki/Salt
+Confidence: medium
+Doubt: Salt has no single origin. I listed the place the page names for the earliest known salt production.

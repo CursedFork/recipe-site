@@ -1,0 +1,14 @@
+Name: Basil
+Aka: dried basil, sweet basil, basil leaves
+Category: Dried herbs
+Form: leaves
+Origin: India
+Cuisines: Italian, Thai, Greek
+Flavor: sweet, peppery, clove-like, minty
+Power: 2
+Tip: Dried basil is milder and more hay-like than fresh. Add it early to sauces, and keep fresh basil for the end.
+Pairs with: Tomatoes, Pasta, Pizza, Scrambled and fried eggs
+Typical dishes: tomato sauce, pizza sauce, pesto
+Source: https://en.wikipedia.org/wiki/Basil
+Confidence: medium
+Doubt: Basil dries poorly and varies a lot by brand, so Power 2 is a middle guess. Thai basil is a different plant with an anise flavor.

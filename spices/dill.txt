@@ -1,0 +1,14 @@
+Name: Dill
+Aka: dill weed, dried dill, dill seed, dill seeds
+Category: Dried herbs
+Form: leaves, whole
+Origin: Iran, Egypt
+Cuisines: Scandinavian, Russian, Greek, Polish
+Flavor: fresh, grassy, anise-like, tangy
+Power: 2
+Tip: Dill weed is the feathery leaf and is delicate, so add it near the end. The seed is a separate, stronger flavor.
+Pairs with: Salmon, Potatoes, Yogurt, Cabbage and Brussels sprouts
+Typical dishes: pickles, gravlax, tzatziki, borscht
+Source: https://en.wikipedia.org/wiki/Dill
+Confidence: medium
+Doubt: The page says dill is native to North Africa, West Asia and Iran, so the two origins are broad pointers. Seed and weed are different tastes and strengths. I covered both in one entry at Power 2, which fits the weed better than the seed.

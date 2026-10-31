@@ -1,0 +1,13 @@
+Name: Cumin
+Aka: cumin seed, ground cumin, jeera
+Category: Seeds and pods
+Form: whole, ground
+Origin: Iran, India
+Cuisines: Indian, Mexican, Levantine, Moroccan
+Flavor: earthy, warm, nutty, slightly bitter
+Power: 3
+Tip: Toast whole seeds in a dry pan until fragrant, or bloom ground cumin in oil. It is a base note, so use it early.
+Pairs with: Beef, Lamb, Chickpeas, Black beans, Rice
+Typical dishes: chili, tacos, hummus, curries
+Source: https://en.wikipedia.org/wiki/Cumin
+Confidence: high

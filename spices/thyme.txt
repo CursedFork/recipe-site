@@ -1,0 +1,14 @@
+Name: Thyme
+Aka: dried thyme, thyme leaves, common thyme
+Category: Dried herbs
+Form: leaves
+Origin: Greece, Spain
+Cuisines: French, Italian, Levantine
+Flavor: earthy, minty, lemony, slightly floral
+Power: 2
+Tip: Add early to soups, stews and roasts, because the leaves are tough and the flavor takes time to release.
+Pairs with: Chicken, Potatoes, Mushrooms, Stews and braises
+Typical dishes: roast chicken, bouquet garni, herbes de Provence
+Source: https://en.wikipedia.org/wiki/Thyme
+Confidence: medium
+Doubt: The origin is the general Mediterranean basin, and I picked Greece and Spain as the countries the page names.

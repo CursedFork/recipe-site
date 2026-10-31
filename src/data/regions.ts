@@ -58,6 +58,7 @@ export const countries = {
   GHA: { name: "Ghana" },
   GRC: { name: "Greece" },
   HUN: { name: "Hungary" },
+  ROU: { name: "Romania" },
   IDN: { name: "Indonesia" },
   IND: { name: "India" },
   IRL: { name: "Ireland" },
