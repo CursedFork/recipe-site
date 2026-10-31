@@ -1,0 +1,162 @@
+---
+/* ---------------------------------------------------------------------------
+   One blend. Fully prerendered: it needs no JavaScript at all.
+   --------------------------------------------------------------------------- */
+
+import SpicesLayout from "../../../layouts/SpicesLayout.astro";
+import { loadLibrary } from "../../../lib/spices/load-spices";
+
+export function getStaticPaths() {
+  const library = loadLibrary();
+  const bySlug = new Map(library.spices.map((spice) => [spice.slug, spice]));
+
+  return library.blends.map((blend) => ({
+    params: { slug: blend.slug },
+    props: {
+      blend,
+      lines: blend.ingredients.map((ingredient) => {
+        const spice = bySlug.get(ingredient.spiceSlug);
+        const members = library.families.get(ingredient.spiceSlug) ?? [];
+        return {
+          ingredient,
+          name: spice?.name ?? ingredient.name,
+          // Naming a family means any member works.
+          anyKind: members.length > 0,
+        };
+      }),
+    },
+  }));
+}
+
+const { blend, lines } = Astro.props;
+
+const amountWords = (amount: (typeof lines)[number]["ingredient"]["amount"]) => {
+  if (amount.kind === "pinch") return "A pinch of";
+  if (amount.kind === "to-taste") return "To taste:";
+  return `${amount.text} ${amount.value <= 1 ? "part" : "parts"}`;
+};
+
+const hostOf = (url: string) => {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
+};
+
+const foodNames = (refs: typeof blend.classic) => refs.map((ref) => ref.name).join(", ");
+---
+
+<SpicesLayout title={blend.name} description={blend.tip}>
+  <article class="spices-page spice">
+    <header class="spice__head">
+      <p class="spice__crumbs"><a href="/spices/blends">Spice blends</a></p>
+      <h1>{blend.name}</h1>
+      {blend.aka.length > 0 && <p class="spice__aka">Also called: {blend.aka.join(", ")}</p>}
+      <p class="spice__aka">
+        {blend.cuisines.join(", ")}. From {blend.origin.map((place) => place.name).join(", ")}.
+      </p>
+    </header>
+
+    {
+      blend.goEasy.length > 0 && (
+        <section class="spice__section spice__careful">
+          <h2>Go easy</h2>
+          <p>
+            Contains{" "}
+            {blend.goEasy
+              .map((s) => `${s.name.toLowerCase()} (Power ${s.power})${s.optional ? ", optional" : ""}`)
+              .join(", ")}
+            . Strong spices, so measure carefully and taste before adding more.
+          </p>
+        </section>
+      )
+    }
+
+    {
+      blend.careful && (
+        <section class="spice__section spice__careful">
+          <h2>Careful</h2>
+          <p>{blend.careful}</p>
+        </section>
+      )
+    }
+
+    <section class="spice__section">
+      <h2>What goes in</h2>
+      <ul class="spice__list blend__ingredients">
+        {
+          lines.map(({ ingredient, name, anyKind }) => (
+            <li>
+              <strong>{amountWords(ingredient.amount)}</strong>{" "}
+              <a href={`/spices/library/${ingredient.spiceSlug}`}>{name}</a>
+              {anyKind && " (any kind works)"}
+              {ingredient.optional && " (nice to have, leave out if you do not have it)"}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="spice__doubt">
+        One part is any measure you like, such as a teaspoon. Use the same measure
+        for every line.
+      </p>
+    </section>
+
+    <section class="spice__section">
+      <h2>How to use it</h2>
+      <p>{blend.tip}</p>
+      <dl class="spice__defs">
+        <dt>Used as</dt>
+        <dd>{blend.uses.join(", ")}</dd>
+        <dt>Cooking</dt>
+        <dd>{blend.methods.join(", ")}</dd>
+        <dt>Goes best with</dt>
+        <dd>{foodNames(blend.classic)}</dd>
+        {
+          blend.also.length > 0 && (
+            <>
+              <dt>Also works with</dt>
+              <dd>{foodNames(blend.also)}</dd>
+            </>
+          )
+        }
+      </dl>
+    </section>
+
+    <section class="spice__section">
+      <h2>About this version</h2>
+      <p>{blend.typicalVersion}</p>
+    </section>
+
+    <section class="spice__section">
+      <h2>Allergens</h2>
+      <p>
+        {
+          blend.allergens.length > 0
+            ? `Contains: ${blend.allergens.join(", ")}.`
+            : "None of the seven allergens this site tracks are in it."
+        }{" "}
+        Check labels, this is not a complete allergen guide.
+      </p>
+    </section>
+
+    <section class="spice__section">
+      <h2>Where this comes from</h2>
+      <p>
+        <span class="spice__confidence">Confidence: {blend.confidence}</span>
+      </p>
+      {blend.doubt && <p class="spice__doubt">{blend.doubt}</p>}
+      <ul class="spice__list spice__sources">
+        {
+          blend.sources.map((url) => (
+            <li>
+              <a href={url} rel="noopener noreferrer" target="_blank">
+                {hostOf(url)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </article>
+</SpicesLayout>

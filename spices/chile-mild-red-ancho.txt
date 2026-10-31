@@ -15,4 +15,4 @@ Source: https://en.wikipedia.org/wiki/Poblano
 Source: https://en.wikipedia.org/wiki/Mole_(sauce)
 Source: https://en.wikipedia.org/wiki/Chili_powder
 Confidence: medium
-Doubt: The heat figure is a Scoville range for the fresh poblano (1,000 to 1,500) that the source applies to ancho, so it is approximate. Your draft said smoky, which I left out: ancho is a dried poblano, not a smoked one, and the sources I read describe it as sweet and fruity. Your draft also listed enchilada sauce, corn and sweet potato, which I could not confirm from a page I read.
+Doubt: The heat figure is a Scoville range for the fresh poblano (1,000 to 1,500) that the source applies to ancho, so it is approximate. An earlier draft said smoky, which I left out: ancho is a dried poblano, not a smoked one, and the sources I read describe it as sweet and fruity. The draft also listed enchilada sauce, corn and sweet potato, which I could not confirm from a page I read.

@@ -12,7 +12,7 @@ Source: https://veenaazmanov.com/wprm_print/homemade-garam-masala-spice-mix
 Source: https://www.americastestkitchen.com/cookscountry/recipes/8027-homemade-garam-masala
 Source: https://en.wikipedia.org/wiki/Garam_masala
 Confidence: medium
-Doubt: The proportions come from one recipe. The food pairings are from your draft and general practice, and I could not read a page that lists them. The uses (marinades, stews, curries, added near the end of cooking) come from the Wikipedia page.
+Doubt: The proportions come from one recipe. The food pairings are from the original draft and general practice, and I could not read a page that lists them. The uses (marinades, stews, curries, added near the end of cooking) come from the Wikipedia page.
 
 Ingredients:
 8 parts Coriander

@@ -395,3 +395,15 @@ I checked the six files with a throwaway script (not kept): every food, method, 
 - The server renders an empty cabinet, so a saved tick appears a moment after the page loads. This is what stops the server and browser disagreeing on first paint.
 - Used-in lists on a spice page show blend names as plain text. They become links in Phase 6, when blend pages exist.
 - Blend suggestions based on the cabinet arrive in Phase 7. The staples switch is saved now and does nothing visible yet except mark the pantry staples.
+
+---
+
+## 18. Phase 6: browsing blends
+
+**What exists now.** `/spices/blends` (browse) and one page per blend at `/spices/blends/<slug>` (72 pages). The Spices hub, the section's sub-navigation, the sitemap and each spice page ("Used in these blends") now link to them. The whole site builds 160 pages.
+
+**Browse filters.** Search (name, aka and every ingredient), Goes with (a whole food group or one item), Cuisine (a Global blend matches every cuisine), How it is used and How it is cooked (several choices match any of them). Different filters must all match. With a food chosen, blends that list it show as **Strong fit** (classic) or **Good fit** (also works) and come first, then A to Z; blends that do not mention it are hidden unless "Show blends that do not mention it" is on. A blend naming a whole group suits every item in it, and a blend naming one item suits only that item. The rules live in `src/lib/spices/blend-filter.ts`, with 16 tests.
+
+**A blend page** shows the ingredients with their parts (and "any kind works" where a family is named, and "nice to have" for optional ones), a "Go easy" note for Power 4 and 5 spices, the allergens worked out from the ingredients with the line "Check labels, this is not a complete allergen guide", the typical version, confidence, doubt and sources.
+
+**Not yet.** Nothing here looks at the cabinet. Ready now, Missing one and the finder come in Phase 7. A note for anyone writing blend files: a food whose name has a comma ("Sandwiches, tacos and wraps") must be written by an alias such as "taco", because the list is split at commas. That is in `docs/spice-formats.txt`.

@@ -16,13 +16,15 @@ import { site } from "../config/site";
 
 export const GET: APIRoute = () => {
   const recipes = loadRecipes();
-  const spices = loadLibrary().spices;
+  const { spices, blends } = loadLibrary();
 
   const paths = [
     "/",
     "/map",
     "/spices",
     "/spices/library",
+    "/spices/blends",
+    ...blends.map((blend) => `/spices/blends/${blend.slug}`),
     ...spices.map((spice) => `/spices/library/${spice.slug}`),
     ...recipes.map((recipe) => `/recipes/${recipe.slug}`),
   ];

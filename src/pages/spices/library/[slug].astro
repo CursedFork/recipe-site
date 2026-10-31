@@ -28,7 +28,7 @@ export function getStaticPaths() {
             (umbrellaSlug !== null && ingredient.spiceSlug === umbrellaSlug),
         ),
       )
-      .map((blend) => blend.name);
+      .map((blend) => ({ name: blend.name, slug: blend.slug }));
 
     return {
       params: { slug: spice.slug },
@@ -165,7 +165,13 @@ const confidenceWords = {
       blends.length > 0 && (
         <section class="spice__section">
           <h2>Used in these blends</h2>
-          <p>{blends.join(", ")}</p>
+          <ul class="spice__list">
+            {blends.map((blend) => (
+              <li>
+                <a href={`/spices/blends/${blend.slug}`}>{blend.name}</a>
+              </li>
+            ))}
+          </ul>
         </section>
       )
     }
