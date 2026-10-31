@@ -1,0 +1,19 @@
+Name: Fines Herbes
+Aka: fine herbs
+Cuisines: French
+Origin: France
+Uses: Finishing sprinkle, Table seasoning
+Methods: Raw or finishing, Sauté or stir-fry
+Classic: Scrambled and fried eggs, Omelets and frittatas, Chicken
+Also: White fish, Mayonnaise and creamy sauces, Salad dressings
+Tip: Fold in at the end of cooking, because the delicate herbs lose their flavor in heat. Fresh is far better than dried.
+Typical version: The page says the canonical fines herbes are parsley, chives, tarragon and chervil, in roughly equal measure.
+Source: https://en.wikipedia.org/wiki/Fines_herbes
+Confidence: medium
+Doubt: The four herbs are from the page. The dried form is much weaker than fresh herbs, which is how this blend is normally used, so the Power ratings here are low.
+
+Ingredients:
+1 part Parsley
+1 part Chives
+1 part Tarragon
+1 part Chervil

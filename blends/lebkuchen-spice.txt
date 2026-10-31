@@ -1,0 +1,22 @@
+Name: Lebkuchen Spice
+Aka: Lebkuchengewuerz, German gingerbread spice, Lebkuchengewürz
+Cuisines: German
+Origin: Germany
+Uses: Sweet or baking
+Methods: Bake
+Classic: Cookies, Cakes and muffins
+Also: Sweet breads and buns, Mulled wine and cider
+Tip: Use it in honey cakes and gingerbread cookies. Ground fine, it spreads through the dough evenly.
+Typical version: Cinnamon-led, with coriander, clove, ginger, cardamom and allspice, and nutmeg for warmth. Aniseed is also traditional, and I left it out because it is not in this library.
+Source: https://en.wikipedia.org/wiki/Lebkuchen
+Confidence: medium
+Doubt: The page lists aniseed, coriander, cloves, ginger, cardamom and allspice as the spices. Cinnamon and nutmeg are very common in recipes but are not on the page. The parts are mine.
+
+Ingredients:
+4 parts Cinnamon
+1 part Coriander
+1 part Clove
+1 part Ginger
+1 part Cardamom
+1 part Allspice
+1/2 part Nutmeg (optional)

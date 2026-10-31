@@ -1,0 +1,26 @@
+Name: Tandoori Masala
+Aka: tandoori spice, tandoori seasoning, tandoori powder
+Cuisines: Indian, Pakistani
+Origin: India
+Uses: Wet marinade or paste, Dry rub
+Methods: Grill, Roast
+Classic: Chicken, Lamb, Cauliflower and broccoli
+Also: Fish, Shrimp, Tofu
+Tip: Stir it into yogurt with lemon juice, ginger and garlic, marinate the meat for several hours, then roast hot.
+Typical version: The page says it typically has garam masala, garlic, ginger, onion and cayenne. Garam masala is itself a blend, so it is built here from its spices, plus Kashmiri chile for the red color.
+Source: https://en.wikipedia.org/wiki/Tandoori_masala
+Confidence: low
+Doubt: The page gives only a loose list of components. The way I split garam masala into its spices, and every part amount, are my own, so this is the least certain of the new blends.
+
+Ingredients:
+3 parts Coriander
+3 parts Cumin
+3 parts Chile, mild red: Kashmiri
+2 parts Ginger
+2 parts Garlic powder
+2 parts Onion powder
+1 part Cinnamon
+1 part Cardamom
+1 part Pepper, black
+1/2 part Clove
+1 part Chile, hot red: Cayenne

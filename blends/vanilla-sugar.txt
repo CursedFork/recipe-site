@@ -1,0 +1,17 @@
+Name: Vanilla Sugar
+Aka: vanilla-scented sugar
+Cuisines: German, French, Scandinavian
+Origin: Germany
+Uses: Sweet or baking
+Methods: Bake
+Classic: Cakes and muffins, Cookies, Custards and puddings
+Also: Berries, Coffee and hot chocolate, Pies and tarts
+Tip: Bury a split vanilla bean in a jar of sugar and wait two weeks. Use it in place of plain sugar in bakes and drinks.
+Typical version: The page describes one to two cups of white sugar aged with vanilla pods for two weeks.
+Source: https://en.wikipedia.org/wiki/Vanilla_sugar
+Confidence: medium
+Doubt: The page describes vanilla pods aged in white sugar. The origin is a broad pointer, since it is common across Europe, and the parts are mine.
+
+Ingredients:
+50 parts Sugar
+1 part Vanilla

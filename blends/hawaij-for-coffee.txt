@@ -1,0 +1,18 @@
+Name: Hawaij for Coffee
+Aka: hawayej for coffee, Yemeni coffee spice, qishr spice
+Cuisines: Yemeni
+Origin: Yemen
+Uses: Drink or infusion
+Methods: Simmer or boil
+Classic: Coffee and hot chocolate
+Also: Tea and chai
+Tip: Simmer a spoonful with coffee grounds or in a coffee pot, and strain. It tastes warmer and sweeter than plain coffee.
+Typical version: The page says the mixture for coffee is made from aniseeds, fennel seeds, ginger and cardamom. Aniseed is not in this library, so fennel and ginger and cardamom carry it here.
+Source: https://en.wikipedia.org/wiki/Hawaij
+Confidence: medium
+Doubt: The page lists aniseed, fennel, ginger and cardamom. I left aniseed out, and the parts are mine.
+
+Ingredients:
+2 parts Fennel seed
+2 parts Ginger
+2 parts Cardamom

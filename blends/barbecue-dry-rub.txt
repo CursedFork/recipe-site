@@ -1,0 +1,22 @@
+Name: Barbecue Dry Rub
+Aka: BBQ rub, basic dry rub, barbecue rub, spice rub
+Cuisines: American BBQ, American
+Origin: United States
+Uses: Dry rub
+Methods: Smoke, Grill, Roast, Slow cook
+Classic: Pork ribs, Pulled pork, Brisket and beef ribs
+Also: Chicken, Pork chops, Roast beef
+Tip: Press it onto meat and rest it for an hour or overnight. The sugar caramelizes, so cook low and slow to avoid burning.
+Typical version: The page says a basic rub has brown sugar, paprika, black pepper, chili powder, garlic powder, onion powder and salt. White sugar is used here because brown sugar is not in this library.
+Source: https://en.wikipedia.org/wiki/Dry_rub
+Confidence: medium
+Doubt: The ingredients come from the source, but the source gives no amounts. The parts are a typical home ratio that I chose, so treat them as a starting point to taste and adjust.
+
+Ingredients:
+4 parts Sugar
+4 parts Paprika
+2 parts Salt
+1 part Pepper, black
+1 part Chile, mild red
+1 part Garlic powder
+1 part Onion powder
