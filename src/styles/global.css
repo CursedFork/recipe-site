@@ -433,3 +433,16 @@ h4,
     padding-block: var(--space-3) var(--space-2);
   }
 }
+
+/* The count next to the Spices link in the header. Lives here because the
+   header is on every page. */
+.nav-badge {
+  display: inline-block;
+  margin-left: var(--space-1);
+  padding: 0 var(--space-2);
+  border-radius: var(--radius);
+  background-color: var(--surface);
+  color: var(--ink);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-emphasis);
+}

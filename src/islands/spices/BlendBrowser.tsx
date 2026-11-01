@@ -13,8 +13,10 @@ import { setStaples } from "../../lib/spices/cabinet";
 import {
   ownedSet,
   rankForCabinet,
+  statusOf,
   statusLabel,
   type BlendStatus,
+  type FinderBlend,
   type SortMode,
 } from "../../lib/spices/finder";
 import { getCabinet, setCabinet, useCabinet } from "./cabinet-store";
@@ -97,6 +99,12 @@ export default function BlendBrowser({ blends, cuisines, uses, methods, foodGrou
     [cabinet.owned, cabinet.staples, finder],
   );
   const cabinetEmpty = cabinet.owned.length === 0;
+
+  /** Blends the whole library can make now, whatever the filters say. */
+  const readyCount = useMemo(
+    () => (finder ? blends.filter((blend) => statusOf(blend as FinderBlend, owned).missing.length === 0).length : 0),
+    [blends, finder, owned],
+  );
 
   const results: Card[] = useMemo(() => {
     const matched = filterBlends(blends, filters);
@@ -277,7 +285,14 @@ export default function BlendBrowser({ blends, cuisines, uses, methods, foodGrou
         </fieldset>
       </div>
 
-      <div className="lib__status">
+      {finder && !cabinetEmpty && (
+        <a className="finder__summary" href="#finder-results">
+          {cabinet.owned.length} {cabinet.owned.length === 1 ? "spice" : "spices"}, {readyCount}{" "}
+          {readyCount === 1 ? "blend" : "blends"} ready. Jump to results
+        </a>
+      )}
+
+      <div className="lib__status" id="finder-results">
         <p className="browser__count" aria-live="polite">
           Showing {results.length} of {blends.length} blends.
         </p>

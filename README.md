@@ -330,6 +330,7 @@ of the site already live stays up.
 
 ```
 recipes/                 Your content. Drop .txt files here.
+spices/  blends/         The Spices section's content, also .txt files.
   photos/                Your photos.
 src/
   config/site.ts         Site name, URL and navigation. The one file to edit.
@@ -362,6 +363,62 @@ Everything else is HTML by the time it reaches a browser.
 [`DECISIONS.md`](DECISIONS.md) explains why things are the way they are: the
 type scale and palette, which components are React islands and why, the mapping
 approach, and where the design tooling was overruled.
+
+---
+
+## The Spices section
+
+A second part of the site, under `/spices`, with a library of spices, a set of
+spice blends, a finder ("What can I make?"), Top picks, Buy next and a shopping
+list. Like the recipes, it is plain text files in a folder and nothing else:
+no database, no accounts. A visitor's ticked spices and shopping list live in
+their own browser and are never sent anywhere.
+
+```
+spices/    One .txt file per spice. 79 of them.
+blends/    One .txt file per blend. 72 of them.
+```
+
+The exact file format, every allowed word, and the Power and Heat scales are in
+[`docs/spice-formats.txt`](docs/spice-formats.txt). How the section was planned,
+and why, is in [`docs/spices-plan.md`](docs/spices-plan.md).
+
+### Adding a spice
+
+1. Copy a similar file in `spices/` (`spices/cumin.txt` is a good one).
+2. Name the new file after the spice, in lowercase with hyphens:
+   `chile-mild-red-ancho.txt` for "Chile, mild red: Ancho". The filename is the spice's identity.
+3. Fill in every field. A variety of a family is written `Family: Variety`
+   (for example `Chile, mild red: Ancho`), and the family needs its own file too.
+4. Run `npm run check:spices`. It lists every problem in every file at once.
+
+**Do not rename a spice file once it is live.** Visitors' saved cabinets and
+lists store the filename, so a rename quietly drops that spice from their
+copy. (The pages list saved spices that no longer exist instead of hiding them.)
+
+### Adding a blend
+
+1. Copy a similar file in `blends/` (`blends/garam-masala.txt` is a good one).
+2. List the ingredients in parts, one per line. A line that names a family
+   ("Cardamom") is met by any variety. A line that names one variety
+   ("Chile, mild red: Ancho") is met only by that one. Add `(optional)` after a
+   line if it only adds a little, like `2 parts Oregano (optional)`.
+3. Pick foods from the list in `src/data/foods.json`. A food whose name has a
+   comma in it (like "Sandwiches, tacos and wraps") must be written with an
+   alias such as `taco`, because the lists are split at commas.
+4. Give a source you actually read, set the confidence honestly, and use the
+   Doubt line to say what you are unsure of. Allergens and "Go easy" notes are
+   worked out from the ingredients, so you do not type them.
+5. Run `npm run check:spices`.
+
+### Rules to keep
+
+- **No invented blends or sources.** If a blend cannot be backed by a page you
+  read, leave it out. Low confidence is allowed. Made-up confidence is not.
+- **Pantry staples** (salt, black pepper and sugar) are listed in
+  `src/config/pantry.ts`. They count as owned while a visitor's switch is on.
+- `npm run build` fails with the full list of problems if any spice or blend file
+  is wrong, just like a bad recipe file.
 
 ---
 

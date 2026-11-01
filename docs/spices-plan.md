@@ -437,3 +437,19 @@ I checked the six files with a throwaway script (not kept): every food, method, 
 **Tests.** `src/lib/spices/shopping.test.ts` (16 tests) covers the list rules and the counts: foods 2 and 1, cuisines, the 8 / 5 / 10 limits, staples and optional spices never suggested, and the unlock against closer split.
 
 **Not yet.** "Copy my cabinet" and "Paste a list", the count badge in the main nav, and the phone summary bar are left for Phase 9 with the rest of the polish. The finder reads `?food=` and `?cuisine=` on load but does not write the URL back as you change filters, so sharing a view you built by hand is not possible yet.
+
+---
+
+## 21. Phase 9: polish
+
+**Back up and restore.** The library page has a "Back up or restore my cabinet" box. "Copy my cabinet" puts one spice name per line on the clipboard (and, if the browser refuses, puts the text in the box to copy by hand). "Paste a list" adds spices from text, one per line, and says which lines it did not recognise instead of skipping them silently. A line matches by full name, filename or alias, or by the variety alone when only one spice has that variety ("Green" is refused because tea and cardamom both have one). Bullets and `[x]` boxes are ignored, so a copied shopping list pastes back in. 11 tests in `src/lib/spices/backup.test.ts`.
+
+**Count badge.** The Spices link in the main nav shows a small number: spices in the cabinet plus items on the shopping list. It shows nothing when both are empty and nothing in the server HTML, so the header is the same for everyone until the browser fills it in. A screen reader hears "3 in your spice cabinet, 0 on your shopping list".
+
+**Phone summary bar.** On the finder, below 48em, a sticky one-line bar says "3 spices, 0 blends ready" and jumps to the results. It is hidden on wider screens and when the cabinet is empty.
+
+**README.** A new "The Spices section" in `README.md`: the two folders, how to add a spice, how to add a blend, and the rules to keep (no invented blends or sources, never rename a live spice file, staples live in `src/config/pantry.ts`).
+
+**Checked.** Page titles are all distinct and each page has one `h1`. Every button, link, field and summary on the seven kinds of Spices page has an accessible name. No sideways scroll at 375 px wide. Dark theme checked on the hub (cards, buttons, text). Print hides the section nav and the list's buttons.
+
+**Things I did not do.** The finder does not write its filters back to the address bar, so a view built by hand cannot be shared by link (Top picks links do work). Tooltips elsewhere on the site still cannot be dismissed with Escape (an open item from the main site). I did not run a screen reader. Real users with a screen reader, and a person looking at the dark theme on a real phone, would catch things I cannot.

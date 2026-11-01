@@ -8,6 +8,7 @@
 
 import { site } from "../config/site";
 import ThemeToggle from "../islands/ThemeToggle.tsx";
+import NavBadge from "../islands/spices/NavBadge.tsx";
 
 // Mark the current page so the active link is obvious without relying on
 // colour alone. Astro gives us the path with a trailing slash sometimes, so
@@ -39,6 +40,7 @@ const path = Astro.url.pathname.replace(/\/+$/, "") || "/";
                   >
                     {item.label}
                   </a>
+                  {item.href === "/spices" && <NavBadge client:load />}
                 </li>
               );
             })

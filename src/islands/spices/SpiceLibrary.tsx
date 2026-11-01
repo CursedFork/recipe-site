@@ -18,6 +18,7 @@ import {
   unknownOwned,
   type Cabinet,
 } from "../../lib/spices/cabinet";
+import { cabinetAsText, parseSpiceList } from "../../lib/spices/backup";
 import {
   filterSpices,
   groupByLetter,
@@ -51,6 +52,9 @@ export default function SpiceLibrary({ spices, categories, cuisines, stapleSlugs
   const [filters, setFilters] = useState<Filters>(noFilters);
   /** The cabinet as it was just before "Clear my cabinet", for Undo. */
   const [undo, setUndo] = useState<Cabinet | null>(null);
+  /** The back-up box: what was pasted, and what happened to it. */
+  const [pasted, setPasted] = useState("");
+  const [backupNote, setBackupNote] = useState("");
 
   const owned = useMemo(() => new Set(cabinet.owned), [cabinet.owned]);
   const known = useMemo(() => new Set(spices.map((spice) => spice.slug)), [spices]);
@@ -86,6 +90,30 @@ export default function SpiceLibrary({ spices, categories, cuisines, stapleSlugs
     const before = getCabinet();
     setCabinet(clearOwned(before));
     setUndo(before);
+  };
+
+  const copyCabinet = async () => {
+    const text = cabinetAsText(getCabinet().owned, spices);
+    try {
+      await navigator.clipboard.writeText(text);
+      setBackupNote(text === "" ? "Your cabinet is empty, so there is nothing to copy." : "Copied. Keep it in a note, or paste it on another device.");
+    } catch {
+      // Copying was refused, so put the text in the box to copy by hand.
+      setPasted(text);
+      setBackupNote("Your browser would not let this page copy. The list is in the box below, so you can copy it from there.");
+    }
+  };
+
+  const importPasted = () => {
+    const { slugs, unknown } = parseSpiceList(pasted, spices);
+    if (slugs.length > 0) edit((current) => addMany(current, slugs));
+    setPasted("");
+    const added = `Added ${slugs.length} ${slugs.length === 1 ? "spice" : "spices"} to your cabinet.`;
+    setBackupNote(
+      unknown.length > 0
+        ? `${added} These were not recognised and were skipped: ${unknown.join("; ")}.`
+        : added,
+    );
   };
 
   const undoClear = () => {
@@ -253,6 +281,39 @@ export default function SpiceLibrary({ spices, categories, cuisines, stapleSlugs
           )}
         </div>
       </div>
+
+      {/* ---- Back up ------------------------------------------------------ */}
+      <details className="lib__backup">
+        <summary>Back up or restore my cabinet</summary>
+        <p className="lib__hint">
+          Copy your cabinet as a list to keep somewhere safe, or paste a list with one spice
+          per line to add those spices.
+        </p>
+        <div className="lib__actions">
+          <button type="button" className="button button--quiet" onClick={copyCabinet}>
+            Copy my cabinet
+          </button>
+        </div>
+        <label className="browser__label" htmlFor="paste-list">
+          Paste a list
+        </label>
+        <textarea
+          id="paste-list"
+          className="browser__input lib__paste"
+          rows={5}
+          value={pasted}
+          onChange={(event) => setPasted(event.target.value)}
+          placeholder={"Cumin\nClove\nChile: Ancho"}
+        />
+        <div className="lib__actions">
+          <button type="button" className="button" disabled={pasted.trim() === ""} onClick={importPasted}>
+            Add these to my cabinet
+          </button>
+        </div>
+        <p className="lib__hint" role="status" aria-live="polite">
+          {backupNote}
+        </p>
+      </details>
 
       {/* ---- Jump to a letter -------------------------------------------- */}
       {groups.length > 1 && (
