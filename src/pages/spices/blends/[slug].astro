@@ -4,16 +4,22 @@
    --------------------------------------------------------------------------- */
 
 import SpicesLayout from "../../../layouts/SpicesLayout.astro";
+import ListButton from "../../../islands/spices/ListButton.tsx";
+import { buildFinderData } from "../../../lib/spices/finder-data";
 import { loadLibrary } from "../../../lib/spices/load-spices";
 
 export function getStaticPaths() {
   const library = loadLibrary();
+  const data = buildFinderData();
+  const finderBySlug = new Map(data.blends.map((blend) => [blend.slug, blend]));
   const bySlug = new Map(library.spices.map((spice) => [spice.slug, spice]));
 
   return library.blends.map((blend) => ({
     params: { slug: blend.slug },
     props: {
       blend,
+      finderIngredients: finderBySlug.get(blend.slug)?.ingredients ?? [],
+      stapleSlugs: data.stapleList,
       lines: blend.ingredients.map((ingredient) => {
         const spice = bySlug.get(ingredient.spiceSlug);
         const members = library.families.get(ingredient.spiceSlug) ?? [];
@@ -28,7 +34,7 @@ export function getStaticPaths() {
   }));
 }
 
-const { blend, lines } = Astro.props;
+const { blend, lines, finderIngredients, stapleSlugs } = Astro.props;
 
 const amountWords = (amount: (typeof lines)[number]["ingredient"]["amount"]) => {
   if (amount.kind === "pinch") return "A pinch of";
@@ -100,6 +106,7 @@ const foodNames = (refs: typeof blend.classic) => refs.map((ref) => ref.name).jo
         One part is any measure you like, such as a teaspoon. Use the same measure
         for every line.
       </p>
+      <ListButton kind="blend" ingredients={finderIngredients} stapleSlugs={stapleSlugs} client:load />
     </section>
 
     <section class="spice__section">

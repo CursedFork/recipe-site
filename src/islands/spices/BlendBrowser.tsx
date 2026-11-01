@@ -7,7 +7,7 @@
    prop) each blend also says whether the saved cabinet can make it.
    --------------------------------------------------------------------------- */
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { setStaples } from "../../lib/spices/cabinet";
 import {
@@ -75,6 +75,22 @@ export default function BlendBrowser({ blends, cuisines, uses, methods, foodGrou
   const [filters, setFilters] = useState<BlendFilters>(noBlendFilters);
   const [sort, setSort] = useState<SortMode>("best");
   const [maxMissing, setMaxMissing] = useState("");
+
+  // A link from Top picks arrives as ?food=g:eggs or ?cuisine=Indian. It is read
+  // once after hydration, so the server and first client render still match.
+  useEffect(() => {
+    if (!finder) return;
+    const params = new URLSearchParams(window.location.search);
+    const food = decodePick(params.get("food") ?? "");
+    const cuisine = params.get("cuisine") ?? "";
+    if (food || cuisines.includes(cuisine)) {
+      setFilters((current) => ({
+        ...current,
+        food: food ?? current.food,
+        cuisine: cuisines.includes(cuisine) ? cuisine : current.cuisine,
+      }));
+    }
+  }, [finder, cuisines]);
 
   const owned = useMemo(
     () => ownedSet(cabinet.owned, cabinet.staples, finder?.stapleSlugs ?? []),

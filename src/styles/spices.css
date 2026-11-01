@@ -429,3 +429,95 @@
   list-style: none;
   padding-left: 0;
 }
+
+/* ---- Top picks, Buy next and the shopping list --------------------------- */
+
+.picks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: var(--space-7);
+  margin-top: var(--space-7);
+}
+
+.picks__section h2 {
+  margin-bottom: var(--space-3);
+  font-size: var(--text-lead);
+}
+
+.picks__section h3 {
+  margin-top: var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--muted);
+}
+
+.picks__list {
+  list-style: none;
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.picks__buy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--surface);
+  border-radius: var(--radius);
+}
+
+.picks__buy .button {
+  font-size: var(--text-xs);
+}
+
+.shopping__actions {
+  margin-bottom: var(--space-2);
+}
+
+.shopping__item {
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "check body"
+    "check actions";
+}
+
+.shopping__row-actions {
+  grid-area: actions;
+}
+
+.lib__name.is-checked {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.blend__list-action {
+  margin-top: var(--space-4);
+}
+
+@media (min-width: 48em) {
+  .shopping__item {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "check body actions";
+    align-items: center;
+  }
+}
+
+@media print {
+  .spices-nav,
+  .shopping__actions,
+  .shopping__row-actions,
+  .lib__orphans {
+    display: none;
+  }
+
+  .shopping__item {
+    grid-template-columns: auto 1fr;
+    grid-template-areas: "check body";
+    background: none;
+    padding-inline: 0;
+  }
+}

@@ -421,3 +421,19 @@ I checked the six files with a throwaway script (not kept): every food, method, 
 **Tests.** `src/lib/spices/finder.test.ts` (19 tests) covers eggs, a family match, a specific-spice miss with its hint, an optional ingredient, classic against also-works order in both sort modes, the staples switch, and the empty-cabinet and no-food cases. "Select all shown with a filter on" was already covered in `library.test.ts` in Phase 5.
 
 **Not yet.** Top picks, Buy next and the shopping list are Phase 8.
+
+---
+
+## 20. Phase 8: Top picks, Buy next and the shopping list
+
+**What exists now.** The Spices home has two live panels under the cards, a new page at `/spices/list`, an "Add to shopping list" button on every spice page, and an "Add missing spices" button on every blend page. The sub-navigation and the sitemap include the list. The whole site builds 162 pages.
+
+**Top picks.** Worked out in the browser from the saved cabinet, from the blends that are Ready now. Each food scores 2 for a classic pairing and 1 for an also-works one (a food named both ways in one blend counts once, as classic). The top 8 foods and top 5 cuisines show with counts such as "3 ready blends". `Global` is not a cuisine here. Each one links to the finder already filtered (`/spices/finder?food=g:eggs` or `?cuisine=Indian`). With an empty cabinet the panel says how to start, and with nothing ready it points to Buy next.
+
+**Buy next.** Among blends missing one or two required spices, it counts for each missing spice how many blends that spice would complete on its own ("would unlock 3 blends") and, separately, how many blends missing exactly two it would bring one spice away. I split these because one spice does not finish a blend that is missing two, and saying it "unlocks" them would be untrue. Staples are always treated as owned here, so salt is never suggested, and optional spices are never counted. Top 10, each with an Add to list button.
+
+**The shopping list.** Add from Buy next, a spice page, or a blend page. Tick items off in the shop, "Bought it" moves one into the cabinet, "Move ticked to my cabinet" moves all the ticked ones, Copy list gives plain text (`[ ] Cumin`), and Print hides the buttons. Saved in the browser as spice filenames (key `spices.shopping`), with the same try/catch handling as the cabinet. Saved items that no longer exist in the library are listed rather than dropped.
+
+**Tests.** `src/lib/spices/shopping.test.ts` (16 tests) covers the list rules and the counts: foods 2 and 1, cuisines, the 8 / 5 / 10 limits, staples and optional spices never suggested, and the unlock against closer split.
+
+**Not yet.** "Copy my cabinet" and "Paste a list", the count badge in the main nav, and the phone summary bar are left for Phase 9 with the rest of the polish. The finder reads `?food=` and `?cuisine=` on load but does not write the URL back as you change filters, so sharing a view you built by hand is not possible yet.

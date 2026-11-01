@@ -6,81 +6,10 @@
    --------------------------------------------------------------------------- */
 
 import SpicesLayout from "../../layouts/SpicesLayout.astro";
-import BlendBrowser, { type FoodGroup } from "../../islands/spices/BlendBrowser.tsx";
-import foodsJson from "../../data/foods.json";
-import { staples } from "../../config/pantry";
-import { loadLibrary } from "../../lib/spices/load-spices";
-import { stapleSlugs } from "../../lib/spices/library-filter";
-import { methods, uses } from "../../lib/spices/vocab";
-import type { FinderBlend } from "../../lib/spices/finder";
-import type { LeanFoodRef } from "../../lib/spices/blend-filter";
-import type { FoodRef } from "../../lib/spices/types";
+import BlendBrowser from "../../islands/spices/BlendBrowser.tsx";
+import { buildFinderData } from "../../lib/spices/finder-data";
 
-const library = loadLibrary();
-const bySlug = new Map(library.spices.map((spice) => [spice.slug, spice]));
-
-const lean = (ref: FoodRef): LeanFoodRef => ({ groupId: ref.groupId, itemId: ref.itemId, name: ref.name });
-
-/** "Chile: Ancho" is shown as is, so the finder names exactly what is missing. */
-const blends: FinderBlend[] = library.blends.map((blend) => ({
-  slug: blend.slug,
-  name: blend.name,
-  aka: blend.aka,
-  cuisines: blend.cuisines,
-  uses: blend.uses,
-  methods: blend.methods,
-  classic: blend.classic.map(lean),
-  also: blend.also.map(lean),
-  ingredientNames: blend.ingredients.map((ingredient) => bySlug.get(ingredient.spiceSlug)?.name ?? ingredient.name),
-  ingredientCount: blend.ingredients.length,
-  goEasy: blend.goEasy,
-  allergens: blend.allergens,
-  ingredients: blend.ingredients.map((ingredient) => {
-    const spice = bySlug.get(ingredient.spiceSlug);
-    const umbrellaSlug = spice?.family
-      ? library.spices.find((other) => other.name === spice.family)?.slug ?? null
-      : null;
-    return {
-      slug: ingredient.spiceSlug,
-      name: spice?.name ?? ingredient.name,
-      optional: ingredient.optional,
-      members: library.families.get(ingredient.spiceSlug) ?? [],
-      siblings:
-        umbrellaSlug === null
-          ? []
-          : (library.families.get(umbrellaSlug) ?? [])
-              .filter((slug) => slug !== ingredient.spiceSlug)
-              .map((slug) => ({ slug, name: bySlug.get(slug)?.name ?? slug })),
-    };
-  }),
-}));
-
-const cuisines = [...new Set(blends.flatMap((blend) => blend.cuisines))]
-  .filter((cuisine) => cuisine !== "Global")
-  .sort((a, b) => a.localeCompare(b));
-
-const usedUses = new Set(blends.flatMap((blend) => blend.uses));
-const usedMethods = new Set(blends.flatMap((blend) => blend.methods));
-
-const foodGroups: FoodGroup[] = (foodsJson as { groups: FoodGroup[] }).groups.map((group) => ({
-  id: group.id,
-  name: group.name,
-  items: group.items.map((item) => ({ id: item.id, name: item.name })),
-}));
-
-/** "Pepper, black" is "black pepper" when said aloud. */
-const say = (name: string) => {
-  const [first, second] = name.split(", ");
-  return second ? `${second} ${first}`.toLowerCase() : name.toLowerCase();
-};
-const spoken = staples.map(say);
-const stapleNote =
-  spoken.length > 1 ? `${spoken.slice(0, -1).join(", ")} and ${spoken[spoken.length - 1]}` : spoken[0];
-
-const stapleList = stapleSlugs(
-  library.spices.map((spice) => ({ slug: spice.slug, name: spice.name, family: spice.family })),
-  staples,
-);
+const data = buildFinderData();
 ---
 
 <SpicesLayout
@@ -98,12 +27,12 @@ const stapleList = stapleSlugs(
     </p>
 
     <BlendBrowser
-      blends={blends}
-      cuisines={cuisines}
-      uses={uses.names.filter((name) => usedUses.has(name))}
-      methods={methods.names.filter((name) => usedMethods.has(name))}
-      foodGroups={foodGroups}
-      finder={{ stapleSlugs: stapleList, stapleNote }}
+      blends={data.blends}
+      cuisines={data.cuisines}
+      uses={data.uses}
+      methods={data.methods}
+      foodGroups={data.foodGroups}
+      finder={{ stapleSlugs: data.stapleList, stapleNote: data.stapleNote }}
       client:load
     />
   </div>

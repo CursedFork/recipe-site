@@ -1,0 +1,24 @@
+---
+/* ---------------------------------------------------------------------------
+   The shopping list. The page is a shell: the list lives in the visitor's
+   browser, so the island fills it in.
+   --------------------------------------------------------------------------- */
+
+import SpicesLayout from "../../layouts/SpicesLayout.astro";
+import ShoppingList from "../../islands/spices/ShoppingList.tsx";
+import { loadLibrary } from "../../lib/spices/load-spices";
+
+const library = loadLibrary();
+const spices = library.spices.map((spice) => ({ slug: spice.slug, name: spice.name }));
+---
+
+<SpicesLayout title="Shopping list" description="Spices to buy. Tick them off in the shop, then move them into your cabinet.">
+  <div class="spices-page">
+    <h1>Shopping list</h1>
+    <p class="spices-page__lead">Spices to buy. Tick them off in the shop.</p>
+    <p class="lib__hint">
+      Your list is saved in this browser only. Nothing is sent anywhere, and there are no accounts.
+    </p>
+    <ShoppingList spices={spices} client:load />
+  </div>
+</SpicesLayout>

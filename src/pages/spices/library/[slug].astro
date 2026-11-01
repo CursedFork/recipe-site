@@ -7,6 +7,7 @@
 import SpicesLayout from "../../../layouts/SpicesLayout.astro";
 import Meter from "../../../islands/spices/Meter.tsx";
 import OwnToggle from "../../../islands/spices/OwnToggle.tsx";
+import ListButton from "../../../islands/spices/ListButton.tsx";
 import { loadLibrary } from "../../../lib/spices/load-spices";
 import { slugifyName } from "../../../lib/spices/text";
 
@@ -85,6 +86,7 @@ const confidenceWords = {
         {spice.power !== null && <Meter kind="power" value={spice.power} />}
         {spice.heat !== null && spice.heat > 0 && <Meter kind="heat" value={spice.heat} />}
         <OwnToggle slug={spice.slug} name={label} client:load />
+        <ListButton kind="spice" slug={spice.slug} name={label} client:load />
       </div>
     </header>
 

@@ -6,9 +6,12 @@
    --------------------------------------------------------------------------- */
 
 import SpicesLayout from "../../layouts/SpicesLayout.astro";
+import PicksPanel from "../../islands/spices/PicksPanel.tsx";
+import { buildFinderData } from "../../lib/spices/finder-data";
 import { loadLibrary } from "../../lib/spices/load-spices";
 
 const library = loadLibrary();
+const data = buildFinderData();
 ---
 
 <SpicesLayout
@@ -47,6 +50,20 @@ const library = loadLibrary();
           and which are only one spice away.
         </p>
       </a>
+
+      <a class="spices-hub__card" href="/spices/list">
+        <span class="spices-hub__card-title">Shopping list</span>
+        <p class="spices-hub__card-text">
+          Spices to buy. Tick them off in the shop, then move them into your cabinet.
+        </p>
+      </a>
     </div>
+
+    <PicksPanel blends={data.blends} stapleSlugs={data.stapleList} client:load />
+
+    <p class="lib__hint">
+      Pairings are traditional suggestions for inspiration, not rules. Your cabinet and
+      list are saved in this browser only. Nothing is sent anywhere.
+    </p>
   </div>
 </SpicesLayout>
