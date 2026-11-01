@@ -2,7 +2,7 @@
 /* ---------------------------------------------------------------------------
    The Spices home. A short hub for now: it links to what exists. The blend
    finder, Top picks, Buy next and the shopping list arrive in later phases and
-   will be added here when they are real pages.
+   will be added here when they are real pages. The finder is here from Phase 7.
    --------------------------------------------------------------------------- */
 
 import SpicesLayout from "../../layouts/SpicesLayout.astro";
@@ -37,6 +37,14 @@ const library = loadLibrary();
         <p class="spices-hub__card-text">
           {library.blends.length} blends from around the world, with what each goes
           with and how to use it. Search by food, cuisine or spice.
+        </p>
+      </a>
+
+      <a class="spices-hub__card" href="/spices/finder">
+        <span class="spices-hub__card-title">What can I make?</span>
+        <p class="spices-hub__card-text">
+          Pick a food and see which blends you can make from the spices you have,
+          and which are only one spice away.
         </p>
       </a>
     </div>

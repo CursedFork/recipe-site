@@ -407,3 +407,17 @@ I checked the six files with a throwaway script (not kept): every food, method, 
 **A blend page** shows the ingredients with their parts (and "any kind works" where a family is named, and "nice to have" for optional ones), a "Go easy" note for Power 4 and 5 spices, the allergens worked out from the ingredients with the line "Check labels, this is not a complete allergen guide", the typical version, confidence, doubt and sources.
 
 **Not yet.** Nothing here looks at the cabinet. Ready now, Missing one and the finder come in Phase 7. A note for anyone writing blend files: a food whose name has a comma ("Sandwiches, tacos and wraps") must be written by an alias such as "taco", because the list is split at commas. That is in `docs/spice-formats.txt`.
+
+---
+
+## 19. Phase 7: the finder
+
+**What exists now.** `/spices/finder` ("What can I make?"), linked from the Spices hub and the section's sub-navigation and listed in the sitemap. It reuses the blend browser (search, Goes with, Cuisine, use and method chips) and adds the cabinet on top. The whole site builds 161 pages.
+
+**What it does with your cabinet.** Each blend card says **Ready now**, **Missing one**, **Missing two** or **Missing three or more**, names what is missing, and lists optional spices as "Nice to have". The rules are plan section 9: a line naming a family is met by the umbrella or any variety; a line naming one variety is met only by that variety; optional lines never block anything; salt, black pepper and sugar count as owned while the staples switch (on this page too) is on. If you own another variety of a missing one, the card adds a gentle "close, but not the same" line, and the status does not change.
+
+**Order.** *Best match* puts fit to the chosen food first, then status, then A to Z. *Ready first* puts status first, then fit. With no food chosen the fit part is skipped, and with no spices ticked the status part is skipped, so an empty cabinet gives A to Z. "What I can make" hides blends missing more than one, two, or any.
+
+**Tests.** `src/lib/spices/finder.test.ts` (19 tests) covers eggs, a family match, a specific-spice miss with its hint, an optional ingredient, classic against also-works order in both sort modes, the staples switch, and the empty-cabinet and no-food cases. "Select all shown with a filter on" was already covered in `library.test.ts` in Phase 5.
+
+**Not yet.** Top picks, Buy next and the shopping list are Phase 8.

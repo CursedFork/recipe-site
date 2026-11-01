@@ -24,6 +24,7 @@ export const GET: APIRoute = () => {
     "/spices",
     "/spices/library",
     "/spices/blends",
+    "/spices/finder",
     ...blends.map((blend) => `/spices/blends/${blend.slug}`),
     ...spices.map((spice) => `/spices/library/${spice.slug}`),
     ...recipes.map((recipe) => `/recipes/${recipe.slug}`),
