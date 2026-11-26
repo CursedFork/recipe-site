@@ -6,7 +6,6 @@ Healthy: no
 Prep: 15
 Cook: 1
 Servings: 8
-Photo: jif-peanut-butter-pie.jpg
 
 Ingredients:
 For the pie:
